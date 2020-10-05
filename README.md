@@ -1,2 +1,2 @@
-# TP_Dise-o
+# TP_DS
 Repositorio del trabajo practico de Diseño de Sistemas
