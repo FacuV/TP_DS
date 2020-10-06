@@ -13,6 +13,5 @@ public class Main {
         GestorPantallas.add(new Pantalla("home",home));
         GestorPantallas.add(new Pantalla("pantalla",pantalla));
         GestorPantallas.init("home");
-
     }
 }
