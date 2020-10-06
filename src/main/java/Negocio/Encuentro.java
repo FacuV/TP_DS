@@ -34,14 +34,12 @@ public class Encuentro {
     public Encuentro(LocalDate fecha, Participante participanteA, Participante participanteB) {
         this(fecha,null, participanteA, participanteB,null,new ArrayList<Resultado>(), null, null, null, null, null);
     }
-    /*
-    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB,Resultado resultado_actual,ArrayList<Resultado> historial_resultados_modificados, Ronda ronda, Encuentro ganador_anterior1, Encuentro ganador_anterior2, Encuentro perdedor_anterior1, Encuentro perdedor_anterior2) {
-        this(fecha,null, participanteA, participanteB,null,new ArrayList<Resultado>(), null, null, null, null, null);
-
+    //Constructor para competencia eliminatoria simple
+    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB, Encuentro ganador_anterior1, Encuentro ganador_anterior2){
+        this(fecha,fase,participanteA,participanteB,null,new ArrayList<Resultado>(), null, ganador_anterior1, ganador_anterior2, null, null);
     }
-
-     */
-
-
-
+    //Constructor para competencia eliminatoria doble
+    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB, Ronda ronda, Encuentro ganador_anterior1, Encuentro ganador_anterior2, Encuentro perdedor_anterior1, Encuentro perdedor_anterior2) {
+        this(fecha,fase,participanteA,participanteB,null,new ArrayList<Resultado>(),ronda,ganador_anterior1, ganador_anterior2, perdedor_anterior1, perdedor_anterior2);
+    }
 }
