@@ -15,16 +15,16 @@ public class Home extends JPantalla {
         JPanel panelTitulo = new JPanel();
             panelTitulo.setLayout(new GridBagLayout());
             panelTitulo.setBackground(Color.white);
-            JLabel principal = new JLabel("usuario frankillerxdxdxd");
+            JLabel principal = new JLabel("Usuario <nombre><apellido>");
+            principal.setFont(new Font(Font.DIALOG,Font.BOLD,40));
             panelTitulo.add(principal);
-            principal.setFont(new Font(Font.DIALOG,1,40));
         GridBagConstraints constraintPanelTitulo = new GridBagConstraints();
             constraintPanelTitulo.gridy = 0;
-            constraintPanelTitulo.weighty = 1.5;
+            constraintPanelTitulo.weighty = 2;
             constraintPanelTitulo.weightx = 1;
             constraintPanelTitulo.insets = new Insets(10,150,10,150);
             constraintPanelTitulo.anchor= GridBagConstraints.CENTER;
-            constraintPanelTitulo.fill= GridBagConstraints.HORIZONTAL;
+            constraintPanelTitulo.fill= GridBagConstraints.BOTH;
         JButton misCompetencias = new JButton("Mis competencias");
         misCompetencias.addActionListener(new ActionListener() {
             @Override
@@ -33,17 +33,17 @@ public class Home extends JPantalla {
             }
         });
         //misCompetencias.setPreferredSize(new Dimension(300,60));
-        misCompetencias.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
+        misCompetencias.setFont(new Font(Font.DIALOG,Font.PLAIN,25));
         GridBagConstraints constraintMisCompetencias = new GridBagConstraints();
         constraintMisCompetencias.gridy = 1;
         constraintMisCompetencias.weightx = 1;
         constraintMisCompetencias.weighty = 1;
-        constraintMisCompetencias.insets = new Insets(80,250,10,250);
+        constraintMisCompetencias.insets = new Insets(40,250,10,250);
         constraintMisCompetencias.anchor= GridBagConstraints.CENTER;
         constraintMisCompetencias.fill= GridBagConstraints.BOTH;
         JButton todasLasCompetencias = new JButton("Todas las competencias");
         //todasLasCompetencias.setPreferredSize(new Dimension(300,60));
-        todasLasCompetencias.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
+        todasLasCompetencias.setFont(new Font(Font.DIALOG,Font.PLAIN,25));
         GridBagConstraints constraintTodasLasCompetencias = new GridBagConstraints();
         constraintTodasLasCompetencias.gridy = 2;
         constraintTodasLasCompetencias.weightx = 1;
@@ -53,7 +53,7 @@ public class Home extends JPantalla {
         constraintTodasLasCompetencias.fill= GridBagConstraints.BOTH;
         JButton lugaresCompetencia = new JButton("Lugares de Competencia");
         //lugaresCompetencia.setPreferredSize(new Dimension(300,60));
-        lugaresCompetencia.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
+        lugaresCompetencia.setFont(new Font(Font.DIALOG,Font.PLAIN,25));
         GridBagConstraints constraintLugaresCompetencia = new GridBagConstraints();
         constraintLugaresCompetencia.gridy = 3;
         constraintLugaresCompetencia.weightx = 1;
@@ -63,7 +63,7 @@ public class Home extends JPantalla {
         constraintLugaresCompetencia.fill= GridBagConstraints.BOTH;
         JButton modificarMisDatos = new JButton("Modificar mis datos");
         //modificarMisDatos.setPreferredSize(new Dimension(300,60));
-        modificarMisDatos.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
+        modificarMisDatos.setFont(new Font(Font.DIALOG,Font.PLAIN,25));
         GridBagConstraints constraintModificarMisDatos = new GridBagConstraints();
         constraintModificarMisDatos.gridy = 4;
         constraintModificarMisDatos.weightx = 1;
