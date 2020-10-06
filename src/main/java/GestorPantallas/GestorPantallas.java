@@ -34,12 +34,15 @@ public abstract class GestorPantallas {
 
     public static void pop() {
         Pantalla ultimaPantalla = new Pantalla("",new JFrame());
+        Pantalla penUltimaPantalla = new Pantalla("",new JFrame());
         for (Pantalla pantalla : pantallas) {
             if (history.size() > 0 && pantalla.nombre.equals(history.get(history.size() - 1))) ultimaPantalla = pantalla;
+            if (history.size() > 1 && pantalla.nombre.equals(history.get(history.size() - 2))) penUltimaPantalla = pantalla;
         }
         if (history.size() > 1) {
-            ultimaPantalla.componente.setVisible(false);
             history.remove(history.size() - 1);
+            penUltimaPantalla.componente.setVisible(true);
+            ultimaPantalla.componente.setVisible(false);
         }
     }
 }
