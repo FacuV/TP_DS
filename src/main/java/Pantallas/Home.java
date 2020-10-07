@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Home extends JPantalla {
-    public Home(String nombrePantalla){
-        super(nombrePantalla,"< Cambiar de usuario");
+    public Home(){
+        super("Menu de usuario","< Cambiar de usuario");
         body.setLayout(new GridBagLayout());
         JPanel panelTitulo = new JPanel();
             panelTitulo.setLayout(new GridBagLayout());
