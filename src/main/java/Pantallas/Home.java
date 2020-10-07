@@ -9,8 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Home extends JPantalla {
-    public Home(String nombrePantalla){
-        super(nombrePantalla,"< Cambiar de usuario");
+
+    public Home(){
+        super("Home","< Cambiar de usuario");
         body.setLayout(new GridBagLayout());
         JPanel panelTitulo = new JPanel();
             panelTitulo.setLayout(new GridBagLayout());
@@ -29,7 +30,7 @@ public class Home extends JPantalla {
         misCompetencias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestorPantallas.push("pantalla");
+                GestorPantallas.push("competencias");
             }
         });
         //misCompetencias.setPreferredSize(new Dimension(300,60));

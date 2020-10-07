@@ -1,15 +1,20 @@
 package GestorPantallas;
 
 import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Stack;
 
 public abstract class GestorPantallas {
     static ArrayList<Pantalla> pantallas = new ArrayList<Pantalla>();
-    static ArrayList<String> history = new ArrayList<String>();
+    static Stack<JFrame> historia = new Stack<JFrame>();
 
-    public static void add(Pantalla pantalla) {
-        pantallas.add(pantalla);
+    public static void add(Pantalla nueva_pantalla) {
+        pantallas.add(nueva_pantalla);
     }
 
     public static void init(String nombrePantalla) {
@@ -17,32 +22,34 @@ public abstract class GestorPantallas {
     }
 
     public static void push(String nombrePantalla) {
-        push(nombrePantalla, true);
-    }
-
-    public static void push(String nombrePantalla, boolean replace) {
-        Pantalla ultimaPantalla = new Pantalla("",new JFrame());
-        Pantalla proximaPantalla = new Pantalla("",new JFrame());
-        for (Pantalla pantalla : pantallas) {
-            if (pantalla.nombre.equals(nombrePantalla)) proximaPantalla = pantalla;
-            if (history.size() > 0 && pantalla.nombre.equals(history.get(history.size() - 1))) ultimaPantalla = pantalla;
+        Pantalla proximaPantalla = Pantalla.find(nombrePantalla,pantallas);
+        try {
+            Constructor constructorPantalla = proximaPantalla.clase.getConstructor();
+            JFrame nuevaPantalla = (JFrame) constructorPantalla.newInstance();
+            nuevaPantalla.setVisible(true);
+            if (historia.size() > 1) {
+                historia.lastElement().setVisible(false);
+            }
+            historia.push(nuevaPantalla);
+        } catch (NoSuchMethodException e) {
+            System.out.format("La pantalla %s no tiene una clase con un constructor válido",nombrePantalla);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
         }
-        if (replace) ultimaPantalla.componente.setVisible(false);
-        proximaPantalla.componente.setVisible(true);
-        history.add(nombrePantalla);
     }
 
     public static void pop() {
-        Pantalla ultimaPantalla = new Pantalla("",new JFrame());
-        Pantalla penUltimaPantalla = new Pantalla("",new JFrame());
-        for (Pantalla pantalla : pantallas) {
-            if (history.size() > 0 && pantalla.nombre.equals(history.get(history.size() - 1))) ultimaPantalla = pantalla;
-            if (history.size() > 1 && pantalla.nombre.equals(history.get(history.size() - 2))) penUltimaPantalla = pantalla;
-        }
-        if (history.size() > 1) {
-            history.remove(history.size() - 1);
-            penUltimaPantalla.componente.setVisible(true);
-            ultimaPantalla.componente.setVisible(false);
+        if (historia.size() > 1) {
+            JFrame pantallaActual = historia.pop();
+            pantallaActual.setVisible(false);
+            pantallaActual.dispose();
+        } else {
+            System.out.println("El stack del gestor de pantallas ya está en la base de la pila.");
         }
     }
 }
