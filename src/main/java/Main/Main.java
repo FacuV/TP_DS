@@ -5,13 +5,23 @@ import GestorPantallas.Pantalla;
 import Interface.JPantalla;
 import Pantallas.Home;
 import javax.swing.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 public class Main {
-    public static void main(String[] args) {
-        JFrame home = new Home("Menu de usuario");
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        JFrame home = new Home();
         JFrame pantalla = new JPantalla("una pantalla","tu vijea");
         GestorPantallas.add(new Pantalla("home",home));
         GestorPantallas.add(new Pantalla("pantalla",pantalla));
         GestorPantallas.init("home");
+
+        Class claseFrame = Class.forName("javax.swing.JFrame");
+        System.out.println(claseFrame.getConstructor());
+        Constructor constructor = claseFrame.getConstructor();
+        JFrame frame;
+        frame = (JFrame) constructor.newInstance();
+        frame.setVisible(true);
+        System.out.println(frame);
     }
 }
