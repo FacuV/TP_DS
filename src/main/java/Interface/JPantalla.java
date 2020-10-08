@@ -14,7 +14,7 @@ public class JPantalla extends JFrame {
         Container cp = getContentPane();
         cp.setLayout(new GridBagLayout());
         cp.setBackground(Color.white);
-        body.setBackground(Color.red);
+//        body.setBackground(Color.white);
             GridBagConstraints constraintBody = new GridBagConstraints();
             constraintBody.weightx = 1;
             constraintBody.weighty = 1;
