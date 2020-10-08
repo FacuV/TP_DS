@@ -14,11 +14,12 @@ public class JPantalla extends JFrame {
         Container cp = getContentPane();
         cp.setLayout(new GridBagLayout());
         cp.setBackground(Color.white);
-        body.setBackground(Color.white);
+        body.setBackground(Color.red);
             GridBagConstraints constraintBody = new GridBagConstraints();
             constraintBody.weightx = 1;
-            constraintBody.weighty = 2;
+            constraintBody.weighty = 1;
             constraintBody.fill = GridBagConstraints.BOTH;
+            constraintBody.anchor = GridBagConstraints.CENTER;
         JPanel footer = new Footer(nombreBotonFooter);
 
         cp.add(body,constraintBody);

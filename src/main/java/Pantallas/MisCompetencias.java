@@ -1,0 +1,210 @@
+package Pantallas;
+
+import Interface.GridBagConstraintFooter;
+import Interface.JPantalla;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
+public class MisCompetencias extends JPantalla {
+    public MisCompetencias(){
+        super("Mis competencias","Volver");
+        body.setLayout(new GridBagLayout());
+        body.add(Cabecera(),CabeceraConstraints());
+        body.add(Cuerpo(),CuerpoConstraints());
+    }
+
+    private JPanel Cabecera() {
+        JPanel Cabecera = new JPanel();
+        Cabecera.setBackground(Color.BLUE);
+        Cabecera.setLayout(new GridBagLayout());
+        Cabecera.add(BotonHome(),BotonHomeConstraints());
+        Cabecera.add(Buscador(),BuscadorConstraints());
+        return Cabecera;
+    }
+
+    private GridBagConstraints CabeceraConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(20,20,20,20);
+        constraints.weightx = 1;
+        return constraints;
+    }
+
+    private JTextField Buscador() {
+        JTextField Buscador = new JTextField();
+        return Buscador;
+    }
+
+    private GridBagConstraints BuscadorConstraints() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 1;
+        constraints.gridx = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
+    }
+
+    private JButton BotonHome () {
+        JButton BotonHome = new JButton();
+        BotonHome.setText("Home");
+        return BotonHome;
+    }
+
+    private GridBagConstraints BotonHomeConstraints () {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0,0,0,40);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridx = 0;
+        return constraints;
+    }
+
+    private JPanel Cuerpo () {
+        JPanel Cuerpo = new JPanel();
+        Cuerpo.setLayout(new GridBagLayout());
+        Cuerpo.setBackground(Color.orange);
+        Cuerpo.add(Filtros(),FiltrosConstraints());
+        Cuerpo.add(Lista(),ListaConstraints());
+        return Cuerpo;
+    }
+
+    private GridBagConstraints CuerpoConstraints () {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
+    }
+
+    private JPanel Filtros () {
+        JPanel Filtros = new JPanel();
+        Filtros.setLayout(new GridBagLayout());
+        Filtros.setBackground(Color.pink);
+
+        JComboBox deporte = new JComboBox();
+        deporte.setToolTipText("Filtrar por deporte");
+        GridBagConstraints deporteConstraint = new GridBagConstraints();
+        deporteConstraint.gridy = 0;
+        deporteConstraint.fill = GridBagConstraints.HORIZONTAL;
+        deporteConstraint.weightx = 1;
+        deporteConstraint.weighty = 1;
+
+        JComboBox modalidad = new JComboBox();
+        modalidad.setToolTipText("Filtrar por deporte");
+        GridBagConstraints modalidadConstraint = new GridBagConstraints();
+        modalidadConstraint.fill = GridBagConstraints.HORIZONTAL;
+        modalidadConstraint.gridy = 1;
+        modalidadConstraint.weightx = 1;
+        modalidadConstraint.weighty = 1;
+
+        JComboBox estado = new JComboBox();
+        estado.setToolTipText("Filtrar por deporte");
+        GridBagConstraints estadoConstraint = new GridBagConstraints();
+        estadoConstraint.fill = GridBagConstraints.HORIZONTAL;
+        estadoConstraint.gridy = 2;
+        estadoConstraint.weightx = 1;
+        estadoConstraint.weighty = 1;
+
+        JButton boton = new JButton();
+        GridBagConstraints botonConstraint = new GridBagConstraints();
+        botonConstraint.fill = GridBagConstraints.HORIZONTAL;
+        botonConstraint.gridy = 3;
+        botonConstraint.weightx = 1;
+        botonConstraint.weighty = 1;
+        boton.setText("Aceptar");
+
+        Filtros.add(deporte,deporteConstraint);
+        Filtros.add(modalidad,modalidadConstraint);
+        Filtros.add(estado,estadoConstraint);
+        Filtros.add(boton,botonConstraint);
+
+        return Filtros;
+    }
+
+    private GridBagConstraints FiltrosConstraints () {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+        constraints.insets = new Insets(10,20,10,20);
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
+    }
+
+    private JScrollPane Lista () {
+        JScrollPane Scroller = new JScrollPane();
+        JPanel Lista = new JPanel();
+        Lista.setLayout(new GridBagLayout());
+        ArrayList<String> competencias = new ArrayList<String>();
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        competencias.add("Competencia 1");
+        competencias.add("Competencia 2");
+        competencias.add("Competencia 3");
+        competencias.add("Competencia 4");
+        competencias.add("Competencia 5");
+        for (int index = 0; index < competencias.size(); index++) {
+            JButton tarjeta = new JButton();
+            tarjeta.setBackground(Color.LIGHT_GRAY);
+            tarjeta.setPreferredSize(new Dimension(0,100));
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridy = index;
+            constraints.weightx = 1;
+            constraints.fill = GridBagConstraints.BOTH;
+            if (index > 0) {
+                constraints.insets = new Insets(5,20,5,20);
+            } else {
+                constraints.insets = new Insets(20,20,5,20);
+            }
+            final int ind = index;
+            Lista.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    System.out.format("Tarjeta clickeada: %d \n",ind);
+                }
+            });
+            Lista.add(tarjeta,constraints);
+        }
+
+        Scroller.setViewportView(Lista);
+        return Scroller;
+    }
+
+    private GridBagConstraints ListaConstraints () {
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 4;
+        constraints.weighty = 1;
+        constraints.gridx = 1;
+        constraints.fill = GridBagConstraints.BOTH;
+        return constraints;
+    }
+}
