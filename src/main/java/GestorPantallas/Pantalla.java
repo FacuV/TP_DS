@@ -1,13 +1,22 @@
 package GestorPantallas;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Pantalla {
     String nombre;
-    JFrame componente;
+    Class clase;
 
-    public Pantalla (String nombre, JFrame componente) {
+    public Pantalla (String nombre, Class clase) {
         this.nombre = nombre;
-        this.componente = componente;
+        this.clase = clase;
+    }
+
+    public static Pantalla find (String nombre, ArrayList<Pantalla> pantallas) {
+        for (Pantalla pantalla : pantallas) {
+            if (pantalla.nombre.equals(nombre)) return pantalla;
+        }
+        return pantallas.get(0);
     }
 }
