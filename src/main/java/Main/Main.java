@@ -4,6 +4,7 @@ import GestorPantallas.GestorPantallas;
 import GestorPantallas.Pantalla;
 import Interface.JPantalla;
 import Negocio.Pais;
+import Negocio.Provincia;
 import Pantallas.Home;
 
 import javax.persistence.EntityManager;
@@ -23,25 +24,9 @@ public class Main {
         //GestorPantallas.init("home");
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
         EntityManager manager = entityManagerFactory.createEntityManager();
-        Pais australia= new Pais("Australia");
-        Pais hungria= new Pais("Hungria");
-        manager.getTransaction().begin();
-        //almacenar objeto
-        manager.persist(australia);
-        manager.persist(hungria);
-        manager.getTransaction().commit();
-
-        //manager.getTransaction().begin();
-        ////almacenar objeto
-        //australia=manager.find(Pais.class,0);
-        //hungria=manager.find(Pais.class,35);
-        //manager.remove(australia);
-        //manager.remove(hungria);
-        //manager.getTransaction().commit();
-        List paises = manager.createQuery("FROM Pais").getResultList();
-        System.out.println(paises);
-        System.out.println(paises.size());
-        manager.close();
+        Provincia bs = manager.find(Provincia.class,1);
+        System.out.println(bs);
+        System.out.println(bs.getPais());
 
 
     }

@@ -1,17 +1,35 @@
 package Negocio;
 
+import javax.persistence.*;
 import java.util.ArrayList;
-
+@Entity
+@Table(name = "competencia")
 public abstract class Competencia {
+    @Id
+    @Column(name = "id_competencia")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int id_competencia;
+    @Column(name = "nombre")
     protected String nombre;
+    @Column(name = "reglamento")
     protected String reglamento;
+    @Column(name = "baja_logica")
     protected boolean baja_logica;
+    @OneToOne
+    @JoinColumn(name = "id_puntuacion")
     protected Puntuacion puntuacion;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "estado")
     protected Estado estado;
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
     protected Usuario usuario;
+    @ManyToOne
+    @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
+    @OneToMany(mappedBy = "competencia")
     protected ArrayList<Disponibilidad> disponibilidades;
+
     protected ArrayList<Participante> participantes;
     protected Fixture fixture;
 
