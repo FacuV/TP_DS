@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.deser.std.MapEntryDeserializer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "lugar_realizacion")
 public class LugarRealizacion{
@@ -19,7 +21,7 @@ public class LugarRealizacion{
     @ManyToMany
     @JoinTable(name = "lugar_realizando_deporte", joinColumns = @JoinColumn(name = "id_deporte"),
             inverseJoinColumns = @JoinColumn(name = "id_lugar_realizacion"))
-    private ArrayList<Deporte> deportes;
+    private List<Deporte> deportes;
     public LugarRealizacion() {}
     public LugarRealizacion(String nombre,Usuario usuario, ArrayList<Deporte> deportes) {
         this.nombre = nombre;
@@ -45,11 +47,11 @@ public class LugarRealizacion{
         this.nombre = nombre;
     }
 
-    public ArrayList<Deporte> getDeportes() {
+    public List<Deporte> getDeportes() {
         return deportes;
     }
 
-    public void setDeportes(ArrayList<Deporte> deportes) {
+    public void setDeportes(List<Deporte> deportes) {
         this.deportes = deportes;
     }
 

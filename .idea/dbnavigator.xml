@@ -25,8 +25,12 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="392a668a-84ee-4494-8f35-cf58c862eedd">
-        <schema name="pg_catalog" object-types="function" />
-        <schema name="public" object-types="table, sequence, view, index, function, dataset trigger, constraint, column" />
+        <schema name="information_schema" object-types="sequence, view, table, function" />
+        <schema name="pg_catalog" object-types="sequence, view, table, function" />
+        <schema name="pg_temp_1" object-types="sequence, view, table, function" />
+        <schema name="pg_toast" object-types="sequence, view, table, function" />
+        <schema name="pg_toast_temp_1" object-types="sequence, view, table, function" />
+        <schema name="public" object-types="dataset trigger, sequence, view, column, table, function, constraint, index" />
       </connection>
     </loaded-nodes>
   </component>
@@ -42,6 +46,7 @@
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.encuentros_en_fixture" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.usuario" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.fixture" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.lugar_realizacion" active-filter-id="" />
