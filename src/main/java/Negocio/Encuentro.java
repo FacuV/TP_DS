@@ -23,9 +23,7 @@ public class Encuentro {
     @JoinColumn(name = "id_participante_b")
     private Participante participanteB;
     @OneToOne
-    @JoinColumns(value = {
-            @JoinColumn(name = "fecha_resultado_encuentro",referencedColumnName = "fecha"),
-            @JoinColumn(name = "hora_resultado_encuentro",referencedColumnName = "hora")})
+    @JoinColumn(name = "id_resultado_final")
     private Resultado resultado_actual;
     @OneToMany(mappedBy = "encuentro")
     private List<Resultado> historial_resultados_modificados;

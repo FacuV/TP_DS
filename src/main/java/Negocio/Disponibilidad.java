@@ -1,13 +1,16 @@
 package Negocio;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "lugar_realizacion_competencia")
-public class Disponibilidad {
+public class Disponibilidad implements Serializable {
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_competencia")
     private Competencia competencia;
+    @Id
     @ManyToOne
     @JoinColumn(name = "id_lugar_realizacion")
     private LugarRealizacion lugarRealizacion;

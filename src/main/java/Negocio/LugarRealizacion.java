@@ -18,18 +18,21 @@ public class LugarRealizacion{
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+    @Column(name = "descripcion")
+    private String descripcion;
     @ManyToMany
-    @JoinTable(name = "lugar_realizando_deporte", joinColumns = @JoinColumn(name = "id_deporte"),
+    @JoinTable(name = "lugar_realizacion_deporte", joinColumns = @JoinColumn(name = "id_deporte"),
             inverseJoinColumns = @JoinColumn(name = "id_lugar_realizacion"))
     private List<Deporte> deportes;
     public LugarRealizacion() {}
-    public LugarRealizacion(String nombre,Usuario usuario, ArrayList<Deporte> deportes) {
+    public LugarRealizacion(String nombre,Usuario usuario, ArrayList<Deporte> deportes, String descripcion) {
         this.nombre = nombre;
         this.usuario = usuario;
         this.deportes = deportes;
+        this.descripcion = descripcion;
     }
-    public LugarRealizacion(String nombre,Usuario usuario) {
-        this(nombre,usuario,new ArrayList());
+    public LugarRealizacion(String nombre,Usuario usuario, String descripcion) {
+        this(nombre,usuario,new ArrayList(),descripcion);
     }
     public int getId_lugar_realizacion() {
         return id_lugar_realizacion;
@@ -53,6 +56,14 @@ public class LugarRealizacion{
 
     public void setDeportes(List<Deporte> deportes) {
         this.deportes = deportes;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Usuario getUsuario() {

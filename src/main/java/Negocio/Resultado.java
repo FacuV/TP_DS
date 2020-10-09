@@ -4,9 +4,15 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "resultado")
 public class Resultado {
+    @Id
+    @Column(name = "id_resultado")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    protected int id_resultado;
     @Column(name = "fecha")
     private LocalDate fecha;
     @Column(name = "hora")
@@ -15,7 +21,7 @@ public class Resultado {
     @Column(name = "resolucion")
     private Resolucion resolucion;
     @OneToMany(mappedBy = "resultado")
-    private ArrayList<Set> sets;
+    private List<Set> sets;
     @ManyToOne
     @JoinColumn(name = "id_encuentro")
     private Encuentro encuentro;
@@ -62,11 +68,19 @@ public class Resultado {
         this.resolucion = resolucion;
     }
 
-    public ArrayList<Set> getSets() {
+    public int getId_resultado() {
+        return id_resultado;
+    }
+
+    public void setId_resultado(int id_resultado) {
+        this.id_resultado = id_resultado;
+    }
+
+    public List<Set> getSets() {
         return sets;
     }
 
-    public void setSets(ArrayList<Set> sets) {
+    public void setSets(List<Set> sets) {
         this.sets = sets;
     }
 

@@ -11,12 +11,9 @@ public class Deporte {
     private int id_deporte;
     @Column(name = "nombre")
     private String nombre;
-    @Column(name = "descripcion")
-    private String descripcion;
     public Deporte(){}
-    public Deporte(String nombre,String descripcion){
+    public Deporte(String nombre){
         this.nombre=nombre;
-        this.descripcion=descripcion;
     }
 
     public int getId_deporte() {
@@ -33,13 +30,5 @@ public class Deporte {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 }

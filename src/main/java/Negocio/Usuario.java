@@ -2,6 +2,8 @@ package Negocio;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -18,16 +20,16 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento")
     private TipoDeDocumento tipoDeDocumento;
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
     @OneToMany(mappedBy = "usuario")
-    private ArrayList<LugarRealizacion> lugaresRealizacion;
+    private List<LugarRealizacion> lugaresRealizacion;
     @OneToMany(mappedBy = "usuario")
-    private ArrayList<Competencia> competencias;
+    private List<Competencia> competencias;
 
     public Usuario(){}
-    public Usuario(String nombre, String apellido, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, ArrayList<LugarRealizacion> lugaresRealizacion, ArrayList<Competencia> competencias) {
+    public Usuario(String nombre, String apellido, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.numero_documento = numero_documento;
@@ -88,19 +90,19 @@ public class Usuario {
         this.localidad = localidad;
     }
 
-    public ArrayList<LugarRealizacion> getLugaresRealizacion() {
+    public List<LugarRealizacion> getLugaresRealizacion() {
         return lugaresRealizacion;
     }
 
-    public void setLugaresRealizacion(ArrayList<LugarRealizacion> lugaresRealizacion) {
+    public void setLugaresRealizacion(List<LugarRealizacion> lugaresRealizacion) {
         this.lugaresRealizacion = lugaresRealizacion;
     }
 
-    public ArrayList<Competencia> getCompetencias() {
+    public List<Competencia> getCompetencias() {
         return competencias;
     }
 
-    public void setCompetencias(ArrayList<Competencia> competencias) {
+    public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
     }
 }

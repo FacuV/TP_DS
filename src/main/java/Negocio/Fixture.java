@@ -2,6 +2,8 @@ package Negocio;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "fixture")
 public class Fixture{
@@ -12,7 +14,7 @@ public class Fixture{
     @OneToMany
     @JoinTable(name = "encuentro_en_fixture", joinColumns = @JoinColumn(name = "id_encuentro"),
             inverseJoinColumns = @JoinColumn(name = "id_fixture"))
-    private ArrayList<Encuentro> encuentros;
+    private List<Encuentro> encuentros;
 
     public Fixture() {
     }
@@ -29,11 +31,11 @@ public class Fixture{
         this.id_fixture = id_fixture;
     }
 
-    public ArrayList<Encuentro> getEncuentros() {
+    public List<Encuentro> getEncuentros() {
         return encuentros;
     }
 
-    public void setEncuentros(ArrayList<Encuentro> encuentros) {
+    public void setEncuentros(List<Encuentro> encuentros) {
         this.encuentros = encuentros;
     }
 }
