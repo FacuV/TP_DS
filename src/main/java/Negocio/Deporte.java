@@ -31,4 +31,11 @@ public class Deporte {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Deporte{" +
+                "nombre='" + nombre + '\'' +
+                '}';
+    }
 }

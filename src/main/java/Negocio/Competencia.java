@@ -42,7 +42,8 @@ public abstract class Competencia {
 
     protected Competencia() {
     }
-    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, List<Disponibilidad> disponibilidades, List<Participante> participantes) {
+
+    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, List<Disponibilidad> disponibilidades, List<Participante> participantes,Fixture fixture) {
         this.nombre = nombre;
         this.reglamento = reglamento;
         this.puntuacion = puntuacion;
@@ -51,9 +52,13 @@ public abstract class Competencia {
         this.deporte = deporte;
         this.disponibilidades = disponibilidades;
         this.participantes = participantes;
+        this.fixture = fixture;
     }
-    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte){
-        this(nombre,reglamento,puntuacion,estado,usuario,deporte,new ArrayList<>(), new ArrayList<>());
+    protected Competencia(String nombre, String reglamento,Puntuacion puntuacion,Estado estado, Usuario usuario, Deporte deporte){
+        this(nombre,reglamento,puntuacion,estado,usuario,deporte,new ArrayList<>(), new ArrayList<>(),null);
+    }
+    protected Competencia(String nombre, String reglamento,Puntuacion puntuacion, Usuario usuario, Deporte deporte){
+        this(nombre,reglamento,puntuacion,Estado.CREADA,usuario,deporte,new ArrayList<>(), new ArrayList<>(),null);
     }
 
     public int getId_competencia() {

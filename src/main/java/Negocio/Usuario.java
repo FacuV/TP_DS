@@ -15,6 +15,8 @@ public class Usuario {
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
+    @Column(name = "email")
+    private String email;
     @Column(name = "documento")
     private String numero_documento;
     @Enumerated(EnumType.STRING)
@@ -29,17 +31,19 @@ public class Usuario {
     private List<Competencia> competencias;
 
     public Usuario(){}
-    public Usuario(String nombre, String apellido, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {
+
+    public Usuario(String nombre, String apellido,String email,String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {
         this.nombre = nombre;
         this.apellido = apellido;
+        this.email = email;
         this.numero_documento = numero_documento;
         this.tipoDeDocumento = tipoDeDocumento;
         this.localidad = localidad;
         this.lugaresRealizacion = lugaresRealizacion;
         this.competencias = competencias;
     }
-    public Usuario(String nombre, String apellido, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad) {
-        this(nombre,apellido,numero_documento,tipoDeDocumento,localidad,new ArrayList<LugarRealizacion>(),new ArrayList<Competencia>());
+    public Usuario(String nombre, String apellido,String email, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad) {
+        this(nombre,apellido,email,numero_documento,tipoDeDocumento,localidad,new ArrayList<LugarRealizacion>(),new ArrayList<Competencia>());
     }
 
     public int getId_usuario() {
@@ -104,5 +108,12 @@ public class Usuario {
 
     public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                '}';
     }
 }
