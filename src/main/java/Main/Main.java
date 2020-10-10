@@ -26,6 +26,6 @@ public class Main {
         frame = (JFrame) constructor.newInstance();
         frame.setVisible(true);
         System.out.println(frame);
-        frame.
+
     }
 }
