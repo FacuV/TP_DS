@@ -33,8 +33,8 @@ public abstract class Competencia {
     @OneToMany(mappedBy = "competencia")
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany
-    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_participante"),
-            inverseJoinColumns = @JoinColumn(name = "id_competencia"))
+    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
+            inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;
     @OneToOne
     @JoinColumn(name = "id_fixture")
