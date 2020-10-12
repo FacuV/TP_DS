@@ -16,6 +16,7 @@ public class Encuentro {
     private LocalDate fecha;
     @Column(name = "fase")
     private Integer fase;
+    //seguir de aca
     @ManyToOne
     @JoinColumn(name = "id_participante_a")
     private Participante participanteA;

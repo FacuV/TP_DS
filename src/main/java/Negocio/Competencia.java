@@ -18,7 +18,7 @@ public abstract class Competencia {
     protected String reglamento;
     @Column(name = "baja_logica")
     protected boolean baja_logica;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_puntuacion")
     protected Puntuacion puntuacion;
     @Enumerated(EnumType.STRING)
@@ -30,13 +30,13 @@ public abstract class Competencia {
     @ManyToOne
     @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
-    @OneToMany(mappedBy = "competencia")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany
     @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
             inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_fixture")
     protected Fixture fixture;
 

@@ -73,4 +73,12 @@ public class LugarRealizacion{
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "LugarRealizacion{" +
+                "id_lugar_realizacion=" + id_lugar_realizacion +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }
