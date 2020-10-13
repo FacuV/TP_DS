@@ -1,22 +1,19 @@
 package Main;
 
-import GestorPantallas.GestorPantallas;
-import GestorPantallas.Pantalla;
+import GestorPantallas.*;
 import Interface.JPantalla;
 import Pantallas.Home;
 import javax.swing.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         JFrame home = new Home();
-        JFrame pantalla = new JPantalla("una pantalla","tu vijea");
-        GestorPantallas.add(new Pantalla("home",home));
-        GestorPantallas.add(new Pantalla("pantalla",pantalla));
+        JFrame pantalla = new JPantalla("una pantalla", "tu vijea");
+        GestorPantallas.add(new Pantalla("home", home));
+        GestorPantallas.add(new Pantalla("pantalla", pantalla));
         GestorPantallas.init("home");
         ArrayList<Pantalla> lista = new ArrayList<Pantalla>();
         Class claseFrame = Class.forName("javax.swing.JFrame");
@@ -26,6 +23,5 @@ public class Main {
         frame = (JFrame) constructor.newInstance();
         frame.setVisible(true);
         System.out.println(frame);
-
     }
 }

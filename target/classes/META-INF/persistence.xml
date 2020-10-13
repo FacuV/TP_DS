@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+    <persistence-unit name="Persistence">
+        <class>Negocio.*</class><class>Negocio.Provincia</class><class>Negocio.Localidad</class><class>Negocio.Usuario</class>
+        <class>Negocio.Competencia</class><class>Negocio.Liga</class><class>Negocio.EliminatoriaSimple</class><class>Negocio.EliminatoriaDoble</class>
+        <class>Negocio.Deporte</class><class>Negocio.LugarRealizacion</class><class>Negocio.Disponibilidad</class>
+        <class>Negocio.Puntuacion</class><class>Negocio.PuntuacionResultadoFinal</class><class>Negocio.PuntuacionSet</class><class>Negocio.PuntuacionPuntaje</class>
+        <class>Negocio.Participante</class><class>Negocio.Individuo</class><class>Negocio.Equipo</class>
+        <class>Negocio.Fixture</class><class>Negocio.Encuentro</class>
+        <class>Negocio.Resultado</class><class>Negocio.Set</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://db-tp-ds.cek12yqxgquj.sa-east-1.rds.amazonaws.com:5432/postgres" />
+            <property name="javax.persistence.jdbc.user" value="postgres" />
+            <property name="javax.persistence.jdbc.password" value="tpdisenio" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate" />
+        </properties>
+    </persistence-unit>
+
+</persistence>
