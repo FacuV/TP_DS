@@ -5,7 +5,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
     <persistence-unit name="Persistence">
-        <class>Negocio.*</class><class>Negocio.Provincia</class><class>Negocio.Localidad</class><class>Negocio.Usuario</class>
+        <class>Negocio.Pais</class><class>Negocio.Provincia</class><class>Negocio.Localidad</class><class>Negocio.Usuario</class>
         <class>Negocio.Competencia</class><class>Negocio.Liga</class><class>Negocio.EliminatoriaSimple</class><class>Negocio.EliminatoriaDoble</class>
         <class>Negocio.Deporte</class><class>Negocio.LugarRealizacion</class><class>Negocio.Disponibilidad</class>
         <class>Negocio.Puntuacion</class><class>Negocio.PuntuacionResultadoFinal</class><class>Negocio.PuntuacionSet</class><class>Negocio.PuntuacionPuntaje</class>
