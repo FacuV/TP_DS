@@ -1,17 +1,10 @@
 package Main;
 
-import GestorPantallas.GestorPantallas;
-import GestorPantallas.Pantalla;
-import Interface.JPantalla;
-import Pantallas.Home;
-import javax.swing.*;
+import java.lang.reflect.InvocationTargetException;
 
 public class Main {
-    public static void main(String[] args) {
-        JFrame home = new Home("Menu de usuario");
-        JFrame pantalla = new JPantalla("una pantalla","tu vijea");
-        GestorPantallas.add(new Pantalla("home",home));
-        GestorPantallas.add(new Pantalla("pantalla",pantalla));
-        GestorPantallas.init("home");
+    public static void main(String[] args){
+        System.out.println(11 % 2 != 0);
+        System.out.println(10 %2 == 0);
     }
 }
