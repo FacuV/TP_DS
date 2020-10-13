@@ -20,7 +20,7 @@ public class Resultado {
     @Enumerated(EnumType.STRING)
     @Column(name = "resolucion")
     private Resolucion resolucion;
-    @OneToMany(mappedBy = "resultado")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "resultado")
     private List<Set> sets;
     @ManyToOne
     @JoinColumn(name = "id_encuentro")

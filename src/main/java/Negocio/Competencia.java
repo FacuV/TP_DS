@@ -18,7 +18,7 @@ public abstract class Competencia {
     protected String reglamento;
     @Column(name = "baja_logica")
     protected boolean baja_logica;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_puntuacion")
     protected Puntuacion puntuacion;
     @Enumerated(EnumType.STRING)
@@ -30,19 +30,20 @@ public abstract class Competencia {
     @ManyToOne
     @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
-    @OneToMany(mappedBy = "competencia")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany
-    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_participante"),
-            inverseJoinColumns = @JoinColumn(name = "id_competencia"))
+    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
+            inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_fixture")
     protected Fixture fixture;
 
     protected Competencia() {
     }
-    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, List<Disponibilidad> disponibilidades, List<Participante> participantes) {
+
+    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, List<Disponibilidad> disponibilidades, List<Participante> participantes,Fixture fixture) {
         this.nombre = nombre;
         this.reglamento = reglamento;
         this.puntuacion = puntuacion;
@@ -51,9 +52,13 @@ public abstract class Competencia {
         this.deporte = deporte;
         this.disponibilidades = disponibilidades;
         this.participantes = participantes;
+        this.fixture = fixture;
     }
-    protected Competencia(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte){
-        this(nombre,reglamento,puntuacion,estado,usuario,deporte,new ArrayList<>(), new ArrayList<>());
+    protected Competencia(String nombre, String reglamento,Puntuacion puntuacion,Estado estado, Usuario usuario, Deporte deporte){
+        this(nombre,reglamento,puntuacion,estado,usuario,deporte,new ArrayList<>(), new ArrayList<>(),null);
+    }
+    protected Competencia(String nombre, String reglamento,Puntuacion puntuacion, Usuario usuario, Deporte deporte){
+        this(nombre,reglamento,puntuacion,Estado.CREADA,usuario,deporte,new ArrayList<>(), new ArrayList<>(),null);
     }
 
     public int getId_competencia() {

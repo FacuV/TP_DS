@@ -20,15 +20,18 @@ public class Liga extends Competencia{
     public Liga(){
         super();
     }
-    public Liga(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, ArrayList<Disponibilidad> disponibilidades, ArrayList<Participante> participantes,int puntos_partido_ganado,int puntos_presentarse,boolean empate_permitido,int puntos_empate) {
-        super(nombre, reglamento, puntuacion, estado, usuario, deporte, disponibilidades, participantes);
+    public Liga(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte, ArrayList<Disponibilidad> disponibilidades, ArrayList<Participante> participantes,Fixture fixture,int puntos_partido_ganado,int puntos_presentarse,boolean empate_permitido,int puntos_empate) {
+        super(nombre, reglamento, puntuacion, estado, usuario, deporte, disponibilidades, participantes,fixture);
         this.puntos_partido_ganado = puntos_partido_ganado;
         this.puntos_presentarse = puntos_presentarse;
         this.empate_permitido = empate_permitido;
         this.puntos_empate = puntos_empate;
     }
     public Liga(String nombre, String reglamento, Puntuacion puntuacion, Estado estado, Usuario usuario, Deporte deporte,int puntos_partido_ganado,int puntos_presentarse,boolean empate_permitido,int puntos_empate) {
-        this(nombre, reglamento, puntuacion, estado, usuario, deporte,new ArrayList<Disponibilidad>(), new ArrayList<Participante>(),puntos_partido_ganado,puntos_presentarse,empate_permitido,puntos_empate);
+        this(nombre, reglamento, puntuacion, estado, usuario, deporte,new ArrayList<Disponibilidad>(), new ArrayList<Participante>(),null,puntos_partido_ganado,puntos_presentarse,empate_permitido,puntos_empate);
+    }
+    public Liga(String nombre, String reglamento, Puntuacion puntuacion,Usuario usuario, Deporte deporte,int puntos_partido_ganado,int puntos_presentarse,boolean empate_permitido,int puntos_empate) {
+        this(nombre, reglamento, puntuacion,Estado.CREADA, usuario, deporte,new ArrayList<Disponibilidad>(), new ArrayList<Participante>(),null,puntos_partido_ganado,puntos_presentarse,empate_permitido,puntos_empate);
     }
 
     public int getPuntos_partido_ganado() {
