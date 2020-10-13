@@ -25,18 +25,14 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="392a668a-84ee-4494-8f35-cf58c862eedd">
-        <schema name="information_schema" object-types="sequence, view, table, function" />
-        <schema name="pg_catalog" object-types="sequence, view, table, function" />
-        <schema name="pg_temp_1" object-types="sequence, view, table, function" />
-        <schema name="pg_toast" object-types="sequence, view, table, function" />
-        <schema name="pg_toast_temp_1" object-types="sequence, view, table, function" />
-        <schema name="public" object-types="dataset trigger, sequence, view, column, table, function, constraint, index" />
+        <schema name="pg_catalog" object-types="table, function, view" />
+        <schema name="public" object-types="table, function, view" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd">
-      <console name="db-tp-ds " type="STANDARD" schema="information_schema" session="Main"><![CDATA[select * from public.localidad]]></console>
+      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from competencia]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
