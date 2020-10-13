@@ -16,17 +16,16 @@ public class Encuentro {
     private LocalDate fecha;
     @Column(name = "fase")
     private Integer fase;
-    //seguir de aca
     @ManyToOne
     @JoinColumn(name = "id_participante_a")
     private Participante participanteA;
     @ManyToOne
     @JoinColumn(name = "id_participante_b")
     private Participante participanteB;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_resultado_final")
     private Resultado resultado_actual;
-    @OneToMany(mappedBy = "encuentro")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "encuentro")
     private List<Resultado> historial_resultados_modificados;
     @Enumerated(EnumType.STRING)
     @Column(name = "ronda")
