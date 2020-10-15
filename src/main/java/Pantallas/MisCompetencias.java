@@ -1,10 +1,13 @@
 package Pantallas;
 
+import GestorPantallas.GestorPantallas;
 import Interface.GridBagConstraintFooter;
 import Interface.JPantalla;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class MisCompetencias extends JPantalla {
 
     private JPanel Cabecera() {
         JPanel Cabecera = new JPanel();
-        Cabecera.setBackground(Color.BLUE);
+//        Cabecera.setBackground(Color.BLUE);
         Cabecera.setLayout(new GridBagLayout());
         Cabecera.add(BotonHome(),BotonHomeConstraints());
         Cabecera.add(Buscador(),BuscadorConstraints());
@@ -66,7 +69,7 @@ public class MisCompetencias extends JPantalla {
     private JPanel Cuerpo () {
         JPanel Cuerpo = new JPanel();
         Cuerpo.setLayout(new GridBagLayout());
-        Cuerpo.setBackground(Color.orange);
+//        Cuerpo.setBackground(Color.orange);
         Cuerpo.add(Filtros(),FiltrosConstraints());
         Cuerpo.add(Lista(),ListaConstraints());
         return Cuerpo;
@@ -85,7 +88,7 @@ public class MisCompetencias extends JPantalla {
     private JPanel Filtros () {
         JPanel Filtros = new JPanel();
         Filtros.setLayout(new GridBagLayout());
-        Filtros.setBackground(Color.pink);
+        Filtros.setBackground(Color.white);
 
         JComboBox deporte = new JComboBox();
         deporte.setToolTipText("Filtrar por deporte");
@@ -116,7 +119,6 @@ public class MisCompetencias extends JPantalla {
         botonConstraint.fill = GridBagConstraints.HORIZONTAL;
         botonConstraint.gridy = 3;
         botonConstraint.weightx = 1;
-        botonConstraint.weighty = 1;
         boton.setText("Aceptar");
 
         Filtros.add(deporte,deporteConstraint);
@@ -131,7 +133,7 @@ public class MisCompetencias extends JPantalla {
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx = 1;
         constraints.weighty = 1;
-        constraints.insets = new Insets(10,20,10,20);
+        constraints.insets = new Insets(20,20,20,20);
         constraints.fill = GridBagConstraints.BOTH;
         return constraints;
     }
@@ -143,49 +145,46 @@ public class MisCompetencias extends JPantalla {
         ArrayList<String> competencias = new ArrayList<String>();
         competencias.add("Competencia 1");
         competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        competencias.add("Competencia 1");
         competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        competencias.add("Competencia 1");
         competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        competencias.add("Competencia 1");
         competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        competencias.add("Competencia 1");
-        competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        competencias.add("Competencia 1");
-        competencias.add("Competencia 2");
-        competencias.add("Competencia 3");
-        competencias.add("Competencia 4");
-        competencias.add("Competencia 5");
-        for (int index = 0; index < competencias.size(); index++) {
-            JButton tarjeta = new JButton();
+
+        JButton nuevaTarjeta = new JButton();
+        nuevaTarjeta.setBackground(Color.white);
+        nuevaTarjeta.setPreferredSize(new Dimension(0,100));
+        GridBagConstraints nuevaTarjetaConstraints = new GridBagConstraints();
+        nuevaTarjetaConstraints.gridy = 0;
+        nuevaTarjetaConstraints.insets = new Insets(5,20,5,20);
+        nuevaTarjetaConstraints.weightx = 1;
+        nuevaTarjetaConstraints.fill = GridBagConstraints.BOTH;
+        nuevaTarjetaConstraints.anchor = GridBagConstraints.SOUTH;
+        JLabel texto = new JLabel("Crear competencia");
+//        texto.setBackground(Color.orange);
+        GridBagConstraints textoConstraint = new GridBagConstraints();
+        textoConstraint.anchor = GridBagConstraints.CENTER;
+        textoConstraint.weightx = 1;
+        textoConstraint.weighty = 1;
+        nuevaTarjeta.add(texto,textoConstraint);
+        Lista.add(nuevaTarjeta,nuevaTarjetaConstraints);
+
+        nuevaTarjeta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestorPantallas.push("nueva_competencia");
+            }
+        });
+
+        for (int index = 1; index < competencias.size(); index++) {
+            JPanel tarjeta = new JPanel();
             tarjeta.setBackground(Color.LIGHT_GRAY);
             tarjeta.setPreferredSize(new Dimension(0,100));
             GridBagConstraints constraints = new GridBagConstraints();
             constraints.gridy = index;
             constraints.weightx = 1;
+            constraints.insets = new Insets(20,20,5,20);
             constraints.fill = GridBagConstraints.BOTH;
-            if (index > 0) {
-                constraints.insets = new Insets(5,20,5,20);
-            } else {
-                constraints.insets = new Insets(20,20,5,20);
-            }
             final int ind = index;
-            Lista.addMouseListener(new MouseAdapter() {
+            tarjeta.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
@@ -205,6 +204,7 @@ public class MisCompetencias extends JPantalla {
         constraints.weighty = 1;
         constraints.gridx = 1;
         constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTH;
         return constraints;
     }
 }
