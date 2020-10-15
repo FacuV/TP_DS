@@ -25,15 +25,15 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="392a668a-84ee-4494-8f35-cf58c862eedd">
-        <schema name="information_schema" object-types="table, view, function" />
-        <schema name="pg_catalog" object-types="table, view, function" />
-        <schema name="public" object-types="column, sequence, table, view, function" />
+        <schema name="information_schema" object-types="view, function, table" />
+        <schema name="pg_catalog" object-types="view, function, table" />
+        <schema name="public" object-types="view, function, sequence, column, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd">
-      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from eliminatoria_simple]]></console>
+      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from lugar_realizacion_competencia]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -289,7 +289,6 @@
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
-          <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>
