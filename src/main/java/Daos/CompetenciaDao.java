@@ -2,7 +2,6 @@ package Daos;
 
 import Negocio.Competencia;
 import Negocio.Usuario;
-
 import java.util.List;
 
 public interface CompetenciaDao {
