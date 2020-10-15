@@ -1,17 +1,19 @@
 package Main;
 
-import GestorPantallas.GestorPantallas;
-import GestorPantallas.Pantalla;
-import Interface.JPantalla;
-import Pantallas.Home;
-import javax.swing.*;
+import Daos.LugarRealizacionDao;
+import Daos.LugarRealizacionPostgreSQLDao;
+import Daos.UsuarioDao;
+import Daos.UsuarioPostgreSQLDao;
+import Negocio.CompetenciaDTO;
+import Negocio.DisponibilidadDTO;
+import Negocio.LugarRealizacion;
+import Negocio.Usuario;
+import Servicio.GestorCompetencia;
+
+import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
-        JFrame home = new Home("Menu de usuario");
-        JFrame pantalla = new JPantalla("una pantalla","tu vijea");
-        GestorPantallas.add(new Pantalla("home",home));
-        GestorPantallas.add(new Pantalla("pantalla",pantalla));
-        GestorPantallas.init("home");
+    public static void main(String[] args){
+
     }
 }
