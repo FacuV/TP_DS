@@ -13,4 +13,8 @@ public class LugarRealizacion {
     public LugarRealizacion(String nombre) {
         this(nombre,new ArrayList());
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }

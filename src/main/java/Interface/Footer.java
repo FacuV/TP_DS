@@ -1,6 +1,6 @@
 package Interface;
 
-import GestorPantallas.GestorPantallas;
+import GestorPantallas.Gestor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class Footer extends JPanel{
         botonFooter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestorPantallas.pop();
+                Gestor.pop();
             }
         });
         add(botonFooter,constraint);

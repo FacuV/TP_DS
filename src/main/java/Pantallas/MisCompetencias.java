@@ -1,7 +1,6 @@
 package Pantallas;
 
-import GestorPantallas.GestorPantallas;
-import Interface.GridBagConstraintFooter;
+import GestorPantallas.Gestor;
 import Interface.JPantalla;
 
 import javax.swing.*;
@@ -170,7 +169,7 @@ public class MisCompetencias extends JPantalla {
         nuevaTarjeta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestorPantallas.push("nueva_competencia");
+                Gestor.push("nueva_competencia");
             }
         });
 
