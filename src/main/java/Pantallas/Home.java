@@ -1,6 +1,6 @@
 package Pantallas;
 
-import GestorPantallas.GestorPantallas;
+import GestorPantallas.Gestor;
 import Interface.JPantalla;
 
 import javax.swing.*;
@@ -30,7 +30,7 @@ public class Home extends JPantalla {
         misCompetencias.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestorPantallas.push("competencias");
+                Gestor.push("competencias");
             }
         });
         //misCompetencias.setPreferredSize(new Dimension(300,60));

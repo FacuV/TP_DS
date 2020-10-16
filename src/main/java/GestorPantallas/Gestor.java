@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Stack;
 
-public abstract class GestorPantallas {
+public abstract class Gestor {
     static ArrayList<Pantalla> pantallas = new ArrayList<Pantalla>();
     static Stack<JFrame> historia = new Stack<JFrame>();
 
