@@ -17,7 +17,7 @@ public class Lugar implements ListCellRenderer {
         GridBagConstraints nombreConstraints = new GridBagConstraints();
         nombreConstraints.weightx = 2;
 
-        JLabel cantidad = new JLabel(String.valueOf(disponibilidad.getCantidad()));
+        JLabel cantidad = new JLabel(String.valueOf(disponibilidad.getDisponibilidad()));
         GridBagConstraints cantidadConstraints = new GridBagConstraints();
         cantidadConstraints.weightx = 1;
 

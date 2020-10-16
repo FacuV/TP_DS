@@ -1,110 +1,85 @@
 package Pantallas.NuevaCompetencia;
 
+import Daos.DeporteDao;
+import Daos.DeportePostgreSQLDao;
+import Negocio.Deporte;
+
 import javax.swing.*;
 import java.awt.*;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.Normalizer;
+import java.util.List;
+
 public class FormularioIzquierdo extends JPanel {
+    DeporteDao deporteDao = new DeportePostgreSQLDao();
+    private int index = 0;
 
     public FormularioIzquierdo() {
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
         JLabel nombreLabel = new JLabel("Nombre de la competencia");
+        JLabel nombreError = new JLabel("Tiene que haber un nombre");
+        nombreError.setForeground(Color.red);
         GridBagConstraints nombreLabelConstraints = new GridBagConstraints();
-        nombreLabelConstraints.gridy = 0;
+        nombreLabelConstraints.gridy = index++;
         nombreLabelConstraints.weightx = 1;
         nombreLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(nombreLabel,nombreLabelConstraints);
+        nombreLabelConstraints.gridy = index++;
+        add(nombreError,nombreLabelConstraints);
 
         JTextField nombre = new JTextField();
         GridBagConstraints nombreConstraints = new GridBagConstraints();
         nombreConstraints.weightx = 1;
-        nombreConstraints.gridy = 1;
+        nombreConstraints.gridy = index++;
         nombreConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(nombre,nombreConstraints);
 
         JLabel deporteLabel = new JLabel("Deporte asociado");
         GridBagConstraints deporteLabelConstraints = new GridBagConstraints();
-        deporteLabelConstraints.gridy = 2;
+        deporteLabelConstraints.gridy = index++;
         deporteLabelConstraints.weightx = 1;
         deporteLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(deporteLabel,deporteLabelConstraints);
 
         JComboBox deporte = new JComboBox();
-        deporte.addItem("Football");
-        deporte.addItem("Basketball");
-        deporte.addItem("Softball");
-        deporte.addItem("Baseball");
+        List<Deporte> deportes = deporteDao.getDeportes();
+        for (Deporte _deporte : deportes) deporte.addItem(_deporte.getNombre());
         GridBagConstraints deporteConstraints = new GridBagConstraints();
         deporteConstraints.weightx = 1;
-        deporteConstraints.gridy = 3;
+        deporteConstraints.gridy = index++;
         deporteConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(deporte,deporteConstraints);
 
         JLabel modalidadLabel = new JLabel("Modalidad de competencia");
         GridBagConstraints modalidadLabelConstraints = new GridBagConstraints();
-        modalidadLabelConstraints.gridy = 4;
+        modalidadLabelConstraints.gridy = index++;
         modalidadLabelConstraints.weightx = 1;
         modalidadLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(modalidadLabel,modalidadLabelConstraints);
 
+        FormaPuntuacion formaPuntuacion = new FormaPuntuacion();
         JComboBox modalidad = new JComboBox();
-        modalidad.addItem("Eliminación simple");
         modalidad.addItem("Sistema de liga");
-        modalidad.addItem("Segunda vuelta");
+        modalidad.addItem("Eliminatoria simple");
+        modalidad.addItem("Eliminatoria doble");
         GridBagConstraints modalidadConstraints = new GridBagConstraints();
         modalidadConstraints.weightx = 1;
-        modalidadConstraints.gridy = 5;
+        modalidadConstraints.gridy = index++;
         modalidadConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(modalidad,modalidadConstraints);
 
-        JLabel subtitle = new JLabel("Forma de puntuación");
-        GridBagConstraints subtitleConstraints = new GridBagConstraints();
-        subtitleConstraints.gridy = 6;
-        add(subtitle,subtitleConstraints);
+        modalidad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formaPuntuacion.hidePuntosGanados(modalidad.getSelectedItem() == "Sistema de liga");
+            }
+        });
 
-        JPanel puntos = new JPanel();
-        puntos.setLayout(new GridLayout(1,3));
-        GridBagConstraints puntosConstraints = new GridBagConstraints();
-        puntosConstraints.gridy = 7;
-        puntosConstraints.weightx = 1;
-        puntosConstraints.fill = GridBagConstraints.HORIZONTAL;
-        JCheckBox hasPuntos = new JCheckBox();
-        JLabel puntosLabel = new JLabel("Puntos victoria por ausencia",SwingConstants.LEFT);
-        JTextField puntosCantidad = new JTextField();
-        puntos.add(hasPuntos);
-        puntos.add(puntosLabel);
-        puntos.add(puntosCantidad);
-        add(puntos,puntosConstraints);
-
-        JPanel sets = new JPanel();
-        sets.setLayout(new GridLayout(1,3));
-        GridBagConstraints setsConstraints = new GridBagConstraints();
-        setsConstraints.gridy = 8;
-        setsConstraints.weightx = 1;
-        setsConstraints.fill = GridBagConstraints.HORIZONTAL;
-        JCheckBox hasSets = new JCheckBox();
-        JLabel setsLabel = new JLabel("Cantidad máxima de sets.",SwingConstants.LEFT);
-        JTextField setsCantidad = new JTextField();
-        sets.add(hasSets);
-        sets.add(setsLabel);
-        sets.add(setsCantidad);
-        add(sets,setsConstraints);
-
-        JPanel finalResult = new JPanel();
-        finalResult.setLayout(new GridLayout(1,3));
-        GridBagConstraints finalResultConstraints = new GridBagConstraints();
-        finalResultConstraints.gridy = 9;
-        finalResultConstraints.weightx = 1;
-        finalResultConstraints.fill = GridBagConstraints.HORIZONTAL;
-        JCheckBox hasFinalResult = new JCheckBox();
-        JLabel finalResultLabel = new JLabel("Resultado final.",SwingConstants.LEFT);
-        finalResultLabel.setOpaque(true);
-        finalResultLabel.setBackground(Color.red);
-        finalResult.add(hasFinalResult);
-        finalResult.add(finalResultLabel);
-        finalResult.add(new JLabel(""));
-        add(finalResult,finalResultConstraints);
+        add(formaPuntuacion, new FormaPuntuacion.Constraints());
 
         JPanel empty = new JPanel();
         GridBagConstraints emptyConstraints = new GridBagConstraints();
