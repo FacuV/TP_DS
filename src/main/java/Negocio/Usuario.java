@@ -25,7 +25,7 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<LugarRealizacion> lugaresRealizacion;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Competencia> competencias;

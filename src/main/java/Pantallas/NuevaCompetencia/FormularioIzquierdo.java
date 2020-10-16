@@ -108,9 +108,35 @@ public class FormularioIzquierdo extends JPanel {
         return this.formaPuntuacion.getPuntosPorGanar();
     };
 
+    public String getCantidadSets() {
+        return this.formaPuntuacion.getCantidadSets();
+    };
+
     public String getPuntosPorPresentarse() {
         return this.formaPuntuacion.getPuntosPorPresentarse();
     };
 
+    public String getPuntosPorAusencia() {
+        return this.formaPuntuacion.getPuntosPorAusencia();
+    };
 
+    public String getPuntosPorEmpate() {
+        return this.formaPuntuacion.getPuntosPorEmpate();
+    };
+
+    public boolean getHasPuntos() {
+        return this.formaPuntuacion.getHasPuntos();
+    };
+
+    public boolean getHasSets() {
+        return this.formaPuntuacion.getHasSets();
+    };
+
+    public boolean getHasFinalResult() {
+        return this.formaPuntuacion.getHasFinalResult();
+    };
+
+    public boolean getHasTie() {
+        return this.formaPuntuacion.getHasTie();
+    };
 }

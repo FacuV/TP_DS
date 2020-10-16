@@ -6,12 +6,12 @@ import java.awt.event.ActionListener;
 
 public class Reglamento extends JPanel {
     JButton boton = new JButton("Aceptar");
+    JTextArea textArea = new JTextArea();
 
     public Reglamento () {
         setLayout(new GridBagLayout());
 
         JScrollPane scroll = new JScrollPane();
-        JTextArea textArea = new JTextArea();
         textArea.setMargin(new Insets(10,10,10,10));
         GridBagConstraints scrollConstraints = new GridBagConstraints();
         scrollConstraints.weighty = 1;
@@ -25,6 +25,10 @@ public class Reglamento extends JPanel {
         botonConstraints.gridy = 1;
         add(boton, botonConstraints);
     }
+
+    public String getReglamento() {
+        return this.textArea.getText();
+    };
 
     public void onAceptar(ActionListener action) {
         this.boton.addActionListener(action);
