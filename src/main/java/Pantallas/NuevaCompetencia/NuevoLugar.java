@@ -1,19 +1,30 @@
 package Pantallas.NuevaCompetencia;
 
+import Daos.UsuarioDao;
+import Daos.UsuarioPostgreSQLDao;
+import Negocio.DisponibilidadDTO;
+import Negocio.Equipo;
+import Negocio.LugarRealizacion;
+import Negocio.Usuario;
+
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class NuevoLugar extends JDialog {
     NuevoLugar self = this;
     String nuevaCantidad;
     JPanel content = new JPanel();
+    UsuarioDao usuarioDao = new UsuarioPostgreSQLDao();
+    List<LugarRealizacion> lugares;
 
-    public NuevoLugar (Window frame, String name, DefaultTableModel model) {
+    public NuevoLugar (Window frame, String name, DefaultTableModel model, ArrayList<DisponibilidadDTO> disponibilidades) {
         super(frame, name);
         setSize(new Dimension(500,150));
         setLocationRelativeTo(null);
@@ -23,10 +34,12 @@ public class NuevoLugar extends JDialog {
 
         JTextField Cantidad = new JTextField();
         JComboBox Nombres = new JComboBox();
-        Nombres.addItem("Boquita");
-        Nombres.addItem("Colón");
-        Nombres.addItem("River");
-        Nombres.addItem("Unión");
+        Usuario usuario = usuarioDao.getUsuario(4);
+        lugares = usuario.getLugaresRealizacion();
+        for (LugarRealizacion lugar : lugares) {
+            Nombres.addItem(lugar.getNombre());
+        };
+
         add(new JLabel("Lugar de realización:"));
         add(Nombres);
         add(new JLabel("Cantidad de encuentros:"));
@@ -51,6 +64,15 @@ public class NuevoLugar extends JDialog {
                 model.addRow(row);
                 self.setVisible(false);
                 self.dispose();
+
+                int lugar_id = 0;
+                for (LugarRealizacion lugar : lugares) {
+                    if (lugar.getNombre() == Nombres.getSelectedItem()) {
+                        lugar_id = lugar.getId_lugar_realizacion();
+                    }
+                };
+
+                disponibilidades.add(new DisponibilidadDTO(Integer.parseInt(Cantidad.getText()),lugar_id));
             }
         });
 

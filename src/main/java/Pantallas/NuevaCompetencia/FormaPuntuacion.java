@@ -93,6 +93,10 @@ public class FormaPuntuacion extends JPanel {
         add(tie,tieConstraints);
     };
 
+    public String getCantidadSets() {
+        return this.cantidadSets.getText();
+    };
+
     public void hidePuntosGanados(boolean hidden) {
         puntosGanados.setVisible(hidden);
     };

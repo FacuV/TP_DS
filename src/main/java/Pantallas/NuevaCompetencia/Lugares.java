@@ -1,6 +1,7 @@
 package Pantallas.NuevaCompetencia;
 
 import Negocio.Disponibilidad;
+import Negocio.DisponibilidadDTO;
 import Negocio.LugarRealizacion;
 
 import javax.swing.*;
@@ -8,10 +9,11 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class Lugares extends JPanel {
-    Disponibilidad disponibilidades[] = {};
+    ArrayList<DisponibilidadDTO> disponibilidades = new ArrayList<>();
     JTable tabla = new JTable();
     Lugares self = this;
     DefaultTableModel model = (DefaultTableModel) tabla.getModel();
@@ -50,12 +52,16 @@ public class Lugares extends JPanel {
         botonEliminarConstraints.gridy = 1;
         botonEliminarConstraints.weightx = 1;
         add(botonEliminar, botonEliminarConstraints);
-    }
+    };
+
+    public ArrayList<DisponibilidadDTO> getDisponibilidades() {
+        return this.disponibilidades;
+    };
 
     public class addDisponibilidad implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            NuevoLugar prompt = new NuevoLugar(SwingUtilities.getWindowAncestor(self),"Agregar Lugar",model);
+            NuevoLugar prompt = new NuevoLugar(SwingUtilities.getWindowAncestor(self),"Agregar Lugar",model,disponibilidades);
             prompt.setVisible(true);
         }
     }
