@@ -2,8 +2,11 @@ package Pantallas.NuevaCompetencia;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class Reglamento extends JPanel {
+    JButton boton = new JButton("Aceptar");
+
     public Reglamento () {
         setLayout(new GridBagLayout());
 
@@ -18,9 +21,12 @@ public class Reglamento extends JPanel {
         scroll.setViewportView(textArea);
         add(scroll,scrollConstraints);
 
-        JButton boton = new JButton("Aceptar");
         GridBagConstraints botonConstraints = new GridBagConstraints();
         botonConstraints.gridy = 1;
         add(boton, botonConstraints);
+    }
+
+    public void onAceptar(ActionListener action) {
+        this.boton.addActionListener(action);
     }
 }

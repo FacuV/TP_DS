@@ -14,6 +14,11 @@ import java.util.List;
 
 public class FormularioIzquierdo extends JPanel {
     DeporteDao deporteDao = new DeportePostgreSQLDao();
+    JLabel nombreError = new JLabel("");
+    JTextField nombre = new JTextField();
+    JComboBox deporte = new JComboBox();
+    JComboBox modalidad = new JComboBox();
+    FormaPuntuacion formaPuntuacion = new FormaPuntuacion();
     private int index = 0;
 
     public FormularioIzquierdo() {
@@ -21,7 +26,6 @@ public class FormularioIzquierdo extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
         JLabel nombreLabel = new JLabel("Nombre de la competencia");
-        JLabel nombreError = new JLabel("Tiene que haber un nombre");
         nombreError.setForeground(Color.red);
         GridBagConstraints nombreLabelConstraints = new GridBagConstraints();
         nombreLabelConstraints.gridy = index++;
@@ -31,7 +35,6 @@ public class FormularioIzquierdo extends JPanel {
         nombreLabelConstraints.gridy = index++;
         add(nombreError,nombreLabelConstraints);
 
-        JTextField nombre = new JTextField();
         GridBagConstraints nombreConstraints = new GridBagConstraints();
         nombreConstraints.weightx = 1;
         nombreConstraints.gridy = index++;
@@ -45,7 +48,6 @@ public class FormularioIzquierdo extends JPanel {
         deporteLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(deporteLabel,deporteLabelConstraints);
 
-        JComboBox deporte = new JComboBox();
         List<Deporte> deportes = deporteDao.getDeportes();
         for (Deporte _deporte : deportes) deporte.addItem(_deporte.getNombre());
         GridBagConstraints deporteConstraints = new GridBagConstraints();
@@ -61,8 +63,6 @@ public class FormularioIzquierdo extends JPanel {
         modalidadLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(modalidadLabel,modalidadLabelConstraints);
 
-        FormaPuntuacion formaPuntuacion = new FormaPuntuacion();
-        JComboBox modalidad = new JComboBox();
         modalidad.addItem("Sistema de liga");
         modalidad.addItem("Eliminatoria simple");
         modalidad.addItem("Eliminatoria doble");
@@ -86,6 +86,31 @@ public class FormularioIzquierdo extends JPanel {
         emptyConstraints.weighty = 1;
         emptyConstraints.gridy = 99999;
         add(empty,emptyConstraints);
+    };
 
-    }
+    public void setNombreError(String error) {
+        this.nombreError.setText(error);
+    };
+
+    public String getNombre() {
+        return this.nombre.getText();
+    };
+
+    public String getDeporte() {
+        return this.deporte.getSelectedItem().toString();
+    };
+
+    public String getModalidad() {
+        return this.modalidad.getSelectedItem().toString();
+    };
+
+    public String getPuntosPorGanar() {
+        return this.formaPuntuacion.getPuntosPorGanar();
+    };
+
+    public String getPuntosPorPresentarse() {
+        return this.formaPuntuacion.getPuntosPorPresentarse();
+    };
+
+
 }
