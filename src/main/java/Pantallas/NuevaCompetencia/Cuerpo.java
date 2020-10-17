@@ -2,6 +2,7 @@ package Pantallas.NuevaCompetencia;
 
 import Daos.DeporteDao;
 import Daos.DeportePostgreSQLDao;
+import GestorPantallas.Gestor;
 import Helpers.CompetenciaHelper;
 import Negocio.CompetenciaDTO;
 import Negocio.DisponibilidadDTO;
@@ -12,6 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Cuerpo extends JPanel {
 
@@ -26,6 +28,10 @@ public class Cuerpo extends JPanel {
         formularioDerecho.onAceptar(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(formularioIzquierdo.getNombre().isEmpty()){
+                    formularioIzquierdo.setNombreError("Se debe ingresar un nombre para la competencia");
+                    return;
+                }else{formularioIzquierdo.setNombreError("");}
                 DeporteDao deporteDao = new DeportePostgreSQLDao();
                 String nombre = formularioIzquierdo.getNombre();
                 String modalidad = formularioIzquierdo.getModalidad();
@@ -49,6 +55,12 @@ public class Cuerpo extends JPanel {
 
                 ArrayList<String> errores = GestorCompetencia.crearComp(new CompetenciaDTO(nombre,deporteDao.getDeporte(deporte).getId_deporte(),disponibilidades,reglamento,4, CompetenciaHelper.getIdModalidad(modalidad),forma_puntuacion,cantidadSets,puntosPorAusencia,puntosPorGanar,puntosPorPresentarse,hasTie,puntosPorEmpate));
                 System.out.println(errores);
+                if(Collections.frequency(errores,null) == 4){ Gestor.pop();return;}
+                if(errores.get(0) != null){formularioIzquierdo.setNombreError(errores.get(0));}else{formularioIzquierdo.setNombreError("");};
+                if(errores.get(1) != null){formularioIzquierdo.setCantidadSetsError(errores.get(1));}else{formularioIzquierdo.setCantidadSetsError("");}
+                if(errores.get(2) != null){formularioIzquierdo.setPuntosPartGanadoEmpatadoError(errores.get(2));}else{formularioIzquierdo.setPuntosPartGanadoEmpatadoError("");}
+                if(errores.get(3) != null){formularioIzquierdo.setPuntosPartGanadoPresentarseError(errores.get(3));}else{formularioIzquierdo.setPuntosPartGanadoPresentarseError("");}
+
             }
         });
     }

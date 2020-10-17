@@ -139,4 +139,11 @@ public class FormularioIzquierdo extends JPanel {
     public boolean getHasTie() {
         return this.formaPuntuacion.getHasTie();
     };
+
+    public void setCantidadSetsError(String error){formaPuntuacion.setCantidadSetsError(error);}
+
+    public void setPuntosPartGanadoEmpatadoError(String error){formaPuntuacion.setPuntosPartGanadoEmpatadoError(error);}
+
+    public void setPuntosPartGanadoPresentarseError(String error){formaPuntuacion.setPuntosPartGanadoPresentarseError(error);}
+
 }

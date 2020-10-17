@@ -13,6 +13,9 @@ public class FormaPuntuacion extends JPanel {
     JTextField cantidadSets = new JTextField();
     JTextField puntosPorAusencia = new JTextField();
     JTextField puntosPorEmpate = new JTextField();
+    JLabel cantidadSetsError = new JLabel("");
+    JLabel puntosPartGanadoEmpatadoError = new JLabel("");
+    JLabel puntosPartGanadoPresentarseError = new JLabel("");
     private int index = 0;
 
     public FormaPuntuacion () {
@@ -38,17 +41,20 @@ public class FormaPuntuacion extends JPanel {
         add(puntos,puntosConstraints);
 
         JPanel sets = new JPanel();
-        sets.setLayout(new GridLayout(1,3));
+        sets.setLayout(new GridLayout(2,3));
         GridBagConstraints cantidadSetsConstraints = new GridBagConstraints();
         cantidadSetsConstraints.gridy = index++;
         cantidadSetsConstraints.weightx = 1;
         cantidadSetsConstraints.fill = GridBagConstraints.HORIZONTAL;
 
         JLabel setsLabel = new JLabel("Cantidad máxima de sets.",SwingConstants.LEFT);
-
+        cantidadSetsError.setForeground(Color.RED);
         sets.add(hasSets);
         sets.add(setsLabel);
         sets.add(cantidadSets);
+        sets.add(new JLabel(""));
+        sets.add(cantidadSetsError);
+        sets.add(new JLabel(""));
         add(sets,cantidadSetsConstraints);
 
         JPanel finalResult = new JPanel();
@@ -65,11 +71,25 @@ public class FormaPuntuacion extends JPanel {
         finalResult.add(new JLabel(""));
         add(finalResult,finalResultConstraints);
 
-        puntosGanados.setLayout(new GridLayout(2,2));
+        puntosGanados.setLayout(new GridLayout(10,2));
         puntosGanados.add(new Label("Puntos por partido ganado"));
         puntosGanados.add(new Label("Puntos por presentarse"));
+        puntosPartGanadoPresentarseError.setForeground(Color.RED);
+        puntosGanados.add(puntosPartGanadoPresentarseError);
+        puntosGanados.add(new Label(""));
         puntosGanados.add(puntosPorGanar);
         puntosGanados.add(puntosPorPresentarse);
+        puntosGanados.add(new Label(""));
+        puntosGanados.add(new Label(""));
+        puntosGanados.add(new JLabel("Empate Permitido"));
+        puntosGanados.add(hasTie);
+        puntosGanados.add(new Label(""));
+        puntosGanados.add(new Label(""));
+        puntosGanados.add(new JLabel("Puntos por empate"));
+        puntosGanados.add(puntosPorEmpate);
+        puntosPartGanadoEmpatadoError.setForeground(Color.RED);
+        puntosGanados.add(puntosPartGanadoEmpatadoError);
+        puntosGanados.add(new Label(""));
 
         GridBagConstraints puntosGanadosConstraints = new GridBagConstraints();
         puntosGanadosConstraints.gridy = index++;
@@ -77,20 +97,6 @@ public class FormaPuntuacion extends JPanel {
         puntosGanadosConstraints.fill = GridBagConstraints.HORIZONTAL;
 
         add(puntosGanados,puntosGanadosConstraints);
-
-        JPanel tie = new JPanel();
-        tie.setLayout(new GridLayout(1,4));
-        tie.add(hasTie);
-        tie.add(new JLabel("Empate Permitido"));
-        tie.add(new JLabel("Puntos por empate"));
-        tie.add(puntosPorEmpate);
-
-        GridBagConstraints tieConstraints = new GridBagConstraints();
-        tieConstraints.gridy = index++;
-        tieConstraints.weightx = 1;
-        tieConstraints.fill = GridBagConstraints.HORIZONTAL;
-        
-        add(tie,tieConstraints);
     };
 
     public String getCantidadSets() {
@@ -132,6 +138,12 @@ public class FormaPuntuacion extends JPanel {
     public boolean getHasTie(){
         return this.hasTie.isSelected();
     };
+
+    public void setCantidadSetsError(String error){cantidadSetsError.setText(error);}
+
+    public void setPuntosPartGanadoEmpatadoError(String error){puntosPartGanadoEmpatadoError.setText(error);}
+
+    public void setPuntosPartGanadoPresentarseError(String error){puntosPartGanadoPresentarseError.setText(error);}
 
     static public class Constraints extends GridBagConstraints {
         public Constraints () {
