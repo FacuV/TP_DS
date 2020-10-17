@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class FormaPuntuacion extends JPanel {
     JPanel puntosGanados = new JPanel();
-    JCheckBox hasFinalResult = new JCheckBox();
+    JCheckBox hasFinalResult = new JCheckBox("Puntos victoria por ausencia");
     JCheckBox hasSets = new JCheckBox();
     JCheckBox hasPuntos = new JCheckBox();
     JCheckBox hasTie = new JCheckBox();
@@ -16,6 +16,7 @@ public class FormaPuntuacion extends JPanel {
     JLabel cantidadSetsError = new JLabel("");
     JLabel puntosPartGanadoEmpatadoError = new JLabel("");
     JLabel puntosPartGanadoPresentarseError = new JLabel("");
+
     private int index = 0;
 
     public FormaPuntuacion () {
@@ -27,7 +28,7 @@ public class FormaPuntuacion extends JPanel {
         add(subtitle,subtitleConstraints);
 
         JPanel puntos = new JPanel();
-        puntos.setLayout(new GridLayout(1,3));
+        puntos.setLayout(new GridLayout(3,3));
         GridBagConstraints puntosConstraints = new GridBagConstraints();
         puntosConstraints.gridy = index++;
         puntosConstraints.weightx = 1;
@@ -35,9 +36,15 @@ public class FormaPuntuacion extends JPanel {
 
         JLabel puntosLabel = new JLabel("Puntos victoria por ausencia",SwingConstants.LEFT);
 
+        puntos.add(new JLabel(""));
+        puntos.add(new JLabel(""));
+        puntos.add(new JLabel(""));
         puntos.add(hasPuntos);
         puntos.add(puntosLabel);
         puntos.add(puntosPorAusencia);
+        puntos.add(new JLabel(""));
+        puntos.add(new JLabel(""));
+        puntos.add(new JLabel(""));
         add(puntos,puntosConstraints);
 
         JPanel sets = new JPanel();
@@ -71,7 +78,9 @@ public class FormaPuntuacion extends JPanel {
         finalResult.add(new JLabel(""));
         add(finalResult,finalResultConstraints);
 
-        puntosGanados.setLayout(new GridLayout(10,2));
+        puntosGanados.setLayout(new GridLayout(12,2));
+        puntosGanados.add(new Label(""));
+        puntosGanados.add(new Label(""));
         puntosGanados.add(new Label("Puntos por partido ganado"));
         puntosGanados.add(new Label("Puntos por presentarse"));
         puntosPartGanadoPresentarseError.setForeground(Color.RED);
