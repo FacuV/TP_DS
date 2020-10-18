@@ -5,12 +5,16 @@ import GestorPantallas.Pantalla;
 import Pantallas.MisCompetencias;
 import Pantallas.Home;
 
+import javax.swing.*;
+
 
 public class Main {
     public static void main(String[] args) {
         Gestor.add(new Pantalla("home", Home.class));
         Gestor.add(new Pantalla("competencias", MisCompetencias.class));
         Gestor.add(new Pantalla("nueva_competencia", Pantallas.NuevaCompetencia.Pantalla.class));
-        Gestor.init("home");
+        Gestor.add(new Pantalla("menu_de_usuario",Pantallas.MenuDeUsuario.MenuDeUsuario.class));
+        //Gestor.init("home");
+        Gestor.init("menu_de_usuario");
     }
 }
