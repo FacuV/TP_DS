@@ -1,10 +1,6 @@
 package Pantallas.NuevaCompetencia;
-
-import Daos.DeporteDao;
-import Daos.DeportePostgreSQLDao;
-import Helpers.CompetenciaHelper;
+import GestorPantallas.Gestor;
 import Negocio.CompetenciaDTO;
-import Negocio.DisponibilidadDTO;
 import Servicio.GestorCompetencia;
 
 import javax.swing.*;
@@ -50,15 +46,22 @@ public class Cuerpo extends JPanel {
             competencia.setDisponibilidades(formularioDerecho.getDisponibilidades());
             competencia.setReglamento(formularioDerecho.getReglamento());
 
-            checkSyntaxis();
+            if (!checkSyntaxis()) return;
 
-//            ArrayList<String> errores = GestorCompetencia.crearComp(competencia);
-//            System.out.println(errores);
+            ArrayList<String> errores = GestorCompetencia.crearComp(competencia);
+            if (showErrors(errores)); // Gestor.pop();
         }
     }
 
-    private void showErrors(ArrayList<String> errores) {
+    private boolean showErrors(ArrayList<String> errores) {
+        boolean correct = true;
+        System.out.println(errores);
+        if (errores.get(3) != null) {
+            formularioIzquierdo.setErrorPuntos(errores.get(3));
+            correct = false;
+        } else formularioIzquierdo.setErrorPuntos("");
 
+        return correct;
     }
 
     private boolean checkSyntaxis () {
@@ -66,7 +69,18 @@ public class Cuerpo extends JPanel {
         if (competencia.getNombre().isEmpty()) {
             correct = false;
             formularioIzquierdo.setNombreError("El nombre no puede estar vacío");
-        };
+        } else formularioIzquierdo.setNombreError("");;
+        if (competencia.getForma_Puntuación() == 1 && competencia.getCantidad_máxima_sets() == 0) {
+            correct = false;
+            formularioIzquierdo.setErrorFormaPuntuacion("Necesita un minimo de sets");
+        } else if (competencia.getForma_Puntuación() == -1) {
+            correct = false;
+            formularioIzquierdo.setErrorFormaPuntuacion("Tenés que elegir una forma de puntuación");
+        } else formularioIzquierdo.setErrorFormaPuntuacion("");
+        if (competencia.getDisponibilidades().size() == 0) {
+            correct = false;
+            formularioDerecho.setLugaresError("Tenés que cargar por lo menos una competencia.");
+        } else formularioDerecho.setLugaresError("");
 
         return correct;
     }
