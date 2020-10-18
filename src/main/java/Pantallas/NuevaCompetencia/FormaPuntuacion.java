@@ -16,7 +16,7 @@ public class FormaPuntuacion extends JPanel {
     JLabel cantidadSetsError = new JLabel("");
     JLabel puntosPartGanadoEmpatadoError = new JLabel("");
     JLabel puntosPartGanadoPresentarseError = new JLabel("");
-
+    
     private int index = 0;
 
     public FormaPuntuacion () {
