@@ -1,8 +1,6 @@
 package GestorPantallas;
 
-import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Pantalla {
     String nombre;
