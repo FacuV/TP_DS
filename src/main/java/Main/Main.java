@@ -1,10 +1,16 @@
 package Main;
 
-import java.lang.reflect.InvocationTargetException;
+import GestorPantallas.Gestor;
+import GestorPantallas.Pantalla;
+import Pantallas.MisCompetencias;
+import Pantallas.Home;
+
 
 public class Main {
-    public static void main(String[] args){
-        System.out.println(11 % 2 != 0);
-        System.out.println(10 %2 == 0);
+    public static void main(String[] args) {
+        Gestor.add(new Pantalla("home", Home.class));
+        Gestor.add(new Pantalla("competencias", MisCompetencias.class));
+        Gestor.add(new Pantalla("nueva_competencia", Pantallas.NuevaCompetencia.Pantalla.class));
+        Gestor.init("home");
     }
 }

@@ -82,10 +82,10 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
 
     @Override
     public boolean nombreUnico(String nombre) {
-        boolean rtn = false;
+        boolean rtn = true;
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        if(manager.createQuery("FROM Competencia WHERE nombre = '"+nombre+"'").getResultList().isEmpty())rtn = true;
+        if(manager.createQuery("FROM Competencia WHERE nombre = '"+nombre+"'").getResultList().isEmpty())rtn = false;
         manager.getTransaction().commit();
         manager.close();
         return rtn;

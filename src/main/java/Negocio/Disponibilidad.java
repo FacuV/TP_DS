@@ -14,6 +14,7 @@ public class Disponibilidad implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_lugar_realizacion")
     private LugarRealizacion lugarRealizacion;
+
     @Column(name = "disponibilidad")
     private int disponibilidad;
     public Disponibilidad() {}
@@ -46,5 +47,9 @@ public class Disponibilidad implements Serializable {
 
     public void setLugarRealizacion(LugarRealizacion lugarRealizacion) {
         this.lugarRealizacion = lugarRealizacion;
+    }
+
+    public String getNombreLugar() {
+        return lugarRealizacion.getNombre();
     }
 }

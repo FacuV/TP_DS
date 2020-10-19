@@ -42,10 +42,6 @@ public class LugarRealizacion{
         this.id_lugar_realizacion = id_lugar_realizacion;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -80,5 +76,9 @@ public class LugarRealizacion{
                 "id_lugar_realizacion=" + id_lugar_realizacion +
                 ", nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 }
