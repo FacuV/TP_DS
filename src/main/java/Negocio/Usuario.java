@@ -17,6 +17,8 @@ public class Usuario {
     private String apellido;
     @Column(name = "email")
     private String email;
+    @Column(name = "contraseña")
+    private String contraseña;
     @Column(name = "documento")
     private String numero_documento;
     @Enumerated(EnumType.STRING)
@@ -108,6 +110,22 @@ public class Usuario {
 
     public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     @Override
