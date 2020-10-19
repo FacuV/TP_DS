@@ -50,6 +50,15 @@ public class UsuarioPostgreSQLDao implements UsuarioDao{
         manager.close();
         return usuario;
     }
+    @Override
+    public Usuario getUsuarioByEmail(String correoElectronico){
+        manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        Usuario usuario = (Usuario) manager.createQuery("FROM Usuario WHERE email = '"+correoElectronico+"'").getSingleResult();
+        manager.getTransaction().commit();
+        manager.close();
+        return usuario;
+    }
 
     @Override
     public void updateUsuario(Usuario usuario) {
@@ -58,5 +67,21 @@ public class UsuarioPostgreSQLDao implements UsuarioDao{
         manager.persist(usuario);
         manager.getTransaction().commit();
         manager.close();
+    }
+
+    public boolean validarEmail(String correoElectronico){
+        manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        boolean rtn = !(manager.createQuery("FROM Usuario WHERE email = '"+correoElectronico+"'").getResultList().isEmpty());
+        manager.getTransaction().commit();
+        manager.close();
+        return rtn;
+    }
+
+    @Override
+    public Usuario validarContraseña(String correoElectronico, String password){
+        Usuario usuario = getUsuarioByEmail(correoElectronico);
+
+        return false;
     }
 }

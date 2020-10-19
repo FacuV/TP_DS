@@ -27,13 +27,14 @@
       <connection connection-id="392a668a-84ee-4494-8f35-cf58c862eedd">
         <schema name="information_schema" object-types="view, function, table" />
         <schema name="pg_catalog" object-types="view, function, table" />
-        <schema name="public" object-types="view, function, sequence, column, table" />
+        <schema name="public" object-types="view, function, column, sequence, table" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd">
-      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from lugar_realizacion_competencia]]></console>
+      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[ALTER TABLE usuario
+ADD COLUMN contraseña character varying]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
