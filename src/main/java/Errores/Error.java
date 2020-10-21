@@ -3,7 +3,7 @@ package Errores;
 public abstract class Error {
     protected String mensajeError;
 
-    protected Error(String mensajeError) {
+    public Error(String mensajeError) {
         this.mensajeError = mensajeError;
     }
 

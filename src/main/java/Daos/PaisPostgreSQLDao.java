@@ -1,43 +1,52 @@
 package Daos;
 
-import Negocio.Deporte;
+import Negocio.Pais;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class DeportePostgreSQLDao implements DeporteDao{
+public class PaisPostgreSQLDao implements PaisDao{
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
     private EntityManager manager;
+
     @Override
-    public Deporte getDeporte(int id_deporte) {
+    public void createPais(Pais pais) {
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        Deporte deporte = manager.find(Deporte.class,id_deporte);
+        manager.persist(pais);
         manager.getTransaction().commit();
         manager.close();
-        return deporte;
     }
 
     @Override
-    public Deporte getDeporte(String nombre) {
+    public Pais getPais(String nombre) {
+        Pais pais = null;
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        Deporte deporte = (Deporte) manager.createQuery("FROM Deporte WHERE nombre = '"+nombre+"'").getSingleResult();
+        List paises = manager.createQuery("FROM Pais WHERE nombre = '"+nombre+"'").getResultList();
+        if(!paises.isEmpty()){pais= (Pais) paises.get(0);}
         manager.getTransaction().commit();
         manager.close();
-        return deporte;
+        return pais;
     }
 
     @Override
-    public List<Deporte> getDeportes() {
-        List<Deporte> deportes;
+    public Pais getPais(int id_pais) {
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        deportes = manager.createQuery("FROM Deporte").getResultList();
+        Pais pais = manager.find(Pais.class,id_pais);
         manager.getTransaction().commit();
         manager.close();
-        return deportes;
-    };
+        return pais;
+    }
+
+    @Override
+    public Pais getOrCreatePais(String nombre){
+        Pais pais = getPais(nombre);
+        if(pais == null) createPais(new Pais(nombre));
+        pais = getPais(nombre);
+        return pais;
+    }
 }

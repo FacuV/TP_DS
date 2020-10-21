@@ -17,6 +17,8 @@ public class Usuario {
     private String apellido;
     @Column(name = "email")
     private String email;
+    @Column(name = "contraseña")
+    private String contraseña;
     @Column(name = "documento")
     private String numero_documento;
     @Enumerated(EnumType.STRING)
@@ -25,25 +27,26 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<LugarRealizacion> lugaresRealizacion;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Competencia> competencias;
 
     public Usuario(){}
 
-    public Usuario(String nombre, String apellido,String email,String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {
+    public Usuario(String nombre, String apellido,String email,String contraseña,String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.contraseña = contraseña;
         this.numero_documento = numero_documento;
         this.tipoDeDocumento = tipoDeDocumento;
         this.localidad = localidad;
         this.lugaresRealizacion = lugaresRealizacion;
         this.competencias = competencias;
     }
-    public Usuario(String nombre, String apellido,String email, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad) {
-        this(nombre,apellido,email,numero_documento,tipoDeDocumento,localidad,new ArrayList<LugarRealizacion>(),new ArrayList<Competencia>());
+    public Usuario(String nombre, String apellido,String email,String contraseña, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad) {
+        this(nombre,apellido,email,contraseña,numero_documento,tipoDeDocumento,localidad,new ArrayList<LugarRealizacion>(),new ArrayList<Competencia>());
     }
 
     public int getId_usuario() {
@@ -108,6 +111,22 @@ public class Usuario {
 
     public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     @Override

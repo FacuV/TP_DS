@@ -3,6 +3,7 @@ package Daos;
 import Negocio.Deporte;
 import Negocio.LugarRealizacion;
 import Negocio.Usuario;
+import Servicio.Password;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -81,7 +82,13 @@ public class UsuarioPostgreSQLDao implements UsuarioDao{
     @Override
     public Usuario validarContraseña(String correoElectronico, String password){
         Usuario usuario = getUsuarioByEmail(correoElectronico);
-
-        return false;
+        try {
+            if(!Password.check(password,usuario.getContraseña())){
+                usuario = null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuario;
     }
 }
