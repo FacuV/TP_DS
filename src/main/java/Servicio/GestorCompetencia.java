@@ -27,7 +27,7 @@ public abstract class GestorCompetencia {
         }else{errores.add(null);}
         if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_partido_ganado < competenciaDTO.puntos_partido_empatado){errores.add("Puntos por partido ganado menor que puntos partido empatado");
         }else{errores.add(null);}
-        if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_presentarse >= competenciaDTO.puntos_partido_ganado){errores.add("Puntos por presentarse >= a puntos por partido ganado");
+        if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_presentarse >= competenciaDTO.puntos_partido_ganado){errores.add("Puntos por presentarse mayor o igual a puntos por partido ganado");
         }else{errores.add(null);}
         //retorno de errores
         for(String error:errores){if(error != null)return errores;}

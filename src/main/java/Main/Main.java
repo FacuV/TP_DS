@@ -11,6 +11,6 @@ public class Main {
         Gestor.add(new Pantalla("home", Home.class));
         Gestor.add(new Pantalla("competencias", MisCompetencias.class));
         Gestor.add(new Pantalla("nueva_competencia", Pantallas.NuevaCompetencia.Pantalla.class));
-        Gestor.init("nueva_competencia");
+        Gestor.init("home");
     }
 }

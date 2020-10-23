@@ -1,18 +1,20 @@
 package Pantallas.NuevaCompetencia;
 import GestorPantallas.Gestor;
+import Helpers.CompetenciaHelper;
 import Negocio.CompetenciaDTO;
 import Servicio.GestorCompetencia;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Cuerpo extends JPanel {
     FormularioIzquierdo formularioIzquierdo = new FormularioIzquierdo();
     FormularioDerecho formularioDerecho = new FormularioDerecho();
     CompetenciaDTO competencia = new CompetenciaDTO();
+    JPanel self = this;
 
     public Cuerpo() {
         setLayout(new GridLayout(1,2));
@@ -41,27 +43,47 @@ public class Cuerpo extends JPanel {
             competencia.setPuntos_presentarse(Integer.parseInt((formularioIzquierdo.getPuntosPorPresentarse().isEmpty())?"0":formularioIzquierdo.getPuntosPorPresentarse()));
             competencia.setTantos_equipo_ganador_por_ausencia(Integer.parseInt((formularioIzquierdo.getPuntosPorAusencia().isEmpty())?"0":formularioIzquierdo.getPuntosPorAusencia()));
             competencia.setCantidad_máxima_sets(Integer.parseInt((formularioIzquierdo.getCantidadSets().isEmpty())?"0":formularioIzquierdo.getCantidadSets()));
-            competencia.setForma_Puntuación(formularioIzquierdo.getHasPuntos() ? 0 : formularioIzquierdo.getHasSets() ? 1 : formularioIzquierdo.getHasFinalResult() ? 3 : -1);
+            competencia.setForma_Puntuación(formularioIzquierdo.getHasPuntos() ? 0 : formularioIzquierdo.getHasSets() ? 1 : formularioIzquierdo.getHasFinalResult() ? 2 : -1);
             competencia.setPermite_empate(formularioIzquierdo.getHasTie());
             competencia.setDisponibilidades(formularioDerecho.getDisponibilidades());
             competencia.setReglamento(formularioDerecho.getReglamento());
+            competencia.setId_usuario(4);
 
             if (!checkSyntaxis()) return;
 
-            ArrayList<String> errores = GestorCompetencia.crearComp(competencia);
-            if (showErrors(errores)); // Gestor.pop();
+            System.out.println("Creando competencia");
+            ArrayList<String> errors = GestorCompetencia.crearComp(competencia);
+            System.out.println(errors);
+            if (!hasErrors(errors)) {
+                System.out.println("No tiene errores");
+                Success success = new Success(SwingUtilities.getWindowAncestor(self));
+                success.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        Gestor.pop();
+                    }
+                });
+                success.setVisible(true);
+            }
         }
     }
 
-    private boolean showErrors(ArrayList<String> errores) {
-        boolean correct = true;
-        System.out.println(errores);
+    private boolean hasErrors(ArrayList<String> errores) {
+        boolean hasErrors = false;
+        if (errores.get(0) != null) {
+            formularioIzquierdo.setNombreError(errores.get(0));
+            hasErrors = true;
+        } else formularioIzquierdo.setNombreError("");
+        if (errores.get(1) != null) {
+            formularioIzquierdo.setErrorSets(errores.get(1));
+            hasErrors = true;
+        } else formularioIzquierdo.setErrorSets(errores.get(2));
         if (errores.get(3) != null) {
             formularioIzquierdo.setErrorPuntos(errores.get(3));
-            correct = false;
+            hasErrors = true;
         } else formularioIzquierdo.setErrorPuntos("");
 
-        return correct;
+        return hasErrors;
     }
 
     private boolean checkSyntaxis () {

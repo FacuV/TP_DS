@@ -4,7 +4,7 @@ public class CompetenciaHelper {
 
     public static int getIdModalidad(String modalidad) {
         switch (modalidad) {
-            case "Sistema de liga":
+            case "Liga":
                 return 0;
             case "Eliminatoria simple":
                 return 1;

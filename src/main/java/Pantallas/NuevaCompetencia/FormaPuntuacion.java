@@ -11,6 +11,7 @@ public class FormaPuntuacion extends JPanel {
 
     private JLabel errorFormaPuntuacion = new JLabel("");
     private JLabel errorPuntos = new JLabel("");
+    private JLabel errorSets = new JLabel("");
 
     private JCheckBox hasSets = new JCheckBox("Sets");
     private JCheckBox hasPuntos = new JCheckBox("Puntos");
@@ -34,6 +35,7 @@ public class FormaPuntuacion extends JPanel {
 
         add(new JLabel("Forma de puntuación",SwingUtilities.CENTER),gbc);
         gbc.gridy = index++; add(errorFormaPuntuacion,gbc);
+        gbc.gridy = index++; errorSets.setForeground(Color.red); add(errorSets,gbc);
 
         JPanel tipoPuntuacion = new JPanel();
         tipoPuntuacion.setLayout(new GridLayout(3,3));
@@ -119,6 +121,7 @@ public class FormaPuntuacion extends JPanel {
 
     public void setErrorFormaPuntuacion(String error) {errorFormaPuntuacion.setText(error);};
     public void setErrorPuntos(String error) { this.errorPuntos.setText(error); };
+    public void setErrorSets(String error) { this.errorSets.setText(error); };
 //
 //    public void setPuntosPartGanadoEmpatadoError(String error){puntosPartGanadoEmpatadoError.setText(error);}
 //
