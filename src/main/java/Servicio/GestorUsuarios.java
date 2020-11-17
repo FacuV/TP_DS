@@ -8,6 +8,7 @@ import Errores.ErrorHash;
 import Helpers.Normalizador;
 import Negocio.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GestorUsuarios {
     private static Usuario usuarioLogueado;
@@ -15,6 +16,10 @@ public abstract class GestorUsuarios {
     private static PaisDao  paisDao = new PaisPostgreSQLDao();
     private static ProvinciaDao provinciaDao = new ProvinciaPostgreSQLDao();
     private static LocalidadDao localidadDao = new LocalidadPostgreSQLDao();
+
+    public static void guardarUsuarioDeIngreso(UsuarioDTO usuarioDTO){
+        usuarioLogueado = usuarioDao.getUsuario(usuarioDTO.id_usuario);
+    }
 
     public static Error autenticarUsuario(String correoElectronico, String password){
         Error error = null;
@@ -58,6 +63,17 @@ public abstract class GestorUsuarios {
         Usuario usuario = new Usuario(usuarioDTO.nombre,usuarioDTO.apellido,usuarioDTO.correoElectronico,hash,usuarioDTO.documento,TipoDeDocumento.valueOf(usuarioDTO.tipoDeDocumento),localidad);
         usuarioDao.createUsuario(usuario);
         return errores;
+    }
+    public static List<UsuarioDTO> getUsuarios(){
+        List<UsuarioDTO> usuariosDTO = new ArrayList<>();
+        for (Usuario usuario:usuarioDao.getUsuarios()){
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            usuarioDTO.id_usuario = usuario.getId_usuario();
+            usuarioDTO.nombre = usuario.getNombre();
+            usuarioDTO.apellido = usuario.getApellido();
+            usuariosDTO.add(usuarioDTO);
+        }
+        return usuariosDTO;
     }
 
     public static Usuario getUsuarioLogueado() {

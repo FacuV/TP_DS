@@ -8,6 +8,7 @@ import Servicio.Password;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class UsuarioPostgreSQLDao implements UsuarioDao{
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
@@ -60,7 +61,15 @@ public class UsuarioPostgreSQLDao implements UsuarioDao{
         manager.close();
         return usuario;
     }
-
+    @Override
+    public List<Usuario> getUsuarios(){
+        manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        List usuarios = manager.createQuery("FROM Usuario").getResultList();
+        manager.getTransaction().commit();
+        manager.close();
+        return usuarios;
+    }
     @Override
     public void updateUsuario(Usuario usuario) {
         manager = entityManagerFactory.createEntityManager();

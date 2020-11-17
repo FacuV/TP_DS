@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class JPantalla extends JFrame {
     protected JPanel body = new JPanel();
+    protected JPanel footer;
     public JPantalla(String nombrePantalla,String nombreBotonFooter){
         super(nombrePantalla);
         setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2);
@@ -20,10 +21,13 @@ public class JPantalla extends JFrame {
             constraintBody.weighty = 1;
             constraintBody.fill = GridBagConstraints.BOTH;
             constraintBody.anchor = GridBagConstraints.CENTER;
-        JPanel footer = new Footer(nombreBotonFooter);
 
         cp.add(body,constraintBody);
-        cp.add(footer,new GridBagConstraintFooter());
+        //Si se pasa como parametro una cadena vacia o un null en nombreBotonFooter no se creara el footer
+        if(!(nombreBotonFooter == null || nombreBotonFooter.isEmpty())){
+            footer = new Footer(nombreBotonFooter);
+            cp.add(footer, new GridBagConstraintFooter());
+        }
     }
     public JPantalla(String nombrePantalla){
         this(nombrePantalla,"< Volver");

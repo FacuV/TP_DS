@@ -1,6 +1,7 @@
 package Negocio;
 
 public class UsuarioDTO {
+    public Integer id_usuario;
     public String correoElectronico;
     public String contraseña;
     public String apellido;
@@ -12,7 +13,8 @@ public class UsuarioDTO {
     public String pais;
 
     public UsuarioDTO() {}
-    public UsuarioDTO(String correoElectronico, String contraseña, String apellido, String nombre, String tipoDeDocumento, String documento, String localidad, String provincia, String pais) {
+    public UsuarioDTO(Integer id_usuario,String correoElectronico, String contraseña, String apellido, String nombre, String tipoDeDocumento, String documento, String localidad, String provincia, String pais) {
+        this.id_usuario = id_usuario;
         this.correoElectronico = correoElectronico;
         this.contraseña = contraseña;
         this.apellido = apellido;
@@ -22,5 +24,10 @@ public class UsuarioDTO {
         this.localidad = localidad;
         this.provincia = provincia;
         this.pais = pais;
+    }
+
+    @Override
+    public String toString() {
+        return (nombre+" "+apellido);
     }
 }
