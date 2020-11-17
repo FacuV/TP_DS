@@ -27,5 +27,4 @@ public class FormularioDerecho extends JPanel {
         this.reglamento.onAceptar(action);
     };
     public void setLugaresError(String error) { this.lugares.setError(error); };
-
 }

@@ -1,10 +1,7 @@
 package Pantallas.NuevaCompetencia;
-
 import GestorPantallas.Gestor;
-import Helpers.CompetenciaHelper;
 import Negocio.CompetenciaDTO;
 import Servicio.GestorCompetencia;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

@@ -5,7 +5,6 @@ import GestorPantallas.Pantalla;
 import Pantallas.MisCompetencias;
 import Pantallas.Home;
 
-
 public class Main {
     public static void main(String[] args) {
         Gestor.add(new Pantalla("home", Home.class));

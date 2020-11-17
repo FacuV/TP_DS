@@ -29,6 +29,9 @@ public class Lugares extends JPanel {
         error.setForeground(Color.red);
         gbc.gridy = index++; add(error,gbc);
 
+        error.setForeground(Color.red);
+        gbc.gridy = index++; add(error,gbc);
+
         JScrollPane lugaresScroll = new JScrollPane(tabla);
         GridBagConstraints lugaresScrollConstraints = new GridBagConstraints();
         lugaresScrollConstraints.gridy = index++;

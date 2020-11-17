@@ -1,5 +1,4 @@
 package Negocio;
-
 import Daos.DeportePostgreSQLDao;
 import Helpers.CompetenciaHelper;
 

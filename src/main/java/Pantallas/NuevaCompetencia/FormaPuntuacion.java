@@ -125,5 +125,4 @@ public class FormaPuntuacion extends JPanel {
 //    public void setPuntosPartGanadoEmpatadoError(String error){puntosPartGanadoEmpatadoError.setText(error);}
 //
 //    public void setPuntosPartGanadoPresentarseError(String error){puntosPartGanadoPresentarseError.setText(error);}
-
 };
