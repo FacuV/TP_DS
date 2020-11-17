@@ -4,29 +4,39 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelSuperior extends JPanel{
-    JLabel correoElectronico = new JLabel("Correo Electrónico");
-    JLabel contraseña = new JLabel("Contraseña");
-    JTextField correoElectronicoTF = new JTextField();
-    JTextField contraseñaTF = new JTextField();
+    JLabel seleccionarUsuario = new JLabel("Seleccione un usuario para iniciar");
+    JLabel error = new JLabel("");
+    JComboBox listaUsuarios = new JComboBox();
     public PanelSuperior(){
         super();
-        //setBackground(Color.green);
-        //Setear fuentes
-        correoElectronico.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
-        contraseña.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
-        setLayout(new GridLayout(2,2,0,50));
-        add(correoElectronico);add(correoElectronicoTF);
-        add(contraseña);add(contraseñaTF);
-    }
+        seleccionarUsuario.setFont(new Font(Font.DIALOG,Font.PLAIN,30));
+        setLayout(new GridBagLayout());
+        //Cargar usuarios al comboBox
 
-    public String getTextCorreo(){return correoElectronicoTF.getText();}
+        GridBagConstraints gridBagConstraintLabel = new GridBagConstraints();
+            gridBagConstraintLabel.weightx = 1;
+            gridBagConstraintLabel.gridy = 1;
+            gridBagConstraintLabel.insets = new Insets(50,50,30,50);
+        add(seleccionarUsuario,gridBagConstraintLabel);
+        GridBagConstraints gridBagConstraintError = new GridBagConstraints();
+            gridBagConstraintError.weightx = 1;
+            gridBagConstraintError.gridy = 2;
+            gridBagConstraintError.insets = new Insets(5,50,5,50);
+        add(error,gridBagConstraintError);
+        GridBagConstraints gridBagConstraintCombo = new GridBagConstraints();
+            gridBagConstraintCombo.weightx = 1;
+            gridBagConstraintCombo.gridy = 3;
+            listaUsuarios.addItem("esto es un combo de usuarios");
+        add(listaUsuarios,gridBagConstraintCombo);
+    }
+    public void setError(String mensajeError){error.setText(mensajeError);}
 
     static public class Constraints extends GridBagConstraints {
         public Constraints(){
             weightx = 1;
-            weighty = 2;
+            weighty = 1.5;
             gridy = 1;
-            fill = GridBagConstraints.HORIZONTAL;
+            fill = GridBagConstraints.VERTICAL;
             anchor = GridBagConstraints.CENTER;
             insets = new Insets(0,50,0,50);
         }
