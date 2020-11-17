@@ -2,7 +2,6 @@ package Daos;
 
 import Negocio.Competencia;
 import Negocio.Usuario;
-
 import java.util.List;
 
 public interface CompetenciaDao {
@@ -12,6 +11,7 @@ public interface CompetenciaDao {
     Competencia getCompetencia(String nombre);
     List<Competencia> getCompetencias(Usuario usuario);
     List<Competencia> getCompetencias();
+    List<Competencia> getByCriteria(String consulta);
     void updateCompetencia(Competencia competencia);
     boolean nombreUnico(String nombre);
 }

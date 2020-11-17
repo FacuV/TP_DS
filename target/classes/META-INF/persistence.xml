@@ -5,13 +5,7 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
     <persistence-unit name="Persistence">
-        <class>Negocio.Pais</class><class>Negocio.Provincia</class><class>Negocio.Localidad</class><class>Negocio.Usuario</class>
-        <class>Negocio.Competencia</class><class>Negocio.Liga</class><class>Negocio.EliminatoriaSimple</class><class>Negocio.EliminatoriaDoble</class>
-        <class>Negocio.Deporte</class><class>Negocio.LugarRealizacion</class><class>Negocio.Disponibilidad</class>
-        <class>Negocio.Puntuacion</class><class>Negocio.PuntuacionResultadoFinal</class><class>Negocio.PuntuacionSet</class><class>Negocio.PuntuacionPuntaje</class>
-        <class>Negocio.Participante</class><class>Negocio.Individuo</class><class>Negocio.Equipo</class>
-        <class>Negocio.Fixture</class><class>Negocio.Encuentro</class>
-        <class>Negocio.Resultado</class><class>Negocio.Set</class>
+        
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

@@ -32,9 +32,7 @@ public abstract class Competencia {
     protected Deporte deporte;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
     protected List<Disponibilidad> disponibilidades;
-    @ManyToMany
-    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
-            inverseJoinColumns = @JoinColumn(name = "id_participante"))
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
     protected List<Participante> participantes;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_fixture")

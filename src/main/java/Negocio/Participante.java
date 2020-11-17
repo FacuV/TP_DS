@@ -13,6 +13,9 @@ public abstract class Participante {
     protected String nombre;
     @Column(name = "email")
     protected String email;
+    @ManyToOne
+    @JoinColumn(name = "id_competencia")
+    private Competencia competencia;
 
     public Participante() {}
 
@@ -43,5 +46,13 @@ public abstract class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Competencia getCompetencia() {
+        return competencia;
+    }
+
+    public void setCompetencia(Competencia competencia) {
+        this.competencia = competencia;
     }
 }

@@ -25,10 +25,12 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<LugarRealizacion> lugaresRealizacion;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Competencia> competencias;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
+    private List<Auditoria> auditorias;
 
     public Usuario(){}
 
@@ -41,6 +43,7 @@ public class Usuario {
         this.localidad = localidad;
         this.lugaresRealizacion = lugaresRealizacion;
         this.competencias = competencias;
+        this.auditorias = new ArrayList<>();
     }
     public Usuario(String nombre, String apellido,String email, String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad) {
         this(nombre,apellido,email,numero_documento,tipoDeDocumento,localidad,new ArrayList<LugarRealizacion>(),new ArrayList<Competencia>());
@@ -108,6 +111,22 @@ public class Usuario {
 
     public void setCompetencias(List<Competencia> competencias) {
         this.competencias = competencias;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<Auditoria> getAuditorias() {
+        return auditorias;
+    }
+
+    public void setAuditorias(List<Auditoria> auditorias) {
+        this.auditorias = auditorias;
     }
 
     @Override
