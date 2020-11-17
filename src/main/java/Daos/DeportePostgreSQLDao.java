@@ -29,7 +29,15 @@ public class DeportePostgreSQLDao implements DeporteDao{
         manager.close();
         return deporte;
     }
-
+    static public int getDeporteId(String nombre) {
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        Deporte deporte = (Deporte) manager.createQuery("FROM Deporte WHERE nombre = '"+nombre+"'").getSingleResult();
+        manager.getTransaction().commit();
+        manager.close();
+        return deporte.getId_deporte();
+    }
     @Override
     public List<Deporte> getDeportes() {
         List<Deporte> deportes;

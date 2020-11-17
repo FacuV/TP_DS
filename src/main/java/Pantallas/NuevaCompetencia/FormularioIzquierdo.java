@@ -62,8 +62,7 @@ public class FormularioIzquierdo extends JPanel {
         modalidadLabelConstraints.weightx = 1;
         modalidadLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(modalidadLabel,modalidadLabelConstraints);
-
-        modalidad.addItem("Sistema de liga");
+        modalidad.addItem("Liga");
         modalidad.addItem("Eliminatoria simple");
         modalidad.addItem("Eliminatoria doble");
         GridBagConstraints modalidadConstraints = new GridBagConstraints();
@@ -75,7 +74,7 @@ public class FormularioIzquierdo extends JPanel {
         modalidad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                formaPuntuacion.hidePuntosGanados(modalidad.getSelectedItem() == "Sistema de liga");
+                formaPuntuacion.hidePuntosGanados(modalidad.getSelectedItem() == "Liga");
             }
         });
 
@@ -91,59 +90,42 @@ public class FormularioIzquierdo extends JPanel {
     public void setNombreError(String error) {
         this.nombreError.setText(error);
     };
-
+    public void setErrorFormaPuntuacion(String error) { this.formaPuntuacion.setErrorFormaPuntuacion(error);};
+    public void setErrorPuntos(String error) { this.formaPuntuacion.setErrorPuntos(error);};
     public String getNombre() {
         return this.nombre.getText();
     };
-
     public String getDeporte() {
         return this.deporte.getSelectedItem().toString();
     };
-
-    public String getModalidad() {
-        return this.modalidad.getSelectedItem().toString();
-    };
-
-    public String getPuntosPorGanar() {
-        return this.formaPuntuacion.getPuntosPorGanar();
-    };
-
+    public String getModalidad() { return this.modalidad.getSelectedItem().toString(); };
+    public String getPuntosPorGanar() { return this.formaPuntuacion.getPuntosPorGanar(); };
     public String getCantidadSets() {
         return this.formaPuntuacion.getCantidadSets();
     };
-
     public String getPuntosPorPresentarse() {
         return this.formaPuntuacion.getPuntosPorPresentarse();
     };
-
     public String getPuntosPorAusencia() {
         return this.formaPuntuacion.getPuntosPorAusencia();
     };
-
     public String getPuntosPorEmpate() {
         return this.formaPuntuacion.getPuntosPorEmpate();
     };
-
     public boolean getHasPuntos() {
         return this.formaPuntuacion.getHasPuntos();
     };
-
     public boolean getHasSets() {
         return this.formaPuntuacion.getHasSets();
     };
-
     public boolean getHasFinalResult() {
         return this.formaPuntuacion.getHasFinalResult();
     };
+    public boolean getHasTie() { return this.formaPuntuacion.getHasTie(); };
+    public void setErrorSets(String error){formaPuntuacion.setErrorSets(error);}
 
-    public boolean getHasTie() {
-        return this.formaPuntuacion.getHasTie();
-    };
+//    public void setPuntosPartGanadoEmpatadoError(String error){formaPuntuacion.setPuntosPartGanadoEmpatadoError(error);}
 
-    public void setCantidadSetsError(String error){formaPuntuacion.setCantidadSetsError(error);}
-
-    public void setPuntosPartGanadoEmpatadoError(String error){formaPuntuacion.setPuntosPartGanadoEmpatadoError(error);}
-
-    public void setPuntosPartGanadoPresentarseError(String error){formaPuntuacion.setPuntosPartGanadoPresentarseError(error);}
+//    public void setPuntosPartGanadoPresentarseError(String error){formaPuntuacion.setPuntosPartGanadoPresentarseError(error);}
 
 }

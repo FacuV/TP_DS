@@ -19,13 +19,13 @@ public class FormularioDerecho extends JPanel {
 
     public ArrayList<DisponibilidadDTO> getDisponibilidades() {
         return lugares.getDisponibilidades();
-    }
-
+    };
     public String getReglamento () {
         return this.reglamento.getReglamento();
-    }
-
+    };
     public void onAceptar (ActionListener action) {
         this.reglamento.onAceptar(action);
-    }
+    };
+    public void setLugaresError(String error) { this.lugares.setError(error); };
+
 }

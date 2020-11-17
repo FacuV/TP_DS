@@ -72,6 +72,17 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
     }
 
     @Override
+    public List<Competencia> getByCriteria(String consulta) {
+        List competencias;
+        manager = entityManagerFactory.createEntityManager();
+        manager.getTransaction().begin();
+        competencias = manager.createQuery(consulta).getResultList();
+        manager.getTransaction().commit();
+        manager.close();
+        return competencias;
+    }
+
+    @Override
     public void updateCompetencia(Competencia competencia) {
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();

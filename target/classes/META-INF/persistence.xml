@@ -12,6 +12,7 @@
         <class>Negocio.Participante</class><class>Negocio.Individuo</class><class>Negocio.Equipo</class>
         <class>Negocio.Fixture</class><class>Negocio.Encuentro</class>
         <class>Negocio.Resultado</class><class>Negocio.Set</class>
+        <class>Negocio.Auditoria</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

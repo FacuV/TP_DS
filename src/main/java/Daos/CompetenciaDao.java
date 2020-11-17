@@ -11,6 +11,7 @@ public interface CompetenciaDao {
     Competencia getCompetencia(String nombre);
     List<Competencia> getCompetencias(Usuario usuario);
     List<Competencia> getCompetencias();
+    List<Competencia> getByCriteria(String consulta);
     void updateCompetencia(Competencia competencia);
     boolean nombreUnico(String nombre);
 }
