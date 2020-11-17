@@ -7,5 +7,8 @@ public interface UsuarioDao {
     void deleteUsuario(Usuario usuario);
     Usuario getUsuario(int id_usuario);
     Usuario getUsuario(String nombre);
+    Usuario getUsuarioByEmail(String correoElectronico);
     void updateUsuario(Usuario usuario);
+    boolean validarEmail(String correoElectronico);
+    Usuario validarContraseña(String correoElectronico, String password);
 }
