@@ -39,14 +39,14 @@ public class Encuentro {
     //En vez de colocar 4 atributos, podemos colocar solo 2 y discernir mediante la ronda en que ronda se esta.
     @OneToOne
     @JoinColumn(name = "id_encuentro_anterior_a")
-    private Encuentro ecuentro_anterior_a;
+    private Encuentro encuentro_anterior_a;
     @OneToOne
     @JoinColumn(name = "id_encuentro_anterior_b")
     private Encuentro encuentro_anterior_b;
 
     public Encuentro() {}
 
-    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB, Resultado resultado_actual, ArrayList<Resultado> historial_resultados_modificados, Ronda ronda, Encuentro encuentro_proximo_ganador, Encuentro encuentro_proximo_perdedor, Encuentro ecuentro_anterior_a, Encuentro ecuentro_anterior_b) {
+    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB, Resultado resultado_actual, ArrayList<Resultado> historial_resultados_modificados, Ronda ronda, Encuentro encuentro_proximo_ganador, Encuentro encuentro_proximo_perdedor, Encuentro encuentro_anterior_a, Encuentro encuentro_anterior_b) {
         this.fecha = fecha;
         this.fase = fase;
         this.participanteA = participanteA;
@@ -56,16 +56,16 @@ public class Encuentro {
         this.ronda = ronda;
         this.encuentro_proximo_ganador = encuentro_proximo_ganador;
         this.encuentro_proximo_perdedor = encuentro_proximo_perdedor;
-        this.ecuentro_anterior_a = ecuentro_anterior_a;
-        this.ecuentro_anterior_a = ecuentro_anterior_b;
+        this.encuentro_anterior_a = encuentro_anterior_a;
+        this.encuentro_anterior_b = encuentro_anterior_b;
     }
     //Constructor para competencia liga
     public Encuentro(LocalDate fecha, Participante participanteA, Participante participanteB) {
         this(fecha,null, participanteA, participanteB,null,new ArrayList<Resultado>(),null,null,null,null,null);
     }
     //Constructor para competencia eliminatoria simple
-    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB,Encuentro encuentro_proximo_ganador,Encuentro ganador_anterior_a, Encuentro ganador_anterior_b){
-        this(fecha,fase,participanteA,participanteB,null,new ArrayList<Resultado>(), null,encuentro_proximo_ganador,null,ganador_anterior_a, ganador_anterior_b);
+    public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB,Encuentro encuentro_proximo_ganador,Encuentro encuentro_anterior_a, Encuentro encuentro_anterior_b){
+        this(fecha,fase,participanteA,participanteB,null,new ArrayList<Resultado>(), null,encuentro_proximo_ganador,null,encuentro_anterior_a, encuentro_anterior_b);
     }
     //Constructor para competencia eliminatoria doble
     public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB, Ronda ronda, Encuentro encuentro_proximo_ganador, Encuentro encuentro_proximo_perdedor, Encuentro ecuentro_anterior_a, Encuentro ecuentro_anterior_b) {
@@ -152,12 +152,12 @@ public class Encuentro {
         this.encuentro_proximo_perdedor = encuentro_proximo_perdedor;
     }
 
-    public Encuentro getEcuentro_anterior_a() {
-        return ecuentro_anterior_a;
+    public Encuentro getEncuentro_anterior_a() {
+        return encuentro_anterior_a;
     }
 
-    public void setEcuentro_anterior_a(Encuentro ecuentro_anterior_a) {
-        this.ecuentro_anterior_a = ecuentro_anterior_a;
+    public void setEncuentro_anterior_a(Encuentro encuentro_anterior_a) {
+        this.encuentro_anterior_a = encuentro_anterior_a;
     }
 
     public Encuentro getEncuentro_anterior_b() {
