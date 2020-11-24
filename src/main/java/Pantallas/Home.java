@@ -2,6 +2,7 @@ package Pantallas;
 
 import GestorPantallas.Gestor;
 import Interface.JPantalla;
+import Servicio.GestorUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +17,7 @@ public class Home extends JPantalla {
         JPanel panelTitulo = new JPanel();
             panelTitulo.setLayout(new GridBagLayout());
             panelTitulo.setBackground(Color.white);
-            JLabel principal = new JLabel("Usuario <nombre><apellido>");
+            JLabel principal = new JLabel("Usuario "+ GestorUsuarios.getUsuarioLogueado().toString());
             principal.setFont(new Font(Font.DIALOG,Font.BOLD,40));
             panelTitulo.add(principal);
         GridBagConstraints constraintPanelTitulo = new GridBagConstraints();
