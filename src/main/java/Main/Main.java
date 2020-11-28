@@ -12,7 +12,7 @@ public class Main {
         Gestor.add(new Pantalla("nueva_competencia", Pantallas.NuevaCompetencia.Pantalla.class));
         Gestor.add(new Pantalla("menu_de_usuario",Pantallas.MenuDeUsuario.MenuDeUsuario.class));
         Gestor.add(new Pantalla("participantes",Pantallas.ListarParticipantes.PantallaParticipantes.class));
-        Gestor.init("menu_de_usuario");
-        //Gestor.init("participantes");
+        //Gestor.init("menu_de_usuario");
+        Gestor.init("participantes");
     }
 }

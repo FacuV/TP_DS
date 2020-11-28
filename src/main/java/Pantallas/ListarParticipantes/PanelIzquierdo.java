@@ -17,8 +17,8 @@ public class PanelIzquierdo extends JPanel {
             constraintGeneral.weightx = 1;
             constraintGeneral.fill = GridBagConstraints.VERTICAL;
             constraintGeneral.anchor = GridBagConstraints.CENTER;
-            constraintGeneral.insets = new Insets(40,5,40,5);
-        constraintGeneral.gridy = 0;
+            constraintGeneral.insets = new Insets(30,5,30,5);
+            constraintGeneral.gridy = 0;
             constraintGeneral.gridx = 0;
         add(home,constraintGeneral);
             constraintGeneral.gridy++;
@@ -34,12 +34,13 @@ public class PanelIzquierdo extends JPanel {
         add(modificar,constraintGeneral);
             constraintGeneral.gridy++;
         add(eliminar,constraintGeneral);
+
     }
     public static class Constraints extends GridBagConstraints{
         public Constraints () {
             fill = GridBagConstraints.BOTH;
             gridx = 1;
-            //insets = new Insets(20,20,20,20);
+            insets = new Insets(20,20,20,20);
             weightx = 1;
             weighty = 1;
         }

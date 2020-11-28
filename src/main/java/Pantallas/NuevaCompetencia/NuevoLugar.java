@@ -3,6 +3,8 @@ package Pantallas.NuevaCompetencia;
 import Daos.UsuarioDao;
 import Daos.UsuarioPostgreSQLDao;
 import Negocio.*;
+import Servicio.GestorUsuarios;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -18,7 +20,6 @@ public class NuevoLugar extends JDialog {
     JButton Aceptar = new JButton("Aceptar");
     JLabel ErrorMsg = new JLabel("");
     JPanel content = new JPanel();
-    UsuarioDao usuarioDao = new UsuarioPostgreSQLDao();
     List<LugarRealizacion> lugares;
     NuevoLugar self = this;
 
@@ -32,7 +33,7 @@ public class NuevoLugar extends JDialog {
 
         ErrorMsg.setForeground(Color.red);
 
-        Usuario usuario = usuarioDao.getUsuario(4);
+        Usuario usuario = GestorUsuarios.getUsuarioLogueado();
         lugares = usuario.getLugaresRealizacion();
         for (LugarRealizacion lugar : lugares) {
             boolean alreadySelected = false;
