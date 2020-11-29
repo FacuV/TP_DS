@@ -2,6 +2,8 @@ package Daos;
 
 import Negocio.Competencia;
 import Negocio.Usuario;
+import Servicio.GestorCompetencia;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -37,6 +39,7 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         Competencia competencia = manager.find(Competencia.class,id_competencia);
+        System.out.println(competencia.getParticipantes());
         manager.getTransaction().commit();
         manager.close();
         return competencia;
@@ -46,6 +49,7 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
         Competencia competencia = (Competencia) manager.createQuery("FROM Competencia WHERE nombre = '"+nombre+"'").getSingleResult();
+        System.out.println(competencia.getParticipantes());
         manager.getTransaction().commit();
         manager.close();
         return competencia;
@@ -83,12 +87,13 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
     }
 
     @Override
-    public void updateCompetencia(Competencia competencia) {
+    public Competencia updateCompetencia(Competencia competencia) {
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        manager.persist(competencia);
+        competencia = manager.merge(competencia);
         manager.getTransaction().commit();
         manager.close();
+        return competencia;
     }
 
     @Override

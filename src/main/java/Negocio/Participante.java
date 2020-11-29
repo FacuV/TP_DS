@@ -13,13 +13,10 @@ public abstract class Participante {
     protected String nombre;
     @Column(name = "email")
     protected String email;
-    @ManyToOne
-    @JoinColumn(name = "id_competencia")
-    private Competencia competencia;
 
     public Participante() {}
 
-    protected Participante(String nombre, String email){
+    public Participante(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
     }
@@ -46,13 +43,5 @@ public abstract class Participante {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Competencia getCompetencia() {
-        return competencia;
-    }
-
-    public void setCompetencia(Competencia competencia) {
-        this.competencia = competencia;
     }
 }

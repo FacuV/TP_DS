@@ -1,15 +1,22 @@
 package Servicio;
 
 import Daos.*;
+import Errores.Error;
+import Errores.ErrorEmailParticipanteRepetido;
+import Errores.ErrorNombreParticipanteRepetido;
+import Exceptions.CompetenciaVaciaException;
 import Negocio.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GestorCompetencia {
-    private static CompetenciaDao competenciaDao = new CompetenciaPostgreSQLDao();
-    private static LugarRealizacionDao lugarRealizacionDao = new LugarRealizacionPostgreSQLDao();
-    private static UsuarioDao usuarioDao = new UsuarioPostgreSQLDao();
-    private static DeporteDao deporteDao = new DeportePostgreSQLDao();
+    private static Competencia competencia;
+    private static final CompetenciaDao competenciaDao = new CompetenciaPostgreSQLDao();
+    private static final LugarRealizacionDao lugarRealizacionDao = new LugarRealizacionPostgreSQLDao();
+    private static final UsuarioDao usuarioDao = new UsuarioPostgreSQLDao();
+    private static final DeporteDao deporteDao = new DeportePostgreSQLDao();
+    private static final ParticipanteDao participanteDao = new ParticipantePostgreSQLDao();
     public static final int LIGA = 0;
     public static final int ELIMINATORIA_SIMPLE = 1;
     public static final int ELIMINATORIA_DOBLE = 2;
@@ -21,7 +28,7 @@ public abstract class GestorCompetencia {
         ArrayList<String> errores = new ArrayList<>(4);
 
         //validaciones logicas
-        errores.add(nombreValido(competenciaDTO));
+        errores.add(nombreCompetenciaValido(competenciaDTO));
         errores.add(setsValidos(competenciaDTO));
         errores.add(puntuacionEmpateValido(competenciaDTO));
         errores.add(puntuacionPresentarseValido(competenciaDTO));
@@ -56,7 +63,20 @@ public abstract class GestorCompetencia {
         return errores;
     }
 
-    private static String nombreValido(CompetenciaDTO competenciaDTO){
+    public static List<Error> crearPart(ParticipanteDTO participanteDTO){
+        List<Error> errores = new ArrayList<>();
+        if(participanteDao.nombreUnico(participanteDTO)) errores.add(new ErrorNombreParticipanteRepetido());
+        if(participanteDao.emailUnico(participanteDTO)) errores.add(new ErrorEmailParticipanteRepetido());
+        if(!errores.isEmpty()) return errores;
+        Participante participante;
+        if(participanteDTO.tipo)participante = new Equipo(participanteDTO.nombre,participanteDTO.email);
+        else participante = new Individuo(participanteDTO.nombre,participanteDTO.email);;
+        competencia.addParticipante(participante);
+        competencia.setEstado(Estado.CREADA);
+        competencia= competenciaDao.updateCompetencia(competencia);
+        return errores;
+    }
+    private static String nombreCompetenciaValido(CompetenciaDTO competenciaDTO){
         System.out.println("hola");
         if(competenciaDao.nombreUnico(competenciaDTO.nombre)){return "El nombre ingresado ya existe en otra competencia";}
         else{return null;}
@@ -73,4 +93,28 @@ public abstract class GestorCompetencia {
         if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_presentarse >= competenciaDTO.puntos_partido_ganado){return "Puntos por presentarse mayor o igual a puntos por partido ganado";}
         else{return null;}
     }
+    public static List<ParticipanteDTO> getParticipantes(){
+        List<ParticipanteDTO> participanteDTOList = new ArrayList<>();
+        try{
+            if(competencia == null) throw new CompetenciaVaciaException();
+            List<Participante> participantes = competencia.getParticipantes();
+            for(Participante participante: participantes){
+                boolean tipo = !(participante instanceof Individuo);
+                ParticipanteDTO participanteDTO = new ParticipanteDTO(participante.getNombre(),participante.getEmail(),competencia.getId_competencia(),tipo);
+                participanteDTOList.add(participanteDTO);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return participanteDTOList;
+    }
+    public static Competencia getCompetencia() {
+        return competencia;
+    }
+
+    public static void setCompetencia(Competencia competencia) {
+        GestorCompetencia.competencia = competencia;
+    }
+
 }

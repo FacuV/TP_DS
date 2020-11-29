@@ -22,12 +22,17 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
-    <loaded-nodes />
+    <show-object-properties value="false" />
+    <loaded-nodes>
+      <connection connection-id="392a668a-84ee-4494-8f35-cf58c862eedd">
+        <schema name="pg_catalog" object-types="view, function, table" />
+        <schema name="public" object-types="view, function, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd">
-      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main">select * from usuario</console>
+      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from participantes_competencia]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -37,8 +42,10 @@
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.participante" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.encuentros_en_fixture" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.usuario" active-filter-id="" />
+    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.competencia" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.fixture" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.lugar_realizacion" active-filter-id="" />
   </component>

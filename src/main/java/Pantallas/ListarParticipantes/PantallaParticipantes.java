@@ -4,14 +4,17 @@ import Interface.JPantalla;
 import Pantallas.NuevaCompetencia.Cabecera;
 import Pantallas.NuevaCompetencia.Cuerpo;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class PantallaParticipantes extends JPantalla{
+    PanelIzquierdo panelIzquierdo = new PanelIzquierdo(this);
+    PanelDerecho panelDerecho = new PanelDerecho(this);
     public PantallaParticipantes(){
-        super("Participantes","< Volver");
+        super("Participantes");
         body.setLayout(new GridBagLayout());
-        body.add(new PanelIzquierdo(),new PanelIzquierdo.Constraints());
-        body.add(new PanelDerecho(),new PanelDerecho.Constraints());
+        body.add(panelIzquierdo,new PanelIzquierdo.Constraints());
+        body.add(panelDerecho,new PanelDerecho.Constraints());
 
     }
 }

@@ -2,6 +2,8 @@ package Pantallas.NuevaCompetencia;
 import GestorPantallas.Gestor;
 import Negocio.CompetenciaDTO;
 import Servicio.GestorCompetencia;
+import Servicio.GestorUsuarios;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -44,7 +46,7 @@ public class Cuerpo extends JPanel {
             competencia.setPermite_empate(formularioIzquierdo.getHasTie());
             competencia.setDisponibilidades(formularioDerecho.getDisponibilidades());
             competencia.setReglamento(formularioDerecho.getReglamento());
-            competencia.setId_usuario(4);
+            competencia.setId_usuario(GestorUsuarios.getUsuarioLogueado().getId_usuario());
 
             if (!checkSyntaxis()) return;
 

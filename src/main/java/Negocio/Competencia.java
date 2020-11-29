@@ -30,9 +30,11 @@ public abstract class Competencia {
     @ManyToOne
     @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia",fetch = FetchType.EAGER)
     protected List<Disponibilidad> disponibilidades;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
+            inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_fixture")
@@ -147,10 +149,9 @@ public abstract class Competencia {
         this.fixture = fixture;
     }
 
+    public void addParticipante(Participante participante){participantes.add(participante);}
     @Override
     public String toString() {
-        return "Competencia{" +
-                "nombre='" + nombre + '\'' +
-                '}';
+        return nombre;
     }
 }
