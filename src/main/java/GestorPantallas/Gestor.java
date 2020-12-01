@@ -27,7 +27,6 @@ public abstract class Gestor {
             Constructor constructorPantalla = proximaPantalla.clase.getConstructor();
             JFrame nuevaPantalla = (JFrame) constructorPantalla.newInstance();
             nuevaPantalla.setVisible(true);
-            System.out.println(historia.size());
             if (historia.size() > 0) {
                 historia.lastElement().setVisible(false);
             }
@@ -43,7 +42,6 @@ public abstract class Gestor {
             e.printStackTrace();
         }
     }
-
     public static void pop() {
         if (historia.size() > 1) {
             JFrame pantallaActual = historia.pop();
@@ -53,5 +51,9 @@ public abstract class Gestor {
         } else {
             System.out.println("El stack del gestor de pantallas ya está en la base de la pila.");
         }
+
+    }
+    public static JFrame peek(){
+        return historia.peek();
     }
 }

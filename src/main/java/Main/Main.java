@@ -3,6 +3,7 @@ package Main;
 import Daos.CompetenciaPostgreSQLDao;
 import GestorPantallas.Gestor;
 import GestorPantallas.Pantalla;
+import Negocio.Competencia;
 import Pantallas.MisCompetencias;
 import Pantallas.Home;
 import Pantallas.NuevoParticipante.PantallaNuevoParticipante;
@@ -17,7 +18,8 @@ public class Main {
         Gestor.add(new Pantalla("participantes",Pantallas.ListarParticipantes.PantallaParticipantes.class));
         Gestor.add(new Pantalla("nuevo participante", PantallaNuevoParticipante.class));
         //Gestor.init("menu_de_usuario");
-        GestorCompetencia.setCompetencia(new CompetenciaPostgreSQLDao().getCompetencia(3));
+        Competencia competencia = new CompetenciaPostgreSQLDao().getCompetencia(5);
+        GestorCompetencia.setCompetencia(competencia);
         Gestor.init("participantes");
     }
 }

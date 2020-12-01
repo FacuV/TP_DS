@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "competencia")
 @Inheritance(strategy= InheritanceType.JOINED)
-public abstract class Competencia {
+public abstract class Competencia{
     @Id
     @Column(name = "id_competencia")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -30,7 +30,8 @@ public abstract class Competencia {
     @ManyToOne
     @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "competencia",fetch = FetchType.EAGER)
+    //Si le pongo onCascade aca me tira error, luego debo ver porque, puede ser porque trata de actualizar disponibilidades y disponibilidades trata de actualizar a usuarioy usuario a competencia.
+    @OneToMany(cascade = CascadeType.REMOVE,mappedBy = "competencia",fetch = FetchType.EAGER)
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
@@ -151,7 +152,5 @@ public abstract class Competencia {
 
     public void addParticipante(Participante participante){participantes.add(participante);}
     @Override
-    public String toString() {
-        return nombre;
-    }
+    public String toString() {return nombre;}
 }

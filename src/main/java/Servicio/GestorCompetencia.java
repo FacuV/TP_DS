@@ -62,7 +62,21 @@ public abstract class GestorCompetencia {
         competenciaDao.createCompetencia(competencia);
         return errores;
     }
+    public static boolean hayDisponibilidad(){
+        boolean rtn = false;
+        int disponibilidadTotal = 0;
+        int cantParticipantes = competencia.getParticipantes().size();
+        for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){
+            disponibilidadTotal+=disponibilidad.getDisponibilidad();
+        }
+        if(disponibilidadTotal == 0)return rtn;
 
+        if(cantParticipantes % 2 != 0)cantParticipantes++;
+
+        if(disponibilidadTotal >= (competencia.getParticipantes().size()/2))rtn = true;
+
+        return rtn;
+    }
     public static List<Error> crearPart(ParticipanteDTO participanteDTO){
         List<Error> errores = new ArrayList<>();
         if(participanteDao.nombreUnico(participanteDTO)) errores.add(new ErrorNombreParticipanteRepetido());
@@ -70,12 +84,13 @@ public abstract class GestorCompetencia {
         if(!errores.isEmpty()) return errores;
         Participante participante;
         if(participanteDTO.tipo)participante = new Equipo(participanteDTO.nombre,participanteDTO.email);
-        else participante = new Individuo(participanteDTO.nombre,participanteDTO.email);;
+        else participante = new Individuo(participanteDTO.nombre,participanteDTO.email);
         competencia.addParticipante(participante);
         competencia.setEstado(Estado.CREADA);
-        competencia= competenciaDao.updateCompetencia(competencia);
+        competencia = competenciaDao.updateCompetencia(competencia);
         return errores;
     }
+
     private static String nombreCompetenciaValido(CompetenciaDTO competenciaDTO){
         System.out.println("hola");
         if(competenciaDao.nombreUnico(competenciaDTO.nombre)){return "El nombre ingresado ya existe en otra competencia";}

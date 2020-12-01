@@ -1,7 +1,5 @@
 package Negocio;
 
-import com.fasterxml.jackson.databind.deser.std.MapEntryDeserializer;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -110,8 +110,11 @@ public class PantallaNuevoParticipante extends JPantalla {
                      return;
                  }
                 JOptionPane.showMessageDialog(esteFrame, "Competencia creada con exito");
-                notifyAll();
                 Gestor.pop();
+                JFrame pantallaParticipantes = Gestor.peek();
+                synchronized (pantallaParticipantes){
+                    pantallaParticipantes.notify();
+                }
             }
         });
     }

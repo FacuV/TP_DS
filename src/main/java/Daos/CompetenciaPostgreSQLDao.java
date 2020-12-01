@@ -1,12 +1,12 @@
 package Daos;
 
 import Negocio.Competencia;
+import Negocio.Disponibilidad;
 import Negocio.Usuario;
-import Servicio.GestorCompetencia;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompetenciaPostgreSQLDao implements CompetenciaDao{
@@ -87,13 +87,14 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
     }
 
     @Override
-    public Competencia updateCompetencia(Competencia competencia) {
+    public Competencia updateCompetencia(Competencia competencia){
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        competencia = manager.merge(competencia);
+        for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){manager.merge(disponibilidad);}
+        Competencia rtn = manager.merge(competencia);
         manager.getTransaction().commit();
         manager.close();
-        return competencia;
+        return rtn;
     }
 
     @Override

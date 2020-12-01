@@ -17,6 +17,7 @@ public class Disponibilidad implements Serializable {
 
     @Column(name = "disponibilidad")
     private int disponibilidad;
+
     public Disponibilidad() {}
 
     public Disponibilidad(int disponibilidad,Competencia competencia, LugarRealizacion lugarRealizacion) {

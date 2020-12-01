@@ -34,8 +34,6 @@ public class Deporte {
 
     @Override
     public String toString() {
-        return "Deporte{" +
-                "nombre='" + nombre + '\'' +
-                '}';
+        return nombre;
     }
 }

@@ -1,9 +1,8 @@
 package Pantallas.ListarParticipantes;
 
 import GestorPantallas.Gestor;
-import GestorPantallas.Pantalla;
-import Pantallas.Home;
-import Pantallas.NuevoParticipante.PantallaNuevoParticipante;
+import Servicio.GestorCompetencia;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,18 +20,39 @@ public class PanelIzquierdo extends JPanel {
     JButton eliminar = new JButton("ELIMINAR PARTICIPANTE");
     public PanelIzquierdo(PantallaParticipantes pantallaParticipantes){
         criterioOrden.addItem(NOMBRE);criterioOrden.addItem(EMAIL);
+        criterioOrden.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pantallaParticipantes.panelDerecho.cargarTabla(pantallaParticipantes);
+            }
+        });
         agregar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e){
-                synchronized (pantallaParticipantes){
-                    Gestor.push("nuevo participante");
-                    try {
-                        pantallaParticipantes.wait();
-                    } catch (InterruptedException interruptedException) {
-                        interruptedException.printStackTrace();
-                    }
-                    pantallaParticipantes.panelDerecho.cargarTabla(pantallaParticipantes);
-                    pantallaParticipantes.revalidate();
+                if(GestorCompetencia.hayDisponibilidad()) {
+                    Thread thread1 = new Thread() {
+                        @Override
+                        public void run() {
+                            Gestor.push("nuevo participante");
+                        }
+                    };
+                    thread1.start();
+                    Thread thread2 = new Thread() {
+                        @Override
+                        public void run() {
+                            synchronized (pantallaParticipantes) {
+                                try {
+                                    if (Gestor.peek().isVisible()) pantallaParticipantes.wait();
+                                } catch (InterruptedException interruptedException) {
+                                    interruptedException.printStackTrace();
+                                }
+                                pantallaParticipantes.panelDerecho.cargarTabla(pantallaParticipantes);
+                            }
+                        }
+                    };
+                    thread2.start();
+                }else {
+                    JOptionPane.showMessageDialog(pantallaParticipantes, "No hay disponibilidad suficiente para agregar otro participante","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
