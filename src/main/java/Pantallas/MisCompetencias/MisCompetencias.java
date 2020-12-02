@@ -1,4 +1,4 @@
-package Pantallas;
+package Pantallas.MisCompetencias;
 
 import GestorPantallas.Gestor;
 import Interface.JPantalla;

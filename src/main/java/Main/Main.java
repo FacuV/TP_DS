@@ -4,7 +4,7 @@ import Daos.CompetenciaPostgreSQLDao;
 import GestorPantallas.Gestor;
 import GestorPantallas.Pantalla;
 import Negocio.Competencia;
-import Pantallas.MisCompetencias;
+import Pantallas.MisCompetencias.MisCompetencias;
 import Pantallas.Home;
 import Pantallas.NuevoParticipante.PantallaNuevoParticipante;
 import Servicio.GestorCompetencia;
