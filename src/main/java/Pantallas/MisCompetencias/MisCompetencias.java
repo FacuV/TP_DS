@@ -1,8 +1,6 @@
-package Pantallas;
-
+package Pantallas.MisCompetencias;
 import GestorPantallas.Gestor;
 import Interface.JPantalla;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,67 +10,18 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class MisCompetencias extends JPantalla {
-    public MisCompetencias(){
+    public MisCompetencias() {
         super("Mis competencias","Volver");
         body.setLayout(new GridBagLayout());
-        body.add(Cabecera(),CabeceraConstraints());
-        body.add(Cuerpo(),CuerpoConstraints());
+        body.add(new Header(), new Header.Constraints());
+        body.add(new Filters(), new Filters.Constraints());
+        body.add(new List(), new List.Constraints());
+//        body.add(Cabecera(),CabeceraConstraints());
+//        body.add(Cuerpo(),CuerpoConstraints());
     }
 
-    private JPanel Cabecera() {
-        JPanel Cabecera = new JPanel();
-//        Cabecera.setBackground(Color.BLUE);
-        Cabecera.setLayout(new GridBagLayout());
-        Cabecera.add(BotonHome(),BotonHomeConstraints());
-        Cabecera.add(Buscador(),BuscadorConstraints());
-        return Cabecera;
-    }
 
-    private GridBagConstraints CabeceraConstraints() {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.insets = new Insets(20,20,20,20);
-        constraints.weightx = 1;
-        return constraints;
-    }
 
-    private JTextField Buscador() {
-        JTextField Buscador = new JTextField();
-        return Buscador;
-    }
-
-    private GridBagConstraints BuscadorConstraints() {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.weightx = 1;
-        constraints.gridx = 1;
-        constraints.fill = GridBagConstraints.BOTH;
-        return constraints;
-    }
-
-    private JButton BotonHome () {
-        JButton BotonHome = new JButton();
-        BotonHome.setText("Home");
-        return BotonHome;
-    }
-
-    private GridBagConstraints BotonHomeConstraints () {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0,0,0,40);
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.gridx = 0;
-        return constraints;
-    }
-
-    private JPanel Cuerpo () {
-        JPanel Cuerpo = new JPanel();
-        Cuerpo.setLayout(new GridBagLayout());
-//        Cuerpo.setBackground(Color.orange);
-        Cuerpo.add(Filtros(),FiltrosConstraints());
-        Cuerpo.add(Lista(),ListaConstraints());
-        return Cuerpo;
-    }
 
     private GridBagConstraints CuerpoConstraints () {
         GridBagConstraints constraints = new GridBagConstraints();
