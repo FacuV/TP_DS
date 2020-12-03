@@ -19,7 +19,7 @@ public class Main {
         Gestor.add(new Pantalla("participantes",Pantallas.ListarParticipantes.PantallaParticipantes.class));
         Gestor.add(new Pantalla("nuevo participante", PantallaNuevoParticipante.class));
         Gestor.add(new Pantalla("ver competencia", PantallaTest.class));
-        Gestor.init("competencias");
+        Gestor.init("ver competencia");
         Competencia competencia = new CompetenciaPostgreSQLDao().getCompetencia(5);
         GestorCompetencia.setCompetencia(competencia);
     }
