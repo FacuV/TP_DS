@@ -51,7 +51,7 @@ public class PanelIzquierdo extends JPanel {
                         }
                     };
                     thread2.start();
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(pantallaParticipantes, "No hay disponibilidad suficiente para agregar otro participante","Error",JOptionPane.ERROR_MESSAGE);
                 }
             }
@@ -87,7 +87,7 @@ public class PanelIzquierdo extends JPanel {
             constraintGeneral.gridy++;
         add(eliminar,constraintGeneral);
     }
-    public String getCriterioOrden(){
+    public String getCriterioOrden() {
         return (String) criterioOrden.getSelectedItem();
     }
     public static class Constraints extends GridBagConstraints{

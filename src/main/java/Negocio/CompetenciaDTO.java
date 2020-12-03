@@ -10,6 +10,7 @@ public class CompetenciaDTO {
     public List<DisponibilidadDTO> disponibilidades;
     public String reglamento;
     public int id_usuario;
+    public String deporte;
     public int modalidad_competencia;
     public int forma_Puntuación;
     public int cantidad_máxima_sets;
@@ -46,6 +47,8 @@ public class CompetenciaDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public void setDeprote(String deporte) { this.deporte = deporte; };
 
     public int getId_deporte() {
         return id_deporte;

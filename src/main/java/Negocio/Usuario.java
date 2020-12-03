@@ -29,7 +29,7 @@ public class Usuario {
     private Localidad localidad;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<LugarRealizacion> lugaresRealizacion;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
     private List<Competencia> competencias;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Auditoria> auditorias;

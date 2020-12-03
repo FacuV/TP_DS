@@ -44,6 +44,7 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
         manager.close();
         return competencia;
     }
+
     @Override
     public Competencia getCompetencia(String nombre) {
         manager = entityManagerFactory.createEntityManager();
