@@ -1,17 +1,30 @@
 package Pantallas.MisCompetencias;
-
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Header extends JPanel {
-    GridBagConstraints gbc = new GridBagConstraints();
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private JButton BotonHome = new JButton("Home");
+    private JTextField buscador = new JTextField();
+    private List Lista;
 
-    public Header () {
+    public Header (List Lista) {
         super(); gbc.fill = GridBagConstraints.BOTH;
         setBackground(Color.red);
+        setBorder(new EmptyBorder(20,20,20,20));
         setLayout(new GridBagLayout());
-        add(new JButton("Home"));
-        gbc.weightx = 1; gbc.gridx = 1; add(new JTextField(),gbc);
+        add(BotonHome); BotonHome.setPreferredSize(new Dimension(120,40));
+        gbc.weightx = 1; gbc.gridx = 1; add(buscador,gbc);
+        this.buscador.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Lista.filtrarBusqueda(buscador.getText().toString());
+            }
+        });
+        this.Lista = Lista;
     };
 
     public static class Constraints extends GridBagConstraints {
