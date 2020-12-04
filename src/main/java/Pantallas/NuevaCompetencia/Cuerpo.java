@@ -50,7 +50,6 @@ public class Cuerpo extends JPanel {
 
             if (!checkSyntaxis()) return;
 
-            System.out.println("Creando competencia");
             ArrayList<String> errors = GestorCompetencia.crearComp(competencia);
             System.out.println(errors);
             if (!hasErrors(errors)) {

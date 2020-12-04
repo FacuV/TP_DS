@@ -65,6 +65,7 @@ public abstract class GestorCompetencia {
         competenciaDao.createCompetencia(competencia);
         return errores;
     }
+
     public static boolean hayDisponibilidad(){
         boolean rtn = false;
         int disponibilidadTotal = 0;
@@ -72,6 +73,7 @@ public abstract class GestorCompetencia {
         for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){
             disponibilidadTotal+=disponibilidad.getDisponibilidad();
         }
+
         if(disponibilidadTotal == 0)return rtn;
 
         if(cantParticipantes % 2 != 0)cantParticipantes++;
