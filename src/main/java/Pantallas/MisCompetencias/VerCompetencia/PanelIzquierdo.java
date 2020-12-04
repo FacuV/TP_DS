@@ -12,7 +12,7 @@ public class PanelIzquierdo extends JPanel {
         JPanel panelProximosEncuentros = new JPanel();
         GridBagConstraints gbc = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0);
             panelImagen.setLayout(new GridBagLayout());
-            panelImagen.add(new JLabel(new ImageIcon("C:\\Users\\facun\\IdeaProjects\\TP_DS\\src\\main\\java\\Iconos\\descarga.jpg")),gbc);
+            panelImagen.add(new JLabel(new ImageIcon("./src/main/java/Iconos/descarga.jpg")),gbc);
         add(panelImagen,gbc);
             panelProximosEncuentros.setLayout(new GridBagLayout());
             JTable table = new JTable();

@@ -20,9 +20,9 @@ public class Main {
         Gestor.add(new Pantalla("participantes",Pantallas.ListarParticipantes.PantallaParticipantes.class));
         Gestor.add(new Pantalla("nuevo participante", PantallaNuevoParticipante.class));
         Gestor.add(new Pantalla("ver competencia", PantallaTest.class));
-
+        Gestor.init("menu_de_usuario");
         Competencia competencia = new CompetenciaPostgreSQLDao().getCompetencia(4);
         GestorCompetencia.setCompetencia(competencia);
-        Gestor.init("ver competencia");
+        CrearEncuentrosHelper.crearEncuentros(GestorCompetencia.getCompetencia().getParticipantes());
     }
 }
