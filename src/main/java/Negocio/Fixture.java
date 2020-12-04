@@ -11,7 +11,7 @@ public class Fixture{
     @Column(name = "id_fixture")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_fixture;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "encuentro_en_fixture", joinColumns = @JoinColumn(name = "id_fixture"),
             inverseJoinColumns = @JoinColumn(name = "id_encuentro"))
     private List<Encuentro> encuentros;

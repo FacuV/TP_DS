@@ -3,8 +3,8 @@ package GestorPantallas;
 import java.util.ArrayList;
 
 public class Pantalla {
-    String nombre;
-    Class clase;
+    public String nombre;
+    public Class clase;
 
     public Pantalla (String nombre, Class clase) {
         this.nombre = nombre;

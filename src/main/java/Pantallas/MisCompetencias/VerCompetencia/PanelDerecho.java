@@ -1,6 +1,9 @@
 package Pantallas.MisCompetencias.VerCompetencia;
 
 import GestorPantallas.Gestor;
+import Pantallas.ListarParticipantes.PantallaParticipantes;
+import Pantallas.NuevoParticipante.PantallaNuevoParticipante;
+import Servicio.GestorCompetencia;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,18 +16,44 @@ public class PanelDerecho extends JPanel {
     JButton posiciones = new JButton("<html><center>POSICIONES<html>");
     JButton participantes = new JButton("<html><center>PARTICIPANTES<html>");
     JButton eliminarCompetencia = new JButton("<html><center>ELIMINAR <p> COMPETENCIA<html>");
-    public PanelDerecho(){
+    public PanelDerecho(VerCompetencia panelVerCompetencia){
         setLayout(new GridBagLayout());
         generarFixture.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         mostrarFixture.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         posiciones.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         participantes.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         eliminarCompetencia.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
-        generarFixture.addActionListener(new ActionListenerGenerarFixture());
+        generarFixture.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GestorCompetencia.generarFixture();
+                panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
+            }
+        });
         participantes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestor.push("participantes");
+                Thread thread1 = new Thread() {
+                    @Override
+                    public void run() {
+                        Gestor.push("participantes");
+                    }
+                };
+                thread1.start();
+                Thread thread2 = new Thread() {
+                    @Override
+                    public void run() {
+                        synchronized (panelVerCompetencia.miFrame) {
+                            try {
+                                if (Gestor.peek().isVisible()) panelVerCompetencia.miFrame.wait();
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
+                            }
+                            panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
+                        }
+                    }
+                };
+                thread2.start();
             }
         });
 

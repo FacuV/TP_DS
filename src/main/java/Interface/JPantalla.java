@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class JPantalla extends JFrame {
     protected JPanel body = new JPanel();
-    protected JPanel footer;
+    protected Footer footer;
     public JPantalla(String nombrePantalla,String nombreBotonFooter){
         super(nombrePantalla);
         setSize((int) Toolkit.getDefaultToolkit().getScreenSize().getWidth()/2,(int)Toolkit.getDefaultToolkit().getScreenSize().getHeight()/2);
@@ -33,4 +33,11 @@ public class JPantalla extends JFrame {
         this(nombrePantalla,"< Volver");
     }
 
+    public JPanel getBody() {
+        return body;
+    }
+
+    public Footer getFooter() {
+        return footer;
+    }
 }

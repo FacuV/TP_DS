@@ -18,8 +18,8 @@ public class MisCompetencias extends JPantalla {
     };
 
     public void setCompetencia(Competencia competencia) {
-        body.add(new VerCompetencia(),new List.Constraints());
         GestorCompetencia.setCompetencia(competencia);
+        body.add(new VerCompetencia(this),new List.Constraints());
         body.remove(2);
         body.revalidate();
     };

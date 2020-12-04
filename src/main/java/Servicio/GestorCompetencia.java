@@ -5,8 +5,11 @@ import Errores.Error;
 import Errores.ErrorEmailParticipanteRepetido;
 import Errores.ErrorNombreParticipanteRepetido;
 import Exceptions.CompetenciaVaciaException;
+import GestorPantallas.Gestor;
+import Helpers.CrearEncuentrosHelper;
 import Negocio.*;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +93,26 @@ public abstract class GestorCompetencia {
         competencia = competenciaDao.updateCompetencia(competencia);
         return errores;
     }
-
+    public static void generarFixture(){
+        if(competencia.getEstado() == Estado.FINALIZADA || competencia.getEstado() == Estado.EN_CURSO){
+            JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>No se puede volver a generar fixture <p> la competencia esta en curso o ya finalizo<html>","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(competencia.getParticipantes().size() <=1){
+            JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>No se puede volver a generar fixture <p> no hay participantes suficientes<html>","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(competencia.getParticipantes().size() % 2 != 0){
+            competencia.addParticipante(new Individuo("FANTASMA","FANTASMA@gmail.com"));
+            competencia = competenciaDao.updateCompetencia(competencia);
+        }
+        Fixture fixture = new Fixture();
+        fixture.setEncuentros(CrearEncuentrosHelper.crearEncuentros(competencia.getParticipantes()));
+        competencia.setFixture(fixture);
+        competencia.setEstado(Estado.PLANIFICADA);
+        competencia = competenciaDao.updateCompetencia(competencia);
+        JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>Fixture creado con exito<html>");
+    }
     private static String nombreCompetenciaValido(CompetenciaDTO competenciaDTO){
         System.out.println("hola");
         if(competenciaDao.nombreUnico(competenciaDTO.nombre)){return "El nombre ingresado ya existe en otra competencia";}
@@ -129,7 +151,6 @@ public abstract class GestorCompetencia {
     }
 
     public static void setCompetencia(Competencia competencia) {
-        GestorCompetencia.competencia = competencia;
+        GestorCompetencia.competencia= competenciaDao.getCompetencia(competencia.getId_competencia());
     }
-
 }
