@@ -111,6 +111,7 @@ public abstract class GestorCompetencia {
         competencia.setFixture(fixture);
         competencia.setEstado(Estado.PLANIFICADA);
         competencia = competenciaDao.updateCompetencia(competencia);
+
         JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>Fixture creado con exito<html>");
     }
     private static String nombreCompetenciaValido(CompetenciaDTO competenciaDTO){
