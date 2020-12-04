@@ -67,8 +67,8 @@ public class Encuentro {
         this.encuentro_perdedor_anterior_b = encuentro_perdedor_anterior_b;
     }
     //Constructor para competencia liga
-    public Encuentro(LocalDate fecha,int fase, Participante participanteA, Participante participanteB) {
-        this(fecha,fase, participanteA, participanteB,null,new ArrayList<Resultado>(),null,null,null,null,null,null,null);
+    public Encuentro(int fase, Participante participanteA, Participante participanteB) {
+        this(null,fase, participanteA, participanteB,null,new ArrayList<Resultado>(),null,null,null,null,null,null,null);
     }
     //Constructor para competencia eliminatoria simple
     public Encuentro(LocalDate fecha, Integer fase, Participante participanteA, Participante participanteB,Encuentro encuentro_proximo_ganador,Encuentro encuentro_ganador_anterior_a, Encuentro encuentro_ganador_anterior_b){
