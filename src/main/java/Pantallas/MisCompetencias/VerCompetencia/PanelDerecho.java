@@ -20,6 +20,7 @@ public class PanelDerecho extends JPanel {
         posiciones.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         participantes.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
         eliminarCompetencia.setFont(new Font(Font.DIALOG,Font.PLAIN,12));
+        generarFixture.addActionListener(new ActionListenerGenerarFixture());
         participantes.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
