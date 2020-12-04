@@ -1,6 +1,7 @@
 package Negocio;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "participante")
@@ -43,5 +44,18 @@ public abstract class Participante {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Participante that = (Participante) o;
+        return id_participante == that.id_participante;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }
