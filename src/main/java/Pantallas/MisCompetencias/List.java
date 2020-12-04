@@ -3,8 +3,10 @@ import Negocio.Competencia;
 import Negocio.EliminatoriaDoble;
 import Negocio.EliminatoriaSimple;
 import Negocio.Liga;
+import Servicio.GestorCompetencia;
 import Servicio.GestorUsuarios;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,7 +23,7 @@ public class List extends JPanel {
     private String estado = "";
     private String deporte = "";
 
-    public List() {
+    public List(MisCompetencias misCompetencias) {
         setLayout(new GridBagLayout());
         Lista.setModel(model);
         listaCompetencias = GestorUsuarios.getUsuarioLogueado().getCompetencias();
@@ -32,16 +34,18 @@ public class List extends JPanel {
         gbc.gridy = 0; gbc.weightx = 1; gbc.weighty = 1; gbc.fill = GridBagConstraints.BOTH; add(scroller,gbc);
         gbc.gridy++; gbc.weightx = 0; gbc.weighty = 0; add(AgregarCompetencia,gbc);
 
+        setBorder(new EmptyBorder(20,20,20,20));
+
         Lista.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList)evt.getSource();
                 if (evt.getClickCount() == 2) {
                     // Double-click detected
                     int index = list.locationToIndex(evt.getPoint());
-                    System.out.format("Seleccionó %s",index);
+                    misCompetencias.setCompetencia(listaCompetencias.get(index));
                 };
             };
-        });
+});
     };
 
     public static class Constraints extends GridBagConstraints {

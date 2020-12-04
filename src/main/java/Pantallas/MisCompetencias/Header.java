@@ -13,7 +13,6 @@ public class Header extends JPanel {
 
     public Header (List Lista) {
         super(); gbc.fill = GridBagConstraints.BOTH;
-        setBackground(Color.red);
         setBorder(new EmptyBorder(20,20,20,20));
         setLayout(new GridBagLayout());
         add(BotonHome); BotonHome.setPreferredSize(new Dimension(120,40));
