@@ -6,6 +6,7 @@ import GestorPantallas.Pantalla;
 import Negocio.Competencia;
 import Pantallas.MisCompetencias.MisCompetencias;
 import Pantallas.Home;
+import Pantallas.MisCompetencias.PantallaTest;
 import Pantallas.NuevoParticipante.PantallaNuevoParticipante;
 import Servicio.GestorCompetencia;
 
@@ -17,9 +18,9 @@ public class Main {
         Gestor.add(new Pantalla("menu_de_usuario",Pantallas.MenuDeUsuario.MenuDeUsuario.class));
         Gestor.add(new Pantalla("participantes",Pantallas.ListarParticipantes.PantallaParticipantes.class));
         Gestor.add(new Pantalla("nuevo participante", PantallaNuevoParticipante.class));
-//        Gestor.init("competencias");
+        Gestor.add(new Pantalla("ver competencia", PantallaTest.class));
+        Gestor.init("ver competencia");
         Competencia competencia = new CompetenciaPostgreSQLDao().getCompetencia(5);
         GestorCompetencia.setCompetencia(competencia);
-        Gestor.init("menu_de_usuario");
     }
 }
