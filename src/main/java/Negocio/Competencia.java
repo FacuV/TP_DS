@@ -30,7 +30,7 @@ public abstract class Competencia{
     @ManyToOne
     @JoinColumn(name = "id_deporte")
     protected Deporte deporte;
-    //Si le pongo onCascade aca me tira error, luego debo ver porque, puede ser porque trata de actualizar disponibilidades y disponibilidades trata de actualizar a usuarioy usuario a competencia.
+    //Si le pongo CascadeType.ALL aca me tira error, luego debo ver porque, puede ser porque trata de actualizar disponibilidades y disponibilidades trata de actualizar a usuarioy usuario a competencia.
     @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "competencia",fetch = FetchType.EAGER)
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany(cascade = CascadeType.ALL)

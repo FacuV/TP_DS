@@ -8,7 +8,6 @@ import Exceptions.CompetenciaVaciaException;
 import GestorPantallas.Gestor;
 import Helpers.CrearEncuentrosHelper;
 import Negocio.*;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,11 +74,8 @@ public abstract class GestorCompetencia {
         }
 
         if(disponibilidadTotal == 0)return rtn;
-
         if(cantParticipantes % 2 != 0)cantParticipantes++;
-
-        if(disponibilidadTotal >= (competencia.getParticipantes().size()/2))rtn = true;
-
+        if(disponibilidadTotal >= cantParticipantes/2)rtn = true;
         return rtn;
     }
     public static List<Error> crearPart(ParticipanteDTO participanteDTO){
@@ -109,7 +105,7 @@ public abstract class GestorCompetencia {
             competencia = competenciaDao.updateCompetencia(competencia);
         }
         Fixture fixture = new Fixture();
-        fixture.setEncuentros(CrearEncuentrosHelper.crearEncuentros(competencia.getParticipantes()));
+        fixture.setEncuentros(CrearEncuentrosHelper.crearEncuentros(competencia.getParticipantes(),competencia.getDisponibilidades()));
         competencia.setFixture(fixture);
         competencia.setEstado(Estado.PLANIFICADA);
         competencia = competenciaDao.updateCompetencia(competencia);

@@ -42,7 +42,7 @@ public class PanelIzquierdo extends JPanel {
                         public void run() {
                             synchronized (pantallaParticipantes) {
                                 try {
-                                    if (Gestor.peek().isVisible()) pantallaParticipantes.wait();
+                                    pantallaParticipantes.wait();
                                 } catch (InterruptedException interruptedException) {
                                     interruptedException.printStackTrace();
                                 }

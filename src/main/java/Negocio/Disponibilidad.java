@@ -53,4 +53,9 @@ public class Disponibilidad implements Serializable {
     public String getNombreLugar() {
         return lugarRealizacion.getNombre();
     }
+
+    @Override
+    public String toString() {
+        return "["+competencia +","+ lugarRealizacion +","+ disponibilidad+"]";
+    }
 }
