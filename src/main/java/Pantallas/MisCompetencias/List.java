@@ -6,8 +6,6 @@ import Negocio.EliminatoriaSimple;
 import Negocio.Liga;
 import Servicio.GestorUsuarios;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -27,13 +25,12 @@ public class List extends JScrollPane {
         Lista.setModel(model);
         listaCompetencias = GestorUsuarios.getUsuarioLogueado().getCompetencias();
         for (Competencia competencia : listaCompetencias) {
-            model.addElement(competencia.getNombre());
+            model.addElement(competencia.getNombre() + " - " + competencia.getDeporte() + " - " + competencia.getEstado());
         }
         setViewportView(Lista);
-//        setBorder(new EmptyBorder(25,25,25,25));
         Lista.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                JList list = (JList)evt.getSource();
+                JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     int index = list.locationToIndex(evt.getPoint());
                     misCompetencias.setCompetencia(listaCompetencias.get(index));
