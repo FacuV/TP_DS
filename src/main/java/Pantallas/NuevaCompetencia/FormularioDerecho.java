@@ -4,12 +4,14 @@ import Negocio.DisponibilidadDTO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FormularioDerecho extends JPanel {
     Reglamento reglamento = new Reglamento();
     Lugares lugares = new Lugares();
+    public ActionListener action;
 
     public FormularioDerecho () {
         setLayout(new GridLayout(2,1));
@@ -27,4 +29,6 @@ public class FormularioDerecho extends JPanel {
         this.reglamento.onAceptar(action);
     };
     public void setLugaresError(String error) { this.lugares.setError(error); };
+    public void setDeporte(String deporte) { this.lugares.setDeporte(deporte); };
+    public ActionListener getOnDeporteChange() { return lugares.getOnDeporteChange();};
 }

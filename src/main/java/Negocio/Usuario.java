@@ -33,7 +33,6 @@ public class Usuario {
     private List<Competencia> competencias;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Auditoria> auditorias;
-
     public Usuario(){}
 
     public Usuario(String nombre, String apellido,String email,String contraseña,String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {

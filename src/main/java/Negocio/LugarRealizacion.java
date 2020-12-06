@@ -19,8 +19,7 @@ public class LugarRealizacion{
     @Column(name = "descripcion")
     private String descripcion;
     @ManyToMany
-    @JoinTable(name = "lugar_realizacion_deporte", joinColumns = @JoinColumn(name = "id_lugar_realizacion"),
-            inverseJoinColumns = @JoinColumn(name = "id_deporte"))
+    @JoinTable(name = "lugar_realizacion_deporte", joinColumns = @JoinColumn(name = "id_lugar_realizacion"), inverseJoinColumns = @JoinColumn(name = "id_deporte"))
     private List<Deporte> deportes;
     public LugarRealizacion() {}
     public LugarRealizacion(String nombre,Usuario usuario, ArrayList<Deporte> deportes, String descripcion) {
@@ -45,7 +44,7 @@ public class LugarRealizacion{
     }
 
     public List<Deporte> getDeportes() {
-        return deportes;
+        return this.deportes;
     }
 
     public void setDeportes(List<Deporte> deportes) {

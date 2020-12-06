@@ -22,12 +22,14 @@ public class NuevoLugar extends JDialog {
     JPanel content = new JPanel();
     List<LugarRealizacion> lugares;
     NuevoLugar self = this;
+    private String deporte = "";
 
-    public NuevoLugar (Window frame, String name, DefaultTableModel model, ArrayList<DisponibilidadDTO> disponibilidades) {
+    public NuevoLugar (Window frame, String name, DefaultTableModel model, ArrayList<DisponibilidadDTO> disponibilidades, String deporte) {
         super(frame, name);
         setSize(new Dimension(500,150));
         setLocationRelativeTo(null);
         setContentPane(content);
+        this.deporte = deporte;
         content.setLayout(new GridLayout(4,2));
         content.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
@@ -37,11 +39,14 @@ public class NuevoLugar extends JDialog {
         lugares = usuario.getLugaresRealizacion();
         for (LugarRealizacion lugar : lugares) {
             boolean alreadySelected = false;
+            boolean usable = true;
+//            if (!lugar.getDeportes().toString().contains(deporte)) usable = false;
+//            System.out.print(lugar.getDeportes());
             for (DisponibilidadDTO disponibilidad : disponibilidades) {
                 if (disponibilidad.id_lugar_realizacion == lugar.getId_lugar_realizacion())
                     alreadySelected = true;
             };
-            if (!alreadySelected) Nombres.addItem(lugar.getNombre());
+            if (!alreadySelected && usable) Nombres.addItem(lugar.getNombre());
         };
         Cancelar.addActionListener(new ActionListener() {
             @Override
