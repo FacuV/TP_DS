@@ -150,6 +150,7 @@ public abstract class GestorCompetencia {
     }
 
     public static void setCompetencia(Competencia competencia) {
-        GestorCompetencia.competencia= competenciaDao.getCompetencia(competencia.getId_competencia());
+        if(competencia == null)GestorCompetencia.competencia=null;
+        else GestorCompetencia.competencia= competenciaDao.getCompetencia(competencia.getId_competencia());
     }
 }

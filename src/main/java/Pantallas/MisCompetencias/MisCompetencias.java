@@ -15,18 +15,19 @@ public class MisCompetencias extends JPantalla {
         body.add(new Header(Lista),new Header.Constraints());
         body.add(new Filters(Lista),new Filters.Constraints());
         body.add(Lista, new List.Constraints());
-    };
+    }
 
     public void setCompetencia(Competencia competencia) {
         GestorCompetencia.setCompetencia(competencia);
         body.add(new VerCompetencia(this),new List.Constraints());
         body.remove(2);
         body.revalidate();
-    };
+    }
 
-    public void unsetCompetencia(Competencia competencia) {
-        GestorCompetencia.setCompetencia(competencia);
+    public void unsetCompetencia() {
+        GestorCompetencia.setCompetencia(null);
         body.remove(2);
         body.add(Lista, new List.Constraints());
-    };
-};
+        body.repaint();
+    }
+}

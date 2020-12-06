@@ -33,7 +33,7 @@ public abstract class Competencia{
     //Si le pongo CascadeType.ALL aca me tira error, luego debo ver porque, puede ser porque trata de actualizar disponibilidades y disponibilidades trata de actualizar a usuarioy usuario a competencia.
     @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "competencia",fetch = FetchType.EAGER)
     protected List<Disponibilidad> disponibilidades;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
             inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;

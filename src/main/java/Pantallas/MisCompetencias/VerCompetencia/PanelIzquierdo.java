@@ -3,10 +3,13 @@ package Pantallas.MisCompetencias.VerCompetencia;
 import GestorPantallas.Gestor;
 import Negocio.Encuentro;
 import Negocio.Estado;
+import Pantallas.MisCompetencias.MisCompetencias;
 import Servicio.GestorCompetencia;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +19,19 @@ public class PanelIzquierdo extends JPanel {
     JLabel proximosEncuentros = new JLabel("Proximos encuentros");
     public PanelIzquierdo(){
         setLayout(new GridBagLayout());
+        JButton atras = new JButton("X");
         JPanel panelProximosEncuentros = new JPanel();
+            atras.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    ((MisCompetencias) Gestor.peek()).unsetCompetencia();
+                }
+            });
         GridBagConstraints gbc = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.NORTHWEST,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0);
-            ImageIcon imageIcon = new ImageIcon("./src/main/java/Iconos/basquet.jpg");
-            JLabel imagen = new JLabel(imageIcon);
-            imagen.setSize(100,100);
-        add(imagen,gbc);
+            //ImageIcon imageIcon = new ImageIcon("./src/main/java/Iconos/basquet.jpg");
+            //JLabel imagen = new JLabel(imageIcon);
+            //imagen.setSize(100,100);
+        add(atras,gbc);
             gbc.anchor=GridBagConstraints.WEST;
             gbc.weighty=1;gbc.weightx=1;
             gbc.gridy++;
