@@ -69,10 +69,7 @@ public class LugarRealizacion{
 
     @Override
     public String toString() {
-        return "LugarRealizacion{" +
-                "id_lugar_realizacion=" + id_lugar_realizacion +
-                ", nombre='" + nombre + '\'' +
-                '}';
+        return nombre;
     }
 
     public String getNombre() {

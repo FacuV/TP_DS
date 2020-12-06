@@ -1,16 +1,14 @@
 package Daos;
 
 import Negocio.Competencia;
-import Negocio.Disponibilidad;
 import Negocio.Usuario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CompetenciaPostgreSQLDao implements CompetenciaDao{
-    private  EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
+    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Persistence");
     private EntityManager manager;
     @Override
     public Competencia createCompetencia(Competencia competencia) {
@@ -91,7 +89,6 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
     public Competencia updateCompetencia(Competencia competencia){
         manager = entityManagerFactory.createEntityManager();
         manager.getTransaction().begin();
-        for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){manager.merge(disponibilidad);}
         Competencia rtn = manager.merge(competencia);
         manager.getTransaction().commit();
         manager.close();

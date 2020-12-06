@@ -50,11 +50,13 @@ public class PanelIzquierdo extends JPanel {
             if(encuentro.getFecha()==null)encuentrosParaMostrar.add(encuentro);
         }
         for(Encuentro encuentro:encuentrosParaMostrar){
-            Object [] row = new Object[3];
-            row[0] = encuentro.getFase();
-            row[1] = encuentro.getParticipanteA();
-            row[2] = encuentro.getParticipanteB();
-            model.addRow(row);
+            if(!(encuentro.getParticipanteA().getNombre().equals("FANTASMA") || encuentro.getParticipanteB().getNombre().equals("FANTASMA"))){
+                Object[] row = new Object[3];
+                row[0] = encuentro.getFase();
+                row[1] = encuentro.getParticipanteA();
+                row[2] = encuentro.getParticipanteB();
+                model.addRow(row);
+            }
         }
         table.setModel(model);
     }
