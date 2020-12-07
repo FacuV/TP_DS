@@ -1,5 +1,8 @@
 package Negocio;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +15,7 @@ public class Fixture{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id_fixture;
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(name = "encuentro_en_fixture", joinColumns = @JoinColumn(name = "id_fixture"),
             inverseJoinColumns = @JoinColumn(name = "id_encuentro"))
     private List<Encuentro> encuentros;

@@ -33,8 +33,10 @@ public class Usuario {
     @JoinColumn(name = "id_localidad")
     private Localidad localidad;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<LugarRealizacion> lugaresRealizacion;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     private List<Competencia> competencias;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Auditoria> auditorias;

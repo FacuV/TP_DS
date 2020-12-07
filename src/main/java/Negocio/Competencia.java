@@ -1,5 +1,8 @@
 package Negocio;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +35,10 @@ public abstract class Competencia{
     protected Deporte deporte;
     //Si le pongo CascadeType.ALL aca me tira error, luego debo ver porque, puede ser porque trata de actualizar disponibilidades y disponibilidades trata de actualizar a usuarioy usuario a competencia.
     @OneToMany(cascade = CascadeType.PERSIST,mappedBy = "competencia",fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     protected List<Disponibilidad> disponibilidades;
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(name = "participantes_competencia", joinColumns = @JoinColumn(name = "id_competencia"),
             inverseJoinColumns = @JoinColumn(name = "id_participante"))
     protected List<Participante> participantes;
