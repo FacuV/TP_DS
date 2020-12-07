@@ -77,7 +77,7 @@ public class List extends JScrollPane {
                     !((competencia instanceof EliminatoriaSimple) && this.modalidad.equals("Eliminatoria Simple")) &&
                     !((competencia instanceof EliminatoriaDoble) && this.modalidad.equals("Eliminatoria Doble"))
             ) continue;
-            if (competencia.getNombre().contains(this.busqueda) || this.busqueda.isEmpty()) model.addElement(competencia.getNombre());
+            if (competencia.getNombre().contains(this.busqueda) || this.busqueda.isEmpty()) model.addElement(competencia.getNombre() + " - " + competencia.getDeporte() + " - " + competencia.getEstado());
         };
     };
 };
