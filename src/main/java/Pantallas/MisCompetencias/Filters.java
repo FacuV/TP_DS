@@ -7,50 +7,51 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Filters extends JPanel {
+    private JButton Aceptar = new JButton("Aceptar");
     private JComboBox Deporte = new JComboBox();
     private JComboBox Modalidad = new JComboBox();
     private JComboBox Estado = new JComboBox();
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private JPanel View = new JPanel();
     private List Lista;
-    private JButton Aceptar = new JButton("Aceptar");
-    private JPanel AceptarContainer = new JPanel(new GridBagLayout());
 
     public Filters(List Lista) {
         super();
-        setLayout(new GridLayout(4,1));
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.BOTH;
         setBorder(new EmptyBorder(20,20,20,20));
-        setPreferredSize(new Dimension(200,0));
-        add(Deporte);
+        View.setLayout(new GridBagLayout());
+        View.setBorder(BorderFactory.createTitledBorder("Filtros"));
+        View.add(new JLabel("Deporte"),gbc); gbc.gridy++;
+        View.add(Deporte,gbc); gbc.gridy++;
+            Deporte.setBorder(new EmptyBorder(0,0,40,0));
             Deporte.addItem("");
             Deporte.addItem("Futbol");
             Deporte.addItem("League of Legends");
-        add(Modalidad);
+        View.add(new JLabel("Modalidad"),gbc); gbc.gridy++;
+        View.add(Modalidad,gbc); gbc.gridy++;
+            Modalidad.setBorder(new EmptyBorder(0,0,40,0));
             Modalidad.addItem("");
             Modalidad.addItem("Liga");
             Modalidad.addItem("Eliminatoria Simple");
             Modalidad.addItem("Eliminatoria Doble");
-        add(Estado);
+        View.add(new JLabel("Estado"),gbc); gbc.gridy++;
+        View.add(Estado,gbc); gbc.gridy++;
+            Estado.setBorder(new EmptyBorder(0,0,40,0));
             Estado.addItem("");
             Estado.addItem("CREADA");
             Estado.addItem("PLANIFICADA");
             Estado.addItem("EN_CURSO");
             Estado.addItem("FINALIZADA");
-        add(AceptarContainer); AceptarContainer.add(Aceptar,null);
-        Deporte.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Lista.filtrarDeporte(Deporte.getSelectedItem().toString());
-            }
-        });
-        Estado.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Lista.filtrarEstado(Estado.getSelectedItem().toString());
-            }
-        });
-        Modalidad.addActionListener(new ActionListener() {
+        View.add(Aceptar,gbc);
+        add(View);
+        Aceptar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Lista.filtrarModalidad(Modalidad.getSelectedItem().toString());
+                Lista.filtrarEstado(Estado.getSelectedItem().toString());
+                Lista.filtrarDeporte(Deporte.getSelectedItem().toString());
             }
         });
         this.Lista = Lista;
@@ -60,8 +61,7 @@ public class Filters extends JPanel {
         public Constraints() {
             gridx = 0;
             gridy = 1;
-            weighty = 1;
-            fill = GridBagConstraints.BOTH;
+            anchor = GridBagConstraints.NORTH;
         };
     };
 }

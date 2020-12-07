@@ -16,8 +16,18 @@ public class Lugares extends JPanel {
     private JLabel error = new JLabel("",SwingUtilities.CENTER);
     private DefaultTableModel model = (DefaultTableModel) tabla.getModel();
     private Lugares self = this;
+    private String deporte = "";
+    public ActionListener onDeporteChange;
 
     public Lugares () {
+        onDeporteChange = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                self.disponibilidades = new ArrayList<>();
+                self.model.setRowCount(0);
+            }
+        };
+
         setLayout(new GridBagLayout());
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
@@ -48,6 +58,7 @@ public class Lugares extends JPanel {
         botonEliminar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                disponibilidades.remove(tabla.getSelectedRow());
                 model.removeRow(tabla.getSelectedRow());
             }
         });
@@ -59,11 +70,13 @@ public class Lugares extends JPanel {
         return this.disponibilidades;
     };
     public void setError(String error) { this.error.setText(error); };
+    public void setDeporte(String deporte) { this.deporte = deporte; };
+    public ActionListener getOnDeporteChange() { return this.onDeporteChange;};
 
     public class addDisponibilidad implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            NuevoLugar prompt = new NuevoLugar(SwingUtilities.getWindowAncestor(self),"Agregar Lugar",model,disponibilidades);
+            NuevoLugar prompt = new NuevoLugar(SwingUtilities.getWindowAncestor(self),"Agregar Lugar",model,disponibilidades,self.deporte);
             prompt.setVisible(true);
         }
     }

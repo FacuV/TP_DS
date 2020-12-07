@@ -20,6 +20,8 @@ public class Cuerpo extends JPanel {
         add(formularioIzquierdo);
         add(formularioDerecho);
         formularioDerecho.onAceptar(new onAceptar());
+        formularioDerecho.setDeporte(formularioIzquierdo.getDeporte());
+        formularioIzquierdo.setOnDeporteChange(formularioDerecho.getOnDeporteChange());
     }
 
     static public class Constraints extends GridBagConstraints {

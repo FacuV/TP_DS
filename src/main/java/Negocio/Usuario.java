@@ -1,5 +1,10 @@
 package Negocio;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,6 @@ public class Usuario {
     private List<Competencia> competencias;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "usuario",fetch = FetchType.LAZY)
     private List<Auditoria> auditorias;
-
     public Usuario(){}
 
     public Usuario(String nombre, String apellido,String email,String contraseña,String numero_documento, TipoDeDocumento tipoDeDocumento, Localidad localidad, List<LugarRealizacion> lugaresRealizacion, List<Competencia> competencias) {

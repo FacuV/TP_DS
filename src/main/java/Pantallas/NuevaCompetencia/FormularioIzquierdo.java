@@ -123,6 +123,7 @@ public class FormularioIzquierdo extends JPanel {
     };
     public boolean getHasTie() { return this.formaPuntuacion.getHasTie(); };
     public void setErrorSets(String error){formaPuntuacion.setErrorSets(error);}
+    public void setOnDeporteChange(ActionListener action) { deporte.addActionListener(action); };
 
 //    public void setPuntosPartGanadoEmpatadoError(String error){formaPuntuacion.setPuntosPartGanadoEmpatadoError(error);}
 
