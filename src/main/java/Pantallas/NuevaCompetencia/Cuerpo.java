@@ -3,7 +3,6 @@ import GestorPantallas.Gestor;
 import Negocio.CompetenciaDTO;
 import Servicio.GestorCompetencia;
 import Servicio.GestorUsuarios;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,8 +20,14 @@ public class Cuerpo extends JPanel {
         add(formularioDerecho);
         formularioDerecho.onAceptar(new onAceptar());
         formularioDerecho.setDeporte(formularioIzquierdo.getDeporte());
-        formularioIzquierdo.setOnDeporteChange(formularioDerecho.getOnDeporteChange());
-    }
+        formularioIzquierdo.setOnDeporteChange(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                formularioDerecho.getOnDeporteChange().actionPerformed(null);
+                formularioDerecho.setDeporte(formularioIzquierdo.getDeporte());
+            }
+        });
+    };
 
     static public class Constraints extends GridBagConstraints {
         public Constraints(){
@@ -48,7 +53,7 @@ public class Cuerpo extends JPanel {
             competencia.setPermite_empate(formularioIzquierdo.getHasTie());
             competencia.setDisponibilidades(formularioDerecho.getDisponibilidades());
             competencia.setReglamento(formularioDerecho.getReglamento());
-            competencia.setId_usuario(GestorUsuarios.getUsuarioLogueado().getId_usuario());
+            competencia.setId_usuario(GestorUsuarios.getUsuarioLogueado().id_usuario);
 
             if (!checkSyntaxis()) return;
 

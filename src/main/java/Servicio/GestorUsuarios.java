@@ -17,9 +17,10 @@ public abstract class GestorUsuarios {
     private static ProvinciaDao provinciaDao = new ProvinciaPostgreSQLDao();
     private static LocalidadDao localidadDao = new LocalidadPostgreSQLDao();
 
-    public static void guardarUsuarioDeIngreso(UsuarioDTO usuarioDTO){
+    public static void guardarUsuarioDeIngreso(UsuarioDTO usuarioDTO) {
         usuarioLogueado = usuarioDao.getUsuario(usuarioDTO.id_usuario);
-    }
+    };
+
     public static List<CompetenciaDTO> getCompetenciasDTO(){
         List<CompetenciaDTO> competenciasDTO = new ArrayList<>();
         for(Competencia competencia:usuarioLogueado.getCompetencias()){
@@ -106,8 +107,14 @@ public abstract class GestorUsuarios {
         return usuariosDTO;
     }
 
-    public static Usuario getUsuarioLogueado() {
-        return usuarioLogueado;
+    public static UsuarioDTO getUsuarioLogueado() {
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.nombre = usuarioLogueado.getNombre();
+        usuarioDTO.apellido = usuarioLogueado.getApellido();
+        usuarioDTO.documento = usuarioLogueado.getNumero_documento();
+        usuarioDTO.correoElectronico = usuarioLogueado.getEmail();
+        usuarioDTO.id_usuario = usuarioLogueado.getId_usuario();
+        return usuarioDTO;
     }
 
     public static void setUsuarioLogueado(Usuario usuarioLogueado) {

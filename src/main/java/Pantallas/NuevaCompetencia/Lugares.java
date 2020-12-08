@@ -1,5 +1,4 @@
 package Pantallas.NuevaCompetencia;
-
 import Negocio.DisponibilidadDTO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

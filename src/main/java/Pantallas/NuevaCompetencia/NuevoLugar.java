@@ -1,10 +1,6 @@
 package Pantallas.NuevaCompetencia;
-
-import Daos.UsuarioDao;
-import Daos.UsuarioPostgreSQLDao;
 import Negocio.*;
 import Servicio.GestorUsuarios;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -20,7 +16,7 @@ public class NuevoLugar extends JDialog {
     JButton Aceptar = new JButton("Aceptar");
     JLabel ErrorMsg = new JLabel("");
     JPanel content = new JPanel();
-    List<LugarRealizacion> lugares;
+    List<LugarRealizacionDTO> lugares;
     NuevoLugar self = this;
     private String deporte = "";
 
@@ -35,18 +31,18 @@ public class NuevoLugar extends JDialog {
 
         ErrorMsg.setForeground(Color.red);
 
-        Usuario usuario = GestorUsuarios.getUsuarioLogueado();
-        lugares = usuario.getLugaresRealizacion();
-        for (LugarRealizacion lugar : lugares) {
+        lugares = GestorUsuarios.getLugaresRealizacionDTO();
+        for (LugarRealizacionDTO lugar : lugares) {
             boolean alreadySelected = false;
-            boolean usable = true;
-//            if (!lugar.getDeportes().toString().contains(deporte)) usable = false;
-//            System.out.print(lugar.getDeportes());
+            boolean usable = false;
+            for(DeporteDTO deporteDTO:lugar.deportesDTO) {
+                if (deporteDTO.nombre.equals(deporte)) usable = true;
+            }
             for (DisponibilidadDTO disponibilidad : disponibilidades) {
-                if (disponibilidad.id_lugar_realizacion == lugar.getId_lugar_realizacion())
+                if (disponibilidad.id_lugar_realizacion == lugar.id_lugar_realizacion)
                     alreadySelected = true;
             };
-            if (!alreadySelected && usable) Nombres.addItem(lugar.getNombre());
+            if (!alreadySelected && usable) Nombres.addItem(lugar.nombre);
         };
         Cancelar.addActionListener(new ActionListener() {
             @Override
@@ -69,10 +65,10 @@ public class NuevoLugar extends JDialog {
                 row[1] = Cantidad.getText();
                 model.addRow(row);
                 int lugar_id = 0;
-                for (LugarRealizacion lugar : lugares) {
-                    if (lugar.getNombre() == Nombres.getSelectedItem()) {
-                        lugar_id = lugar.getId_lugar_realizacion();
-                    }
+                for (LugarRealizacionDTO lugar : lugares) {
+                    if (lugar.nombre == Nombres.getSelectedItem()) {
+                        lugar_id = lugar.id_lugar_realizacion;
+                    };
                 };
 
                 disponibilidades.add(new DisponibilidadDTO(Integer.parseInt(Cantidad.getText()),lugar_id));
@@ -88,5 +84,5 @@ public class NuevoLugar extends JDialog {
         add(Cantidad);
         add(Cancelar);
         add(Aceptar);
-    }
-}
+    };
+};

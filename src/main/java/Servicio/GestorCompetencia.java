@@ -53,7 +53,7 @@ public abstract class GestorCompetencia {
         try{
             if(competencia == null) throw new CompetenciaVaciaException();
             List<Participante> participantes = competencia.getParticipantes();
-            for(Participante participante: participantes){
+            for(Participante participante: participantes) {
                 boolean tipo = !(participante instanceof Individuo);
                 ParticipanteDTO participanteDTO = new ParticipanteDTO(participante.getNombre(),participante.getEmail(),competencia.getId_competencia(),tipo);
                 participanteDTOList.add(participanteDTO);
@@ -63,7 +63,8 @@ public abstract class GestorCompetencia {
             e.printStackTrace();
         }
         return participanteDTOList;
-    }
+    };
+
 
     public static Estado getEstado(){
         return competencia.getEstado();
@@ -130,7 +131,8 @@ public abstract class GestorCompetencia {
         competencia.setEstado(Estado.CREADA);
         competencia = competenciaDao.updateCompetencia(competencia);
         return errores;
-    }
+    };
+
     public static void generarFixture(){
         if(competencia.getEstado() == Estado.FINALIZADA || competencia.getEstado() == Estado.EN_CURSO){
             JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>No se puede volver a generar fixture <p> la competencia esta en curso o ya finalizo<html>","Error",JOptionPane.ERROR_MESSAGE);
@@ -151,29 +153,34 @@ public abstract class GestorCompetencia {
         competencia = competenciaDao.updateCompetencia(competencia);
 
         JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>Fixture creado con exito<html>");
-    }
+    };
+
     private static String nombreCompetenciaValido(CompetenciaDTO competenciaDTO){
         System.out.println("hola");
         if(competenciaDao.nombreUnico(competenciaDTO.nombre)){return "El nombre ingresado ya existe en otra competencia";}
         else{return null;}
-    }
+    };
+
     private static String setsValidos(CompetenciaDTO competenciaDTO){
         if(competenciaDTO.forma_Puntuación == SETS &&(competenciaDTO.cantidad_máxima_sets % 2 == 0) || competenciaDTO.cantidad_máxima_sets > 10){return "Cantidad sets par o mayor a 10";}
         else{return null;}
-    }
+    };
+
     private static String puntuacionEmpateValido(CompetenciaDTO competenciaDTO){
         if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_partido_ganado < competenciaDTO.puntos_partido_empatado){return "Puntos por partido ganado menor que puntos partido empatado";}
         else{return null;}
-    }
+    };
+
     private static String puntuacionPresentarseValido(CompetenciaDTO competenciaDTO){
         if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_presentarse >= competenciaDTO.puntos_partido_ganado){return "Puntos por presentarse mayor o igual a puntos por partido ganado";}
-        else{return null;}
-    }
+        else {return null;}
+    };
+
     public static Competencia getCompetencia() {
         return competencia;
-    }
-    public static void setCompetencia(Competencia competencia) {
-        if(competencia == null)GestorCompetencia.competencia=null;
-        else GestorCompetencia.competencia= competenciaDao.getCompetencia(competencia.getId_competencia());
-    }
-}
+    };
+    public static void setCompetencia(Integer id) {
+        if (id == null) GestorCompetencia.competencia = null;
+        else GestorCompetencia.competencia = competenciaDao.getCompetencia(id);
+    };
+};

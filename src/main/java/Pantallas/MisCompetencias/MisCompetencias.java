@@ -64,12 +64,12 @@ public class MisCompetencias extends JPantalla {
         };
     } ;
 
-    public void setCompetencia(Competencia competencia) {
-        GestorCompetencia.setCompetencia(competencia);
+    public void setCompetencia(Integer id) {
+        GestorCompetencia.setCompetencia(id);
         mainView.remove(0);
         mainView.add(new VerCompetencia(this));
         revalidate();
-    }
+    };
 
     public void unsetCompetencia() {
         GestorCompetencia.setCompetencia(null);

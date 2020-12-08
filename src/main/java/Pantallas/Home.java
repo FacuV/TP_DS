@@ -17,7 +17,7 @@ public class Home extends JPantalla {
         JPanel panelTitulo = new JPanel();
             panelTitulo.setLayout(new GridBagLayout());
             panelTitulo.setBackground(Color.white);
-            JLabel principal = new JLabel("Usuario "+ GestorUsuarios.getUsuarioLogueado().toString());
+            JLabel principal = new JLabel("Usuario "+ GestorUsuarios.getUsuarioLogueado().nombre);
             principal.setFont(new Font(Font.DIALOG,Font.BOLD,40));
             panelTitulo.add(principal);
         GridBagConstraints constraintPanelTitulo = new GridBagConstraints();
