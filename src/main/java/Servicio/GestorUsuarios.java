@@ -28,6 +28,9 @@ public abstract class GestorUsuarios {
             competenciaDTO.nombre = competencia.getNombre();
             competenciaDTO.deporte = competencia.getDeporte().getNombre();
             competenciaDTO.estado = competencia.getEstado().toString();
+            if(competencia instanceof Liga)competenciaDTO.modalidad_competencia =GestorCompetencia.LIGA;
+            if(competencia instanceof EliminatoriaSimple)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_SIMPLE;
+            if(competencia instanceof EliminatoriaDoble)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_DOBLE;
             competenciasDTO.add(competenciaDTO);
         }
         return competenciasDTO;

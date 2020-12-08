@@ -26,7 +26,7 @@ public class PanelDerecho extends JPanel{
         model = new DefaultTableModel();
         model.addColumn("Nombre Participante/Equipo");
         model.addColumn("Correo Electronico");
-        List<ParticipanteDTO> participanteDTOList = GestorCompetencia.getParticipantes();
+        List<ParticipanteDTO> participanteDTOList = GestorCompetencia.getParticipantesDTO();
         if(pantallaParticipantes.panelIzquierdo.getCriterioOrden().equals(PanelIzquierdo.NOMBRE)) Collections.sort(participanteDTOList, (x, y) -> x.nombre.compareToIgnoreCase(y.nombre));
         else Collections.sort(participanteDTOList, (x, y) -> x.email.compareToIgnoreCase(y.email));
         for(ParticipanteDTO participanteDTO: participanteDTOList){

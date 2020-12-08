@@ -39,7 +39,6 @@ public class CompetenciaPostgreSQLDao implements CompetenciaDao{
         Competencia competencia = manager.find(Competencia.class,id_competencia);
         manager.getTransaction().commit();
         manager.close();
-        System.out.println(competencia.getParticipantes());
         return competencia;
     }
 

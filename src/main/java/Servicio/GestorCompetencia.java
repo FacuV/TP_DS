@@ -26,6 +26,46 @@ public abstract class GestorCompetencia {
     public static final int SETS = 1;
     public static final int FINAL = 2;
 
+    public static CompetenciaDTO getCompetenciaDTO(){
+        CompetenciaDTO competenciaDTO = new CompetenciaDTO();
+            competenciaDTO.id_competencia= competencia.getId_competencia();
+            competenciaDTO.nombre = competencia.getNombre();
+            competenciaDTO.reglamento = competencia.getReglamento();
+            competenciaDTO.deporte = competencia.getDeporte().getNombre();
+            competenciaDTO.estado = competencia.getEstado().toString();
+            if(competencia instanceof Liga)competenciaDTO.modalidad_competencia =GestorCompetencia.LIGA;
+            if(competencia instanceof EliminatoriaSimple)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_SIMPLE;
+            if(competencia instanceof EliminatoriaDoble)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_DOBLE;
+            competenciaDTO.participantesDTO=getParticipantesDTO();
+            competenciaDTO.disponibilidadesDTO=getDisponibilidadesDTO();
+
+        return competenciaDTO;
+    }
+    public static List<DisponibilidadDTO> getDisponibilidadesDTO(){
+        List<DisponibilidadDTO> disponibilidadesDTO = new ArrayList<>();
+        for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){
+            disponibilidadesDTO.add(new DisponibilidadDTO(disponibilidad.getDisponibilidad(),disponibilidad.getLugarRealizacion().getId_lugar_realizacion()));
+        }
+        return disponibilidadesDTO;
+    }
+    public static List<ParticipanteDTO> getParticipantesDTO(){
+        List<ParticipanteDTO> participanteDTOList = new ArrayList<>();
+        try{
+            if(competencia == null) throw new CompetenciaVaciaException();
+            List<Participante> participantes = competencia.getParticipantes();
+            for(Participante participante: participantes){
+                boolean tipo = !(participante instanceof Individuo);
+                ParticipanteDTO participanteDTO = new ParticipanteDTO(participante.getNombre(),participante.getEmail(),competencia.getId_competencia(),tipo);
+                participanteDTOList.add(participanteDTO);
+            }
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        return participanteDTOList;
+    }
+
+
     public static ArrayList<String> crearComp(CompetenciaDTO competenciaDTO){
         ArrayList<String> errores = new ArrayList<>(4);
 
@@ -64,7 +104,6 @@ public abstract class GestorCompetencia {
         competenciaDao.createCompetencia(competencia);
         return errores;
     }
-
     public static boolean hayDisponibilidad(){
         boolean rtn = false;
         int disponibilidadTotal = 0;
@@ -127,26 +166,9 @@ public abstract class GestorCompetencia {
         if(competenciaDTO.modalidad_competencia == LIGA && competenciaDTO.puntos_presentarse >= competenciaDTO.puntos_partido_ganado){return "Puntos por presentarse mayor o igual a puntos por partido ganado";}
         else{return null;}
     }
-    public static List<ParticipanteDTO> getParticipantes(){
-        List<ParticipanteDTO> participanteDTOList = new ArrayList<>();
-        try{
-            if(competencia == null) throw new CompetenciaVaciaException();
-            List<Participante> participantes = competencia.getParticipantes();
-            for(Participante participante: participantes){
-                boolean tipo = !(participante instanceof Individuo);
-                ParticipanteDTO participanteDTO = new ParticipanteDTO(participante.getNombre(),participante.getEmail(),competencia.getId_competencia(),tipo);
-                participanteDTOList.add(participanteDTO);
-            }
-        }catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-        return participanteDTOList;
-    }
     public static Competencia getCompetencia() {
         return competencia;
     }
-
     public static void setCompetencia(Competencia competencia) {
         if(competencia == null)GestorCompetencia.competencia=null;
         else GestorCompetencia.competencia= competenciaDao.getCompetencia(competencia.getId_competencia());
