@@ -65,6 +65,9 @@ public abstract class GestorCompetencia {
         return participanteDTOList;
     }
 
+    public static Estado getEstado(){
+        return competencia.getEstado();
+    }
 
     public static ArrayList<String> crearComp(CompetenciaDTO competenciaDTO){
         ArrayList<String> errores = new ArrayList<>(4);

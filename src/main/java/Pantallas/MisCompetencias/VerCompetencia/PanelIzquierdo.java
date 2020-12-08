@@ -49,12 +49,12 @@ public class PanelIzquierdo extends JPanel {
         model.addColumn("Fase");
         model.addColumn("ParticipanteA");
         model.addColumn("ParticipanteB");
-        if(GestorCompetencia.getCompetencia().getEstado()== Estado.CREADA){
+        if(GestorCompetencia.getEstado()== Estado.CREADA){
             table.setModel(model);
             return;
         }
         List<Encuentro> encuentrosParaMostrar = new ArrayList<>();
-        int tamFase = GestorCompetencia.getCompetencia().getParticipantes().size()/2;
+        int tamFase = GestorCompetencia.getParticipantesDTO().size()/2;
         for(Encuentro encuentro:GestorCompetencia.getCompetencia().getFixture().getEncuentros()){
             if(encuentrosParaMostrar.size()==tamFase)break;
             if(encuentro.getFecha()==null)encuentrosParaMostrar.add(encuentro);

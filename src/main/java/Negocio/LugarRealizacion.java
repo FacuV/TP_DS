@@ -1,5 +1,8 @@
 package Negocio;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,8 @@ public class LugarRealizacion{
     private Usuario usuario;
     @Column(name = "descripcion")
     private String descripcion;
-    @ManyToMany
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
     @JoinTable(name = "lugar_realizacion_deporte", joinColumns = @JoinColumn(name = "id_lugar_realizacion"), inverseJoinColumns = @JoinColumn(name = "id_deporte"))
     private List<Deporte> deportes;
     public LugarRealizacion() {}
