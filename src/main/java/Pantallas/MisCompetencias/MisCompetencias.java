@@ -20,7 +20,7 @@ public class MisCompetencias extends JPantalla {
     private MainView mainView = new MainView(this);
 
     public MisCompetencias(){
-        super("Mis competencias","Volver");
+        super("Mis competencias");
         body.setLayout(new GridBagLayout());
         body.add(new Header(Lista),new Header.Constraints());
         body.add(new Filters(Lista),new Filters.Constraints());
@@ -76,5 +76,6 @@ public class MisCompetencias extends JPantalla {
         mainView.remove(0);
         mainView.add(Lista);
         revalidate();
+        repaint();
     };
 };
