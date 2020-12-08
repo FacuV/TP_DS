@@ -17,13 +17,14 @@ public class MisCompetencias extends JPantalla {
     private List Lista = new List(self);
     private JButton AgregarCompetencia = new JButton("Agregar competencia");
     private GridBagConstraints gbc = new GridBagConstraints();
+    private MainView mainView = new MainView(this);
 
     public MisCompetencias(){
         super("Mis competencias","Volver");
         body.setLayout(new GridBagLayout());
         body.add(new Header(Lista),new Header.Constraints());
         body.add(new Filters(Lista),new Filters.Constraints());
-        body.add(new MainView(this), MainView.getConstraints());
+        body.add(mainView, MainView.getConstraints()); mainView.add(Lista);
         gbc.gridy = 2;
         gbc.gridx = 0;
         body.add(AgregarCompetencia,gbc);
@@ -35,12 +36,20 @@ public class MisCompetencias extends JPantalla {
         });
     };
     private static class MainView extends JPanel {
+        GridBagConstraints gbc = new GridBagConstraints();
+
         public MainView(MisCompetencias misCompetencias) {
             super(new GridBagLayout());
             setBorder(new EmptyBorder(20,20,20,20));
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.weightx = 1; gbc.weighty = 1; gbc.fill = GridBagConstraints.BOTH;
-            add(misCompetencias.Lista,gbc);
+                gbc.weightx = 1;
+                gbc.weighty = 1;
+                gbc.fill = GridBagConstraints.BOTH;
+        };
+
+        @Override
+        public Component add(Component comp) {
+            super.add(comp,gbc);
+            return comp;
         };
 
         public static GridBagConstraints getConstraints() {
@@ -57,16 +66,15 @@ public class MisCompetencias extends JPantalla {
 
     public void setCompetencia(Competencia competencia) {
         GestorCompetencia.setCompetencia(competencia);
-        body.add(new VerCompetencia(this),MainView.getConstraints());
-        body.remove(2);
-        body.revalidate();
+        mainView.remove(0);
+        mainView.add(new VerCompetencia(this));
+        revalidate();
     }
 
     public void unsetCompetencia() {
         GestorCompetencia.setCompetencia(null);
-        body.add(Lista, MainView.getConstraints());
-        body.remove(2);
-        body.revalidate();
-        body.repaint();
+        mainView.remove(0);
+        mainView.add(Lista);
+        revalidate();
     };
 };
