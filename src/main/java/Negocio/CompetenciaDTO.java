@@ -5,12 +5,14 @@ import Helpers.CompetenciaHelper;
 import java.util.List;
 
 public class CompetenciaDTO {
+    public int id_competencia;
     public String nombre;
     public int id_deporte;
     public List<DisponibilidadDTO> disponibilidades;
     public String reglamento;
     public int id_usuario;
     public String deporte;
+    public String estado;
     public int modalidad_competencia;
     public int forma_Puntuación;
     public int cantidad_máxima_sets;

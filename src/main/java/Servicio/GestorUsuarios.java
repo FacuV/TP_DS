@@ -20,6 +20,33 @@ public abstract class GestorUsuarios {
     public static void guardarUsuarioDeIngreso(UsuarioDTO usuarioDTO){
         usuarioLogueado = usuarioDao.getUsuario(usuarioDTO.id_usuario);
     }
+    public static List<CompetenciaDTO> getCompetenciasDTO(){
+        List<CompetenciaDTO> competenciasDTO = new ArrayList<>();
+        for(Competencia competencia:usuarioLogueado.getCompetencias()){
+            CompetenciaDTO competenciaDTO = new CompetenciaDTO();
+            competenciaDTO.id_competencia=competencia.getId_competencia();
+            competenciaDTO.nombre = competencia.getNombre();
+            competenciaDTO.deporte = competencia.getDeporte().getNombre();
+            competenciaDTO.estado = competencia.getEstado().toString();
+            competenciasDTO.add(competenciaDTO);
+        }
+        return competenciasDTO;
+    }
+    public static List<LugarRealizacionDTO> getLugaresRealizacionDTO(){
+        List<LugarRealizacionDTO> lugaresRealizacionDTO = new ArrayList<>();
+        for(LugarRealizacion lugarRealizacion:usuarioLogueado.getLugaresRealizacion()){
+            LugarRealizacionDTO lugarRealizacionDTO = new LugarRealizacionDTO();
+            lugarRealizacionDTO.id_lugar_realizacion=lugarRealizacion.getId_lugar_realizacion();
+            lugarRealizacionDTO.nombre = lugarRealizacion.getNombre();
+            lugarRealizacionDTO.descripcion = lugarRealizacion.getDescripcion();
+            lugarRealizacionDTO.deportesDTO = new ArrayList<>();
+            for(Deporte deporte:lugarRealizacion.getDeportes()){
+                lugarRealizacionDTO.deportesDTO.add(new DeporteDTO(deporte.getId_deporte(),deporte.getNombre()));
+            }
+            lugaresRealizacionDTO.add(lugarRealizacionDTO);
+        }
+        return lugaresRealizacionDTO;
+    }
 
     public static Error autenticarUsuario(String correoElectronico, String password){
         Error error = null;

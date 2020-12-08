@@ -72,10 +72,8 @@ public abstract class GestorCompetencia {
         for(Disponibilidad disponibilidad:competencia.getDisponibilidades()){
             disponibilidadTotal+=disponibilidad.getDisponibilidad();
         }
-
         if(disponibilidadTotal == 0)return rtn;
-        if(cantParticipantes % 2 != 0)cantParticipantes++;
-        if(disponibilidadTotal >= cantParticipantes/2)rtn = true;
+        if(disponibilidadTotal > cantParticipantes/2)rtn = true;
         return rtn;
     }
     public static List<Error> crearPart(ParticipanteDTO participanteDTO){
