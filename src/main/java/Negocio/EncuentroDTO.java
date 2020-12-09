@@ -17,4 +17,9 @@ public class EncuentroDTO{
         this.participanteB = participanteB;
         this.id_lugarRealizacion = id_lugarRealizacion;
     }
+
+    @Override
+    public String toString() {
+        return "["+participanteA+";"+participanteB+"]";
+    }
 }

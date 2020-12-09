@@ -11,4 +11,9 @@ public class ParticipanteDTO {
         this.id_competencia = id_competencia;
         this.tipo = tipo;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

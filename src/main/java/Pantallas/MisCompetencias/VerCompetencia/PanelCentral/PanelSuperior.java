@@ -1,5 +1,6 @@
 package Pantallas.MisCompetencias.VerCompetencia.PanelCentral;
 
+import Negocio.CompetenciaDTO;
 import Negocio.EliminatoriaDoble;
 import Negocio.EliminatoriaSimple;
 import Negocio.Liga;
@@ -9,11 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelSuperior extends JPanel {
-    JLabel competencia = new JLabel(GestorCompetencia.getCompetencia().getNombre());
-    JLabel deporte = new JLabel(GestorCompetencia.getCompetencia().getDeporte().toString());
-    JLabel modalidad = new JLabel();
-    JLabel estado = new JLabel(GestorCompetencia.getCompetencia().getEstado().toString());
-    JLabel reglamento = new JLabel(GestorCompetencia.getCompetencia().getReglamento());
+    CompetenciaDTO competenciaDTO = GestorCompetencia.getCompetenciaDTO();
+    JLabel competencia = new JLabel(competenciaDTO.nombre);
+    JLabel deporte = new JLabel(competenciaDTO.deporte);
+    JLabel modalidad = new JLabel((competenciaDTO.modalidad_competencia==0)?"Liga":(competenciaDTO.modalidad_competencia==1)?"Eliminatoria Simple":"Eliminatoria Doble");
+    JLabel estado = new JLabel(competenciaDTO.estado);
+    JLabel reglamento = new JLabel(competenciaDTO.reglamento);
     public PanelSuperior(){
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(0,0,0,0),0,0);
@@ -26,9 +28,6 @@ public class PanelSuperior extends JPanel {
             constraints.gridy++;
         add(deporte,constraints);
             constraints.gridy++;
-            if(GestorCompetencia.getCompetencia() instanceof Liga) modalidad.setText("LIGA");
-            if(GestorCompetencia.getCompetencia() instanceof EliminatoriaSimple)modalidad.setText("ELIMINATORIA SIMPLE");
-            if(GestorCompetencia.getCompetencia() instanceof EliminatoriaDoble)modalidad.setText("ELIMINATRIA DOBLE");
         add(modalidad,constraints);
             constraints.gridx++;
         add(estado,constraints);

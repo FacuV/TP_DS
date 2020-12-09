@@ -8,8 +8,11 @@ import Exceptions.CompetenciaVaciaException;
 import GestorPantallas.Gestor;
 import Helpers.CrearEncuentrosHelper;
 import Negocio.*;
+import org.hibernate.mapping.Collection;
+
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class GestorCompetencia {
@@ -37,7 +40,8 @@ public abstract class GestorCompetencia {
             if(competencia instanceof EliminatoriaSimple)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_SIMPLE;
             if(competencia instanceof EliminatoriaDoble)competenciaDTO.modalidad_competencia =GestorCompetencia.ELIMINATORIA_DOBLE;
             competenciaDTO.participantesDTO=getParticipantesDTO();
-            competenciaDTO.disponibilidadesDTO=getDisponibilidadesDTO();
+            competenciaDTO.disponibilidades=getDisponibilidadesDTO();
+            competenciaDTO.fixtureDTO = getFixtureDTO();
 
         return competenciaDTO;
     }
@@ -64,7 +68,22 @@ public abstract class GestorCompetencia {
         }
         return participanteDTOList;
     }
-
+    public static FixtureDTO getFixtureDTO(){
+        FixtureDTO fixtureDTO = new FixtureDTO();
+        List<EncuentroDTO> encuentrosDTO = new ArrayList<>();
+        if(competencia.getEstado() == Estado.CREADA)return null;
+        for(Encuentro encuentro:competencia.getFixture().getEncuentros()){
+            EncuentroDTO encuentroDTO = new EncuentroDTO();
+                encuentroDTO.id_encuentro=encuentro.getId_encuentro();
+                encuentroDTO.fase=encuentro.getFase();
+                encuentroDTO.id_lugarRealizacion=encuentro.getLugarRealizacion().getId_lugar_realizacion();
+                encuentroDTO.participanteA= new ParticipanteDTO(encuentro.getParticipanteA().getNombre(),encuentro.getParticipanteA().getEmail(),competencia.getId_competencia(),(encuentro.getParticipanteA() instanceof Equipo));
+                encuentroDTO.participanteB= new ParticipanteDTO(encuentro.getParticipanteB().getNombre(),encuentro.getParticipanteB().getEmail(),competencia.getId_competencia(),(encuentro.getParticipanteB() instanceof Equipo));
+            encuentrosDTO.add(encuentroDTO);
+        }
+        fixtureDTO.encuentrosDTO = encuentrosDTO;
+        return fixtureDTO;
+    }
     public static Estado getEstado(){
         return competencia.getEstado();
     }
@@ -140,12 +159,12 @@ public abstract class GestorCompetencia {
             JOptionPane.showMessageDialog(Gestor.peek(), "<html><center>No se puede volver a generar fixture <p> no hay participantes suficientes<html>","Error",JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(competencia.getParticipantes().size() % 2 != 0){
-            competencia.addParticipante(new Individuo("FANTASMA","FANTASMA@gmail.com"));
-            competencia = competenciaDao.updateCompetencia(competencia);
+        List<Participante> participantes = new ArrayList<>(competencia.getParticipantes());
+        if(participantes.size() % 2 != 0){
+            participantes.add(new Individuo("FANTASMA","FANTASMA@gmail.com"));
         }
         Fixture fixture = new Fixture();
-        fixture.setEncuentros(CrearEncuentrosHelper.crearEncuentros(competencia.getParticipantes(),competencia.getDisponibilidades()));
+        fixture.setEncuentros(CrearEncuentrosHelper.crearEncuentros(participantes,competencia.getDisponibilidades()));
         competencia.setFixture(fixture);
         competencia.setEstado(Estado.PLANIFICADA);
         competencia = competenciaDao.updateCompetencia(competencia);

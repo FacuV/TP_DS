@@ -195,6 +195,14 @@ public class Encuentro {
         this.encuentro_perdedor_anterior_b = encuentro_perdedor_anterior_b;
     }
 
+    public LugarRealizacion getLugarRealizacion() {
+        return lugarRealizacion;
+    }
+
+    public void setLugarRealizacion(LugarRealizacion lugarRealizacion) {
+        this.lugarRealizacion = lugarRealizacion;
+    }
+
     @Override
     public String toString() {
         return "["+fase+","+participanteA+","+participanteB+"]";

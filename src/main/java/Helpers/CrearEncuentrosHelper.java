@@ -28,6 +28,8 @@ public class CrearEncuentrosHelper {
                 lista1=listasRotadas.get(0);
                 lista2=listasRotadas.get(1);
             }
+            //quitar los encuentros con participantes fantasma
+            encuentros.removeIf(e->e.getParticipanteA().getNombre().equals("FANTASMA")||e.getParticipanteB().getNombre().equals("FANTASMA"));
         return encuentros;
     }
     private static List<List<Participante>> rotar(List<Participante> lista1,List<Participante> lista2){

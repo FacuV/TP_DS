@@ -1,10 +1,14 @@
 package Pantallas.MisCompetencias.VerCompetencia;
 
 import GestorPantallas.Gestor;
+import Negocio.CompetenciaDTO;
 import Negocio.Encuentro;
+import Negocio.EncuentroDTO;
 import Negocio.Estado;
 import Pantallas.MisCompetencias.MisCompetencias;
 import Servicio.GestorCompetencia;
+import com.amazonaws.services.dynamodbv2.xspec.S;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -49,22 +53,24 @@ public class PanelIzquierdo extends JPanel {
         model.addColumn("Fase");
         model.addColumn("ParticipanteA");
         model.addColumn("ParticipanteB");
-        if(GestorCompetencia.getEstado()== Estado.CREADA){
+        CompetenciaDTO competenciaDTO = GestorCompetencia.getCompetenciaDTO();
+        if(competenciaDTO.estado.equals(Estado.CREADA.toString())){
             table.setModel(model);
             return;
         }
-        List<Encuentro> encuentrosParaMostrar = new ArrayList<>();
-        int tamFase = GestorCompetencia.getParticipantesDTO().size()/2;
-        for(Encuentro encuentro:GestorCompetencia.getCompetencia().getFixture().getEncuentros()){
+        List<EncuentroDTO> encuentrosParaMostrar = new ArrayList<>();
+        int tamFase = competenciaDTO.participantesDTO.size()/2;
+        System.out.println(competenciaDTO.fixtureDTO.encuentrosDTO);
+        for(EncuentroDTO encuentro:competenciaDTO.fixtureDTO.encuentrosDTO){
             if(encuentrosParaMostrar.size()==tamFase)break;
-            if(encuentro.getFecha()==null)encuentrosParaMostrar.add(encuentro);
+            encuentrosParaMostrar.add(encuentro);
         }
-        for(Encuentro encuentro:encuentrosParaMostrar){
-            if(!(encuentro.getParticipanteA().getNombre().equals("FANTASMA") || encuentro.getParticipanteB().getNombre().equals("FANTASMA"))){
+        for(EncuentroDTO encuentro:encuentrosParaMostrar){
+            if(!(encuentro.participanteA.nombre.equals("FANTASMA") || encuentro.participanteB.nombre.equals("FANTASMA"))){
                 Object[] row = new Object[3];
-                row[0] = encuentro.getFase();
-                row[1] = encuentro.getParticipanteA();
-                row[2] = encuentro.getParticipanteB();
+                row[0] = encuentro.fase;
+                row[1] = encuentro.participanteA.nombre;
+                row[2] = encuentro.participanteB.nombre;
                 model.addRow(row);
             }
         }

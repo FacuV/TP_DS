@@ -22,7 +22,7 @@ public class CompetenciaDTO {
     public boolean permite_empate;
     public int puntos_partido_empatado;
     public List<ParticipanteDTO> participantesDTO;
-    public List<DisponibilidadDTO> disponibilidadesDTO;
+    public FixtureDTO fixtureDTO;
 
     public CompetenciaDTO(String nombre, int id_deporte, List<DisponibilidadDTO> disponibilidades, String reglamento, int id_usuario, int modalidad_competencia, int forma_Puntuación, int cantidad_máxima_sets, int tantos_equipo_ganador_por_ausencia, int puntos_partido_ganado, int puntos_presentarse, boolean permite_empate, int puntos_partido_empatado) {
         this.nombre = nombre;

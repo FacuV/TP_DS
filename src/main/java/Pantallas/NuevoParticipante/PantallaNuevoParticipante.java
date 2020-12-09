@@ -99,8 +99,8 @@ public class PantallaNuevoParticipante extends JPantalla {
                  * True para equipo
                  */
                 ParticipanteDTO participanteDTO;
-                 if(tipoCombo.getSelectedItem().equals(PERSONA)) participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetencia().getId_competencia(),false);
-                 else participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetencia().getId_competencia(),true);
+                 if(tipoCombo.getSelectedItem().equals(PERSONA)) participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetenciaDTO().id_competencia,false);
+                 else participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetenciaDTO().id_competencia,true);
                  List<Error> errorList = GestorCompetencia.crearPart(participanteDTO);
                  if(!errorList.isEmpty()){
                      for (Error error:errorList){

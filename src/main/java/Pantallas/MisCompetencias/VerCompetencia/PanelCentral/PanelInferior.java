@@ -1,6 +1,8 @@
 package Pantallas.MisCompetencias.VerCompetencia.PanelCentral;
 
+import Negocio.CompetenciaDTO;
 import Negocio.Participante;
+import Negocio.ParticipanteDTO;
 import Servicio.GestorCompetencia;
 
 import javax.swing.*;
@@ -28,14 +30,15 @@ public class PanelInferior extends JPanel {
     public void cargarTablaParticipantes() {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Participantes");
-        if (GestorCompetencia.getCompetencia().getParticipantes().isEmpty()) {
+        CompetenciaDTO competenciaDTO = GestorCompetencia.getCompetenciaDTO();
+        if (competenciaDTO.participantesDTO.isEmpty()){
             table.setModel(model);
             return;
         }
-        for(Participante participante:GestorCompetencia.getCompetencia().getParticipantes()) {
-            if(!participante.getNombre().equals("FANTASMA")){
+        for(ParticipanteDTO participante:competenciaDTO.participantesDTO) {
+            if(!participante.nombre.equals("FANTASMA")){
                 Object[] row = new Object[1];
-                row[0] = participante.getNombre();
+                row[0] = participante.nombre;
                 model.addRow(row);
             }
         }
