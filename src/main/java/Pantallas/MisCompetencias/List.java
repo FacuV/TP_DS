@@ -21,11 +21,7 @@ public class List extends JScrollPane {
 
     public List(MisCompetencias misCompetencias) {
         Lista.setModel(model);
-        listaCompetenciasDTO = GestorUsuarios.getCompetenciasDTO();
-        for (CompetenciaDTO competencia : listaCompetenciasDTO) {
-            model.addElement(competencia.nombre + " - " + competencia.deporte + " - " + competencia.estado);
-        };
-
+        cargarLista();
         setViewportView(Lista);
         Lista.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
@@ -44,7 +40,13 @@ public class List extends JScrollPane {
             }
         });
     };
-
+    public void cargarLista(){
+        listaCompetenciasDTO = GestorUsuarios.getCompetenciasDTO();
+        model.clear();
+        for (CompetenciaDTO competencia : listaCompetenciasDTO) {
+            model.addElement(competencia.nombre + " - " + competencia.deporte + " - " + competencia.estado);
+        };
+    }
     public void filtrarBusqueda(String busqueda) {
         this.busqueda = busqueda;
         this.filtrar();

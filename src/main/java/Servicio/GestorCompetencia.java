@@ -8,11 +8,8 @@ import Exceptions.CompetenciaVaciaException;
 import GestorPantallas.Gestor;
 import Helpers.CrearEncuentrosHelper;
 import Negocio.*;
-import org.hibernate.mapping.Collection;
-
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class GestorCompetencia {

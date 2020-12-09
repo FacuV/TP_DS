@@ -62,6 +62,10 @@ public class Cuerpo extends JPanel {
             if (!hasErrors(errors)) {
                 JOptionPane.showMessageDialog(self, "Competencia creado con éxito");
                 Gestor.pop();
+                JFrame frame = Gestor.peek();
+                synchronized (frame){
+                    frame.notify();
+                }
             }
         }
     }

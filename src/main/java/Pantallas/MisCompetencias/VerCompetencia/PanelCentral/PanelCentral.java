@@ -13,9 +13,7 @@ public class PanelCentral extends JPanel{
         setLayout(new GridBagLayout());
         add(panelSuperior,new PanelSuperior.Constraint());
         add(panelInferior,new PanelInferior.Constraint());
-
     }
-
     public static class Constraint extends GridBagConstraints {
         public Constraint(){
             super();

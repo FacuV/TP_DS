@@ -4,6 +4,7 @@ import Interface.JPantalla;
 import Negocio.Competencia;
 import Pantallas.MisCompetencias.VerCompetencia.VerCompetencia;
 import Servicio.GestorCompetencia;
+import Servicio.GestorUsuarios;
 import org.hibernate.cfg.JPAIndexHolder;
 
 import javax.swing.*;
@@ -28,10 +29,33 @@ public class MisCompetencias extends JPantalla {
         gbc.gridy = 2;
         gbc.gridx = 0;
         body.add(AgregarCompetencia,gbc);
+        JFrame self = this;
         AgregarCompetencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Gestor.push("nueva_competencia");
+                Thread thread1 = new Thread() {
+                    @Override
+                    public void run() {
+                        Gestor.push("nueva_competencia");
+                    }
+                };
+                thread1.start();
+                Thread thread2 = new Thread() {
+                    @Override
+                    public void run() {
+                        synchronized (self) {
+                            try {
+                                self.wait();
+                            } catch (InterruptedException interruptedException) {
+                                interruptedException.printStackTrace();
+                            }
+                            Lista.cargarLista();
+                            revalidate();
+                            repaint();
+                        }
+                    }
+                };
+                thread2.start();
             }
         });
     };

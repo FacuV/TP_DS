@@ -22,6 +22,7 @@ public abstract class GestorUsuarios {
     };
 
     public static List<CompetenciaDTO> getCompetenciasDTO(){
+        refreshUsuario();
         List<CompetenciaDTO> competenciasDTO = new ArrayList<>();
         for(Competencia competencia:usuarioLogueado.getCompetencias()){
             CompetenciaDTO competenciaDTO = new CompetenciaDTO();
@@ -50,6 +51,9 @@ public abstract class GestorUsuarios {
             lugaresRealizacionDTO.add(lugarRealizacionDTO);
         }
         return lugaresRealizacionDTO;
+    }
+    private static void refreshUsuario(){
+        usuarioLogueado = usuarioDao.getUsuario(usuarioLogueado.getId_usuario());
     }
 
     public static Error autenticarUsuario(String correoElectronico, String password){
