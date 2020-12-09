@@ -63,7 +63,9 @@ public class CompetenciaDTO {
     };
 
     public void setDeporte(String deporte) {
-        this.id_deporte = DeportePostgreSQLDao.getDeporteId(deporte);
+        if (!deporte.isEmpty()) {
+            this.id_deporte = DeportePostgreSQLDao.getDeporteId(deporte);
+        }
     };
 
     public List<DisponibilidadDTO> getDisponibilidades() {

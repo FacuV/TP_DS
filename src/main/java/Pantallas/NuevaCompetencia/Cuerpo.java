@@ -60,15 +60,8 @@ public class Cuerpo extends JPanel {
             ArrayList<String> errors = GestorCompetencia.crearComp(competencia);
             System.out.println(errors);
             if (!hasErrors(errors)) {
-                System.out.println("No tiene errores");
-                Success success = new Success(SwingUtilities.getWindowAncestor(self));
-                success.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        Gestor.pop();
-                    }
-                });
-                success.setVisible(true);
+                JOptionPane.showMessageDialog(self, "Competencia creado con éxito");
+                Gestor.pop();
             }
         }
     }
