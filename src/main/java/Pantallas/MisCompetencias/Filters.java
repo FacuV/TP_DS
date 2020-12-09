@@ -28,7 +28,12 @@ public class Filters extends JPanel {
             Deporte.setBorder(new EmptyBorder(0,0,40,0));
             Deporte.addItem("");
             Deporte.addItem("Futbol");
+            Deporte.addItem("Baloncesto");
+            Deporte.addItem("Voleibol");
+            Deporte.addItem("Waterpolo");
+            Deporte.addItem("Polo");
             Deporte.addItem("League of Legends");
+            Deporte.addItem("Handball");
         View.add(new JLabel("Modalidad"),gbc); gbc.gridy++;
         View.add(Modalidad,gbc); gbc.gridy++;
             Modalidad.setBorder(new EmptyBorder(0,0,40,0));

@@ -1,5 +1,4 @@
 package Pantallas.NuevoParticipante;
-
 import Errores.Error;
 import Errores.ErrorEmailParticipanteRepetido;
 import Errores.ErrorNombreParticipanteRepetido;
@@ -7,8 +6,8 @@ import GestorPantallas.Gestor;
 import Interface.JPantalla;
 import Negocio.ParticipanteDTO;
 import Servicio.GestorCompetencia;
-
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,105 +16,159 @@ import java.util.List;
 public class PantallaNuevoParticipante extends JPantalla {
     public static final String PERSONA = "PERSONA";
     public static final String EQUIPO = "EQUIPO";
-    JLabel titulo = new JLabel("Nuevo Participante");
-    JLabel tipoLabel = new JLabel("Tipo de Participante");
-    JComboBox<String> tipoCombo = new JComboBox<String>();
-    JLabel nombreLabel = new JLabel("Nombre");
-    JLabel nombreLabelError = new JLabel("");
-    JTextField nombreTextField = new JTextField();
-    JLabel emailLabel = new JLabel("Email");
-    JLabel emailLabelError = new JLabel("");
-    JTextField emailTextField = new JTextField();
-    JButton aceptar = new JButton("Aceptar");
+    private GridBagConstraints gbc = new GridBagConstraints();
+    private PantallaNuevoParticipante self = this;
+    NombreLabel nombreLabel = new NombreLabel();
+    NombreError nombreError = new NombreError();
+    NombreInput nombreInput = new NombreInput();
+    TipoLabel tipoLabel = new TipoLabel();
+    TipoError tipoError = new TipoError();
+    TipoInput tipoInput = new TipoInput();
+    EmailLabel emailLabel = new EmailLabel();
+    EmailError emailError = new EmailError();
+    EmailInput emailInput = new EmailInput();
+    AceptarButton aceptarButton = new AceptarButton();
+
     public PantallaNuevoParticipante() {
         super("Nuevo Participante");
         body.setLayout(new GridBagLayout());
-        tipoCombo.addItem(PERSONA);tipoCombo.addItem(EQUIPO);
-        titulo.setFont(new Font(Font.DIALOG,Font.BOLD,40));
-        nombreLabelError.setForeground(Color.RED);
-        emailLabelError.setForeground(Color.RED);
-        GridBagConstraints gbc = new GridBagConstraints();
-            gbc.weightx = 1;gbc.weighty = 1;
-            gbc.gridx = 2;gbc.gridy = 0;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridwidth = 2; gbc.gridy = 0; gbc.gridx = 0; body.add(new Titulo(),gbc);
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.gridwidth = 1; gbc.gridy++; body.add(tipoLabel,gbc);
+        gbc.gridx = 1; body.add(nombreLabel,gbc);
+        gbc.gridx = 0; gbc.gridy++; body.add(tipoError,gbc);
+        gbc.gridx = 1; body.add(nombreError,gbc);
+        gbc.gridy++; gbc.gridx = 0; body.add(tipoInput,gbc);
+        gbc.gridx = 1; body.add(nombreInput,gbc);
+        gbc.gridy++; gbc.gridx = 0; gbc.gridwidth = 2; body.add(emailLabel,gbc);
+        gbc.gridy++; body.add(emailError,gbc);
+        gbc.gridy++; body.add(emailInput,gbc);
+        gbc.gridy++; gbc.anchor = GridBagConstraints.CENTER; gbc.insets = new Insets(20,0,0,0); body.add(aceptarButton,gbc);
+    };
 
-            gbc.weightx++;gbc.weighty++;
-            gbc.fill = GridBagConstraints.VERTICAL;
-        body.add(titulo,gbc);
-            gbc.gridy++;
-            gbc.weightx--;gbc.weighty--;
-            gbc.gridx--;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.fill = GridBagConstraints.VERTICAL;
-        body.add(tipoLabel,gbc);
-            gbc.gridx++;gbc.gridx++;
-        body.add(nombreLabel,gbc);
-            gbc.gridy++;
-            gbc.gridx--;gbc.gridx--;
-        body.add(new JLabel(),gbc);
-            gbc.gridx++;gbc.gridx++;
-        body.add(nombreLabelError,gbc);
-            gbc.gridy++;
-            gbc.gridx--;gbc.gridx--;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-        body.add(tipoCombo,gbc);
-            gbc.gridx++;gbc.gridx++;
-        body.add(nombreTextField,gbc);
-            gbc.gridy++;
-            gbc.gridx--;
-            gbc.fill = GridBagConstraints.VERTICAL;
-        body.add(emailLabel,gbc);
-            gbc.gridy++;
-        body.add(emailLabelError,gbc);
-            gbc.gridy++;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-        body.add(emailTextField,gbc);
-            gbc.gridy++;
-            gbc.anchor = GridBagConstraints.CENTER;
-            gbc.fill = GridBagConstraints.VERTICAL;
-        body.add(aceptar,gbc);
-            gbc.gridy++;gbc.weighty=10;
-        body.add(new JSeparator(),gbc);
-            gbc.gridx++;gbc.gridx++;
-            gbc.weightx=6;
-        body.add(new JSeparator(),gbc);
-            gbc.gridx=0;
-        body.add(new JSeparator(),gbc);
+    private class Titulo extends JLabel {
+        public Titulo() {
+            super("Nuevo Participante");
+            setFont(new Font(Font.DIALOG,Font.BOLD,40));
+            setBorder(new EmptyBorder(0,20,20,20));
+        };
+    };
 
-        JFrame esteFrame = this;
-        aceptar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                 nombreLabelError.setText("");
-                 emailLabelError.setText("");
-                 if(nombreTextField.getText().isEmpty() || emailTextField.getText().isEmpty()){
-                     if(nombreTextField.getText().isEmpty()) nombreLabelError.setText("Ingrese un nombre");
-                     if(emailTextField.getText().isEmpty()) emailLabelError.setText("Ingrese un email");
-                     return;
-                 }
-                /**
-                 * False para persona o individuo
-                 * True para equipo
-                 */
-                ParticipanteDTO participanteDTO;
-                 if(tipoCombo.getSelectedItem().equals(PERSONA)) participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetenciaDTO().id_competencia,false);
-                 else participanteDTO=new ParticipanteDTO(nombreTextField.getText(),emailTextField.getText(),GestorCompetencia.getCompetenciaDTO().id_competencia,true);
-                 List<Error> errorList = GestorCompetencia.crearPart(participanteDTO);
-                 if(!errorList.isEmpty()){
-                     for (Error error:errorList){
-                         if(error instanceof ErrorNombreParticipanteRepetido)nombreLabelError.setText(error.getMensajeError());
-                         if(error instanceof ErrorEmailParticipanteRepetido)emailLabelError.setText(error.getMensajeError());
-                     }
-                     return;
-                 }
-                JOptionPane.showMessageDialog(esteFrame, "Participante creado con éxito");
-                Gestor.pop();
-                JFrame pantallaParticipantes = Gestor.peek();
-                synchronized (pantallaParticipantes){
-                    pantallaParticipantes.notify();
+    private class NombreLabel extends JLabel {
+        public NombreLabel() {
+            super("Nombre");
+            setBorder(new EmptyBorder(0,10,10,0));
+            setPreferredSize(new Dimension(500,this.getPreferredSize().height));
+            setFont(new Font(Font.DIALOG,Font.PLAIN,20));
+        };
+    };
+
+    private class NombreError extends JLabel {
+        public NombreError() {
+            super("");
+            setBorder(new EmptyBorder(0,10,0,0));
+            setForeground(Color.red);
+        };
+    };
+
+    private class TipoError extends JLabel {
+        public TipoError() {
+            super("");
+            setBorder(new EmptyBorder(0,10,0,0));
+            setForeground(Color.red);
+        };
+    };
+
+    private class EmailError extends JLabel {
+        public EmailError() {
+            super("");
+            setBorder(new EmptyBorder(0,10,0,0));
+            setForeground(Color.red);
+        };
+    };
+
+    private class TipoLabel extends JLabel {
+        public TipoLabel() {
+            super("Tipo de participante");
+            setBorder(new EmptyBorder(0,10,10,20));
+            setPreferredSize(new Dimension(250,this.getPreferredSize().height));
+            setFont(new Font(Font.DIALOG,Font.PLAIN,20));
+        };
+    };
+
+    private class EmailLabel extends JLabel {
+        public EmailLabel() {
+            super("Email");
+            setBorder(new EmptyBorder(0,10,0,0));
+            setFont(new Font(Font.DIALOG,Font.PLAIN,20));
+        };
+    };
+
+    private class TipoInput extends JComboBox {
+        public TipoInput() {
+            super();
+            addItem(PERSONA);
+            addItem(EQUIPO);
+            setPreferredSize(new Dimension(250,this.getPreferredSize().height));
+        };
+    };
+
+    private class NombreInput extends JTextField {
+        public NombreInput() {
+            super();
+            setPreferredSize(new Dimension(500,this.getPreferredSize().height));
+        };
+    };
+
+    private class EmailInput extends JTextField {
+        public EmailInput() {
+            super();
+            setPreferredSize(new Dimension(750,this.getPreferredSize().height));
+        };
+    };
+    private class AceptarButton extends JButton {
+        public AceptarButton() {
+            super("Aceptar");
+            setFont(new Font(Font.DIALOG, Font.BOLD, 30));
+            addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    nombreError.setText("");
+                    emailError.setText("");
+                    if (nombreInput.getText().isEmpty() || emailInput.getText().isEmpty()) {
+                        if (nombreInput.getText().isEmpty()) nombreError.setText("Ingrese un nombre");
+                        if (emailInput.getText().isEmpty()) emailError.setText("Ingrese un email");
+                        return;
+                    }
+                    /**
+                     * * False para persona o individuo
+                     * * True para equipo
+                     * */
+                    ParticipanteDTO participanteDTO;
+                    if (tipoInput.getSelectedItem().equals(PERSONA))
+                        participanteDTO = new ParticipanteDTO(nombreInput.getText(), emailInput.getText(), GestorCompetencia.getCompetencia().getId_competencia(), false);
+                    else
+                        participanteDTO = new ParticipanteDTO(nombreInput.getText(), emailInput.getText(), GestorCompetencia.getCompetencia().getId_competencia(), true);
+                    List<Error> errorList = GestorCompetencia.crearPart(participanteDTO);
+                    if (!errorList.isEmpty()) {
+                        for (Error error : errorList) {
+                            if (error instanceof ErrorNombreParticipanteRepetido)
+                                nombreError.setText(error.getMensajeError());
+                            if (error instanceof ErrorEmailParticipanteRepetido)
+                                emailError.setText(error.getMensajeError());
+                        }
+                        return;
+                    }
+                    JOptionPane.showMessageDialog(self, "Participante creado con éxito");
+                    Gestor.pop();
+                    JFrame pantallaParticipantes = Gestor.peek();
+                    synchronized (pantallaParticipantes) {
+                        pantallaParticipantes.notify();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }
+
+

@@ -32,7 +32,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd">
-      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from fixture]]></console>
+      <console name="db-tp-ds " type="STANDARD" schema="public" session="Main"><![CDATA[select * from competencia]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

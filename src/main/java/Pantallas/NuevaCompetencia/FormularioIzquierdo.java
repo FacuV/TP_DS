@@ -47,9 +47,14 @@ public class FormularioIzquierdo extends JPanel {
         deporteLabelConstraints.weightx = 1;
         deporteLabelConstraints.fill = GridBagConstraints.HORIZONTAL;
         add(deporteLabel,deporteLabelConstraints);
-
-        List<Deporte> deportes = deporteDao.getDeportes();
-        for (Deporte _deporte : deportes) deporte.addItem(_deporte.getNombre());
+        deporte.addItem("");
+        deporte.addItem("Futbol");
+        deporte.addItem("Baloncesto");
+        deporte.addItem("Voleibol");
+        deporte.addItem("Waterpolo");
+        deporte.addItem("Polo");
+        deporte.addItem("League of Legends");
+        deporte.addItem("Handball");
         GridBagConstraints deporteConstraints = new GridBagConstraints();
         deporteConstraints.weightx = 1;
         deporteConstraints.gridy = index++;

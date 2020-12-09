@@ -1,9 +1,7 @@
 package Pantallas.MisCompetencias;
 import GestorPantallas.Gestor;
-import Negocio.Competencia;
-import Negocio.EliminatoriaDoble;
-import Negocio.EliminatoriaSimple;
-import Negocio.Liga;
+import Negocio.*;
+import Servicio.GestorCompetencia;
 import Servicio.GestorUsuarios;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +12,7 @@ import java.awt.event.MouseEvent;
 public class List extends JScrollPane {
     private JButton AgregarCompetencia = new JButton("Agregar");
     private DefaultListModel model = new DefaultListModel();
-    private java.util.List<Competencia> listaCompetencias;
+    private java.util.List<CompetenciaDTO> listaCompetenciasDTO;
     private JList Lista = new JList();
     private String busqueda = "";
     private String modalidad = "";
@@ -23,20 +21,22 @@ public class List extends JScrollPane {
 
     public List(MisCompetencias misCompetencias) {
         Lista.setModel(model);
-        listaCompetencias = GestorUsuarios.getUsuarioLogueado().getCompetencias();
-        for (Competencia competencia : listaCompetencias) {
-            model.addElement(competencia.getNombre() + " - " + competencia.getDeporte() + " - " + competencia.getEstado());
-        }
+        listaCompetenciasDTO = GestorUsuarios.getCompetenciasDTO();
+        for (CompetenciaDTO competencia : listaCompetenciasDTO) {
+            model.addElement(competencia.nombre + " - " + competencia.deporte + " - " + competencia.estado);
+        };
+
         setViewportView(Lista);
         Lista.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
                 JList list = (JList) evt.getSource();
                 if (evt.getClickCount() == 2) {
                     int index = list.locationToIndex(evt.getPoint());
-                    misCompetencias.setCompetencia(listaCompetencias.get(index));
+                    misCompetencias.setCompetencia(listaCompetenciasDTO.get(index).id_competencia);
                 };
             };
-});
+        });
+
         AgregarCompetencia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -67,17 +67,17 @@ public class List extends JScrollPane {
 
     private void filtrar() {
         model.removeAllElements();
-        for (Integer index = 0; index < listaCompetencias.size(); index++) {
-            Competencia competencia = listaCompetencias.get(index);
-            if (!this.deporte.isEmpty() && !competencia.getDeporte().getNombre().equals(this.deporte)) continue;
-            if (!this.estado.isEmpty() && !competencia.getEstado().toString().equals(this.estado)) continue;
+        for (Integer index = 0; index < listaCompetenciasDTO.size(); index++) {
+            CompetenciaDTO competencia = listaCompetenciasDTO.get(index);
+            if (!this.deporte.isEmpty() && !competencia.deporte.equals(this.deporte)) continue;
+            if (!this.estado.isEmpty() && !competencia.estado.equals(this.estado)) continue;
             if (
                     !this.modalidad.isEmpty() &&
-                    !((competencia instanceof Liga) && this.modalidad.equals("Liga")) &&
-                    !((competencia instanceof EliminatoriaSimple) && this.modalidad.equals("Eliminatoria Simple")) &&
-                    !((competencia instanceof EliminatoriaDoble) && this.modalidad.equals("Eliminatoria Doble"))
+                    !((competencia.modalidad_competencia == GestorCompetencia.LIGA) && this.modalidad.equals("Liga")) &&
+                    !((competencia.modalidad_competencia == GestorCompetencia.ELIMINATORIA_SIMPLE) && this.modalidad.equals("Eliminatoria Simple")) &&
+                    !((competencia.modalidad_competencia == GestorCompetencia.ELIMINATORIA_DOBLE) && this.modalidad.equals("Eliminatoria Doble"))
             ) continue;
-            if (competencia.getNombre().contains(this.busqueda) || this.busqueda.isEmpty()) model.addElement(competencia.getNombre() + " - " + competencia.getDeporte() + " - " + competencia.getEstado());
+            if (competencia.getNombre().contains(this.busqueda) || this.busqueda.isEmpty()) model.addElement(competencia.nombre + " - " + competencia.deporte + " - " + competencia.estado);
         };
     };
 };
