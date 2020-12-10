@@ -26,9 +26,14 @@ public class PanelDerecho extends JPanel {
         generarFixture.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GestorCompetencia.generarFixture();
-                panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
-                panelVerCompetencia.panelCentral.panelSuperior.actualizarEstado();
+                Object[] possibleValues = { "cancelar", "aceptar"};
+                Object[] options = { "Cancelar", "Aceptar" };
+                Object selectedValue = JOptionPane.showInternalOptionDialog(null,"¿Seguro que quiere crear un nuevo fixture?"," ", JOptionPane.OK_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,possibleValues);
+                if((Integer) selectedValue == 1) {
+                    GestorCompetencia.generarFixture();
+                    panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
+                    panelVerCompetencia.panelCentral.panelSuperior.actualizarEstado();
+                }
             }
         });
         participantes.addActionListener(new ActionListener() {
@@ -46,7 +51,7 @@ public class PanelDerecho extends JPanel {
                     public void run() {
                         synchronized (panelVerCompetencia.miFrame) {
                             try {
-                                if (Gestor.peek().isVisible()) panelVerCompetencia.miFrame.wait();
+                                panelVerCompetencia.miFrame.wait();
                             } catch (InterruptedException interruptedException) {
                                 interruptedException.printStackTrace();
                             }
@@ -59,7 +64,6 @@ public class PanelDerecho extends JPanel {
                 thread2.start();
             }
         });
-
         GridBagConstraints constraintGeneral = new GridBagConstraints();
             constraintGeneral.weightx=1;constraintGeneral.weighty=1;
             constraintGeneral.fill=GridBagConstraints.BOTH;

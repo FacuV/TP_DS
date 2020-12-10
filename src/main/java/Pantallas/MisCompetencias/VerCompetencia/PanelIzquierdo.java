@@ -59,7 +59,6 @@ public class PanelIzquierdo extends JPanel {
         }
         List<EncuentroDTO> encuentrosParaMostrar = new ArrayList<>();
         int tamFase = competenciaDTO.participantesDTO.size()/2;
-        System.out.println(competenciaDTO.fixtureDTO.encuentrosDTO);
         for(EncuentroDTO encuentro:competenciaDTO.fixtureDTO.encuentrosDTO){
             if(encuentrosParaMostrar.size()==tamFase)break;
             encuentrosParaMostrar.add(encuentro);
