@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Pantalla extends JPantalla {
     public Pantalla() {
-        super("Nueva competencia","Volver");
+        super("Nueva competencia");
         body.setLayout(new GridBagLayout());
         body.add(new Cabecera(),new Cabecera.Constraints());
         body.add(new Cuerpo(), new Cuerpo.Constraints());
