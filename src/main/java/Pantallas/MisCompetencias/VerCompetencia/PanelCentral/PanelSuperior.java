@@ -11,12 +11,14 @@ import java.awt.*;
 
 public class PanelSuperior extends JPanel {
     CompetenciaDTO competenciaDTO = GestorCompetencia.getCompetenciaDTO();
-    JLabel competencia = new JLabel(competenciaDTO.nombre);
+    String competenciaFormatedString = String.format("<html><div style=\"width:%dpx;\">%s</div></html>", 400,competenciaDTO.nombre);
+    JLabel competencia = new JLabel(competenciaFormatedString);
     JLabel deporte = new JLabel(competenciaDTO.deporte);
     JLabel modalidad = new JLabel((competenciaDTO.modalidad_competencia==0)?"Liga":(competenciaDTO.modalidad_competencia==1)?"Eliminatoria Simple":"Eliminatoria Doble");
     JLabel estado = new JLabel(competenciaDTO.estado);
-    JLabel reglamento = new JLabel(competenciaDTO.reglamento);
-    public PanelSuperior(){
+    String reglamentoMessage = String.format("<html><div style=\"width:%dpx;\">%s</div></html>", 400, competenciaDTO.reglamento);
+    JLabel reglamento = new JLabel(reglamentoMessage);
+    public PanelSuperior() {
         setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.HORIZONTAL,new Insets(0,0,0,0),0,0);
         competencia.setFont(new Font(Font.DIALOG,Font.BOLD,30));
@@ -48,5 +50,5 @@ public class PanelSuperior extends JPanel {
             fill=GridBagConstraints.BOTH;
             anchor=GridBagConstraints.CENTER;
         }
-    }
-}
+    };
+};

@@ -31,7 +31,7 @@ public class List extends JScrollPane {
                     misCompetencias.setCompetencia(listaCompetenciasDTO.get(index).id_competencia);
                 };
             };
-        });
+});
 
         AgregarCompetencia.addActionListener(new ActionListener() {
             @Override

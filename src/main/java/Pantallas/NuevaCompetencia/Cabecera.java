@@ -1,7 +1,11 @@
 package Pantallas.NuevaCompetencia;
 
+import GestorPantallas.Gestor;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
 public class Cabecera extends JPanel {
@@ -12,6 +16,13 @@ public class Cabecera extends JPanel {
         JButton BotonHome = new JButton("Home");
         GridBagConstraints BotonHomeConstraints = new GridBagConstraints();
         add(BotonHome,BotonHomeConstraints);
+        BotonHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestor.popToTop();
+                Gestor.push("home");
+            }
+        });
 
         JLabel Titulo = new JLabel("Nueva competencia",SwingConstants.CENTER);
         Titulo.setFont(new Font("Arial",Font.BOLD, 30));

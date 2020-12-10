@@ -1,7 +1,6 @@
 package Helpers;
 
 import Negocio.DeporteDTO;
-
 import javax.swing.*;
 import java.awt.*;
 

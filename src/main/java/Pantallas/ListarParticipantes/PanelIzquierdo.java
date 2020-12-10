@@ -19,6 +19,13 @@ public class PanelIzquierdo extends JPanel {
     JButton modificar = new JButton("MODIFICAR PARTICIPANTE");
     JButton eliminar = new JButton("ELIMINAR PARTICIPANTE");
     public PanelIzquierdo(PantallaParticipantes pantallaParticipantes){
+        home.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestor.popToTop();
+                Gestor.push("home");
+            }
+        });
         criterioOrden.addItem(NOMBRE);criterioOrden.addItem(EMAIL);
         criterioOrden.addActionListener(new ActionListener() {
             @Override
