@@ -35,16 +35,12 @@ public class PanelIzquierdo extends JPanel {
         imagenDeporte.add(new JSeparator(),new ImagenDeporte.ConstraintSeparator1());
         imagenDeporte.add(new JSeparator(),new ImagenDeporte.ConstraintSeparator2());
         add(imagenDeporte);
-            gbc.anchor=GridBagConstraints.WEST;
-            gbc.weighty=1;gbc.weightx=1;
-            gbc.gridy++;
-        //add(proximosEncuentros,gbc);
-            //gbc.anchor=GridBagConstraints.CENTER;
-            //gbc.weighty=1;gbc.weightx=1;
             panelProximosEncuentros.setLayout(new GridBagLayout());
             cargarTablaProximosEncuentros();
+            panelProximosEncuentros.add(proximosEncuentros,gbc);
+            gbc.gridy++;
+            gbc.weightx=5;gbc.weighty=5;
             panelProximosEncuentros.add(scrollPane,gbc);
-            //gbc.gridy++;
         add(panelProximosEncuentros);
     }
     public void cargarTablaProximosEncuentros(){
@@ -78,7 +74,7 @@ public class PanelIzquierdo extends JPanel {
         public Constraint(){
             super();
             gridx=0;
-            weightx=6;
+            weightx=10;
             weighty=1;
             fill= GridBagConstraints.BOTH;
             anchor=GridBagConstraints.CENTER;
