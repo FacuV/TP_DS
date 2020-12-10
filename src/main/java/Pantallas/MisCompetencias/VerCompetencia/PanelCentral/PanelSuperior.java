@@ -25,7 +25,7 @@ public class PanelSuperior extends JPanel {
         deporte.setFont(new Font(Font.DIALOG,Font.BOLD,15));
         modalidad.setFont(new Font(Font.DIALOG,Font.BOLD,15));
         estado.setFont(new Font(Font.DIALOG,Font.BOLD,15));
-        reglamento.setFont(new Font(Font.DIALOG,Font.ITALIC,15));
+        reglamento.setFont(new Font(Font.DIALOG,Font.ITALIC,10));
         add(competencia,constraints);
             constraints.gridy++;
         add(deporte,constraints);
