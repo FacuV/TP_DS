@@ -59,6 +59,7 @@ public class MisCompetencias extends JPantalla {
             }
         });
     };
+
     private static class MainView extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
 
