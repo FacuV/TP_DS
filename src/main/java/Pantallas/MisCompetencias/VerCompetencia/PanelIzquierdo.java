@@ -1,7 +1,6 @@
 package Pantallas.MisCompetencias.VerCompetencia;
 
 import GestorPantallas.Gestor;
-import Helpers.ImagenDeporte;
 import Negocio.CompetenciaDTO;
 import Negocio.EncuentroDTO;
 import Negocio.Estado;
@@ -21,7 +20,11 @@ public class PanelIzquierdo extends JPanel {
     JLabel proximosEncuentros = new JLabel("Proximos encuentros");
     public PanelIzquierdo(){
         setLayout(new GridLayout(2,1));
-        JButton atras = new JButton(new ImageIcon("src/main/java/Iconos/cruz.jpg"));
+        ImageIcon imagenCruz = new ImageIcon("src/main/java/Iconos/cruz1.png");
+        JButton atras = new JButton();
+        atras.setBounds(0,0,50,50);
+        Icon icono = new ImageIcon(imagenCruz.getImage().getScaledInstance(atras.getWidth(),atras.getHeight(),Image.SCALE_DEFAULT)) ;
+        atras.setIcon(icono);
         JPanel panelProximosEncuentros = new JPanel();
         ImagenDeporte imagenDeporte = new ImagenDeporte(GestorCompetencia.getDeporteDTO());
             atras.addActionListener(new ActionListener() {

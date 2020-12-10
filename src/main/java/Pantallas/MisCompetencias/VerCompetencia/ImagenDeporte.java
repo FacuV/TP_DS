@@ -1,4 +1,4 @@
-package Helpers;
+package Pantallas.MisCompetencias.VerCompetencia;
 
 import Negocio.DeporteDTO;
 import javax.swing.*;
@@ -39,14 +39,14 @@ public class ImagenDeporte extends JPanel {
             super();
             weightx=1;weighty=1;
             anchor=GridBagConstraints.NORTHWEST;
-            fill=GridBagConstraints.HORIZONTAL;
+            fill=GridBagConstraints.NONE;
             gridy=0;gridx=0;
         }
     }
     public static class ConstraintSeparator1 extends GridBagConstraints{
         public ConstraintSeparator1(){
             super();
-            weightx=10;weighty=1;
+            weightx=30;weighty=1;
             anchor=GridBagConstraints.CENTER;
             fill=GridBagConstraints.BOTH;
             gridy=0;gridx=1;
@@ -56,7 +56,7 @@ public class ImagenDeporte extends JPanel {
         public ConstraintSeparator2(){
             super();
             weightx=5;weighty=5;
-            anchor=GridBagConstraints.NORTHWEST;
+            anchor=GridBagConstraints.CENTER;
             fill=GridBagConstraints.BOTH;
             gridy=1;gridx=0;
         }
