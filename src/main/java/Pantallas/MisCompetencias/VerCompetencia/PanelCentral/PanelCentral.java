@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class PanelCentral extends JPanel{
-    PanelSuperior panelSuperior = new PanelSuperior();
-    PanelInferior panelInferior = new PanelInferior();
+    public PanelSuperior panelSuperior = new PanelSuperior();
+    public PanelInferior panelInferior = new PanelInferior();
     public PanelCentral(){
         setLayout(new GridBagLayout());
         add(panelSuperior,new PanelSuperior.Constraint());

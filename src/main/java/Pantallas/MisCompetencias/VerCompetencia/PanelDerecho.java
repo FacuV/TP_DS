@@ -28,6 +28,7 @@ public class PanelDerecho extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 GestorCompetencia.generarFixture();
                 panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
+                panelVerCompetencia.panelCentral.panelSuperior.actualizarEstado();
             }
         });
         participantes.addActionListener(new ActionListener() {
@@ -50,6 +51,8 @@ public class PanelDerecho extends JPanel {
                                 interruptedException.printStackTrace();
                             }
                             panelVerCompetencia.panelIzquierdo.cargarTablaProximosEncuentros();
+                            panelVerCompetencia.panelCentral.panelInferior.cargarTablaParticipantes();
+                            panelVerCompetencia.panelCentral.panelSuperior.actualizarEstado();
                         }
                     }
                 };

@@ -1,14 +1,12 @@
 package Pantallas.MisCompetencias.VerCompetencia;
 
 import GestorPantallas.Gestor;
+import Helpers.ImagenDeporte;
 import Negocio.CompetenciaDTO;
-import Negocio.Encuentro;
 import Negocio.EncuentroDTO;
 import Negocio.Estado;
 import Pantallas.MisCompetencias.MisCompetencias;
 import Servicio.GestorCompetencia;
-import com.amazonaws.services.dynamodbv2.xspec.S;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -22,31 +20,32 @@ public class PanelIzquierdo extends JPanel {
     JScrollPane scrollPane = new JScrollPane(table);
     JLabel proximosEncuentros = new JLabel("Proximos encuentros");
     public PanelIzquierdo(){
-        setLayout(new GridBagLayout());
-        JButton atras = new JButton("X");
+        setLayout(new GridLayout(2,1));
+        JButton atras = new JButton(new ImageIcon("src/main/java/Iconos/cruz.jpg"));
         JPanel panelProximosEncuentros = new JPanel();
+        ImagenDeporte imagenDeporte = new ImagenDeporte(GestorCompetencia.getDeporteDTO());
             atras.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     ((MisCompetencias) Gestor.peek()).unsetCompetencia();
                 }
             });
-        GridBagConstraints gbc = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.NORTHWEST,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0);
-            //ImageIcon imageIcon = new ImageIcon("./src/main/java/Iconos/basquet.jpg");
-            //JLabel imagen = new JLabel(imageIcon);
-            //imagen.setSize(100,100);
-        add(atras,gbc);
+        GridBagConstraints gbc = new GridBagConstraints(0,0,1,1,1,1,GridBagConstraints.CENTER,GridBagConstraints.BOTH,new Insets(0,0,0,0),0,0);
+        imagenDeporte.add(atras,new ImagenDeporte.ConstraintBoton());
+        imagenDeporte.add(new JSeparator(),new ImagenDeporte.ConstraintSeparator1());
+        imagenDeporte.add(new JSeparator(),new ImagenDeporte.ConstraintSeparator2());
+        add(imagenDeporte);
             gbc.anchor=GridBagConstraints.WEST;
             gbc.weighty=1;gbc.weightx=1;
             gbc.gridy++;
-        add(proximosEncuentros,gbc);
-            gbc.anchor=GridBagConstraints.CENTER;
-            gbc.weighty=2;gbc.weightx=2;
+        //add(proximosEncuentros,gbc);
+            //gbc.anchor=GridBagConstraints.CENTER;
+            //gbc.weighty=1;gbc.weightx=1;
             panelProximosEncuentros.setLayout(new GridBagLayout());
             cargarTablaProximosEncuentros();
             panelProximosEncuentros.add(scrollPane,gbc);
-            gbc.gridy++;
-        add(panelProximosEncuentros,gbc);
+            //gbc.gridy++;
+        add(panelProximosEncuentros);
     }
     public void cargarTablaProximosEncuentros(){
         DefaultTableModel model = new DefaultTableModel();
@@ -80,7 +79,7 @@ public class PanelIzquierdo extends JPanel {
         public Constraint(){
             super();
             gridx=0;
-            weightx=2;
+            weightx=6;
             weighty=1;
             fill= GridBagConstraints.BOTH;
             anchor=GridBagConstraints.CENTER;

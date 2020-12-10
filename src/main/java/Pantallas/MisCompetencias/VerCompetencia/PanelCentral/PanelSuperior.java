@@ -35,6 +35,9 @@ public class PanelSuperior extends JPanel {
             constraints.gridy++;
         add(reglamento,constraints);
     }
+    public void actualizarEstado(){
+        estado.setText(GestorCompetencia.getEstado().toString());
+    }
     public static class Constraint extends GridBagConstraints{
         public Constraint(){
             super();
