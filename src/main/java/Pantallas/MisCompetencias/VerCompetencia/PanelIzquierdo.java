@@ -63,13 +63,11 @@ public class PanelIzquierdo extends JPanel {
             encuentrosParaMostrar.add(encuentro);
         }
         for(EncuentroDTO encuentro:encuentrosParaMostrar){
-            if(!(encuentro.participanteA.nombre.equals("FANTASMA") || encuentro.participanteB.nombre.equals("FANTASMA"))){
                 Object[] row = new Object[3];
                 row[0] = encuentro.fase;
                 row[1] = encuentro.participanteA.nombre;
                 row[2] = encuentro.participanteB.nombre;
                 model.addRow(row);
-            }
         }
         table.setModel(model);
     }

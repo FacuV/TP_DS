@@ -81,13 +81,13 @@ public abstract class GestorCompetencia {
         fixtureDTO.encuentrosDTO = encuentrosDTO;
         return fixtureDTO;
     }
-
     public static Estado getEstado(){
         return competencia.getEstado();
     }
     public static DeporteDTO getDeporteDTO(){
         return new DeporteDTO(competencia.getDeporte().getId_deporte(),competencia.getDeporte().getNombre());
     }
+
     public static ArrayList<String> crearComp(CompetenciaDTO competenciaDTO){
         ArrayList<String> errores = new ArrayList<>(4);
 
