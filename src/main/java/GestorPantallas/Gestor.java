@@ -51,8 +51,14 @@ public abstract class Gestor {
         } else {
             System.out.println("El stack del gestor de pantallas ya está en la base de la pila.");
         }
-
     }
+
+    public static void popToTop() {
+        while (historia.size() > 1) {
+            Gestor.pop();
+        };
+    };
+
     public static JFrame peek(){
         return historia.peek();
     }

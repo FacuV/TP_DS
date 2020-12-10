@@ -1,4 +1,6 @@
 package Pantallas.MisCompetencias;
+import GestorPantallas.Gestor;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -16,6 +18,13 @@ public class Header extends JPanel {
         setBorder(new EmptyBorder(20,20,20,20));
         setLayout(new GridBagLayout());
         add(BotonHome); BotonHome.setPreferredSize(new Dimension(120,40));
+        BotonHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Gestor.popToTop();
+                Gestor.push("home");
+            }
+        });
         gbc.gridx = 1; gbc.insets = new Insets(0,20,0,0); add(new JLabel("Buscador:"),gbc);
         gbc.weightx = 1; gbc.gridx = 2; gbc.insets = new Insets(0,0,0,0); add(buscador,gbc);
         this.buscador.addActionListener(new ActionListener() {
