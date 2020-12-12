@@ -37,12 +37,12 @@
     <connection id="392a668a-84ee-4494-8f35-cf58c862eedd" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.participante" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.encuentros_en_fixture" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.usuario" active-filter-id="" />
+    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.participante" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.participantes_competencia" active-filter-id="" />
-    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.competencia" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.fixture" active-filter-id="" />
+    <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.competencia" active-filter-id="" />
     <filter-actions connection-id="392a668a-84ee-4494-8f35-cf58c862eedd" dataset="public.lugar_realizacion" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
@@ -286,6 +286,7 @@
           <content-type name="JSON" enabled="true" />
           <content-type name="JSON5" enabled="true" />
           <content-type name="Groovy" enabled="true" />
+          <content-type name="AIDL" enabled="true" />
           <content-type name="YAML" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>
